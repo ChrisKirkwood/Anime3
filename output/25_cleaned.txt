@@ -1,0 +1,3 @@
+0.00: The sky is dark.
+13.00: The storm rages on.
+18.00: Thank you for your purchase!

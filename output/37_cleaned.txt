@@ -1,0 +1,7 @@
+0.00: The sky is dark.
+13.00: The storm rages on.
+18.00: Thank you for your purchase!
+22.00: At Onigashima.
+37.00: A legion of beasts howl madly.
+51.00: At Habu Port.
+54.00: A shower passes in late autumn.

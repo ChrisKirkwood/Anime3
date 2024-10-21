@@ -1,0 +1,4 @@
+0.00: The sky is dark.
+18.00: Thank you for your purchase!
+21.00: I.
+25.00: 'M'.
