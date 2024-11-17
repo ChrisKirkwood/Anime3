@@ -2,11 +2,22 @@ import cv2
 import io
 import os
 import logging
+import json
 from google.cloud import vision
 import numpy as np
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+log_file_path = r"D:\Anime3\log\backend.log"
+os.makedirs(os.path.dirname(log_file_path), exist_ok=True)  # Ensure the log directory exists
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file_path, mode='a'),  # Append to the log file
+        logging.StreamHandler()  # Also output to console
+    ]
+)
 logger = logging.getLogger(__name__)
 
 # Initialize the Google Cloud Vision client
@@ -49,8 +60,19 @@ def detect_text_from_frame(frame, vision_client):
         logger.error(f"Error detecting text from frame: {e}")
         return None
 
+# Function to validate subtitles
+def validate_subtitle(subtitle):
+    # Define your validation logic here
+    if len(subtitle) < 3:  # Too short
+        return False
+    if subtitle.isdigit():  # Only numbers
+        return False
+    if len(subtitle.split()) <= 1:  # Single-word subtitles
+        return False
+    return True  # Passes validation
+
 # Function to extract frames from the video and process them
-def extract_subtitles_from_video(video_path, vision_client, frame_skip=30, similarity_threshold=0.85):
+def extract_subtitles_from_video(video_path, vision_client, frame_skip=30):
     try:
         # Open video file
         cap = cv2.VideoCapture(video_path)
@@ -76,7 +98,12 @@ def extract_subtitles_from_video(video_path, vision_client, frame_skip=30, simil
 
                 # Skip if the subtitle is too similar to the previous one
                 if detected_text and (last_detected_text is None or detected_text != last_detected_text):
-                    subtitles.append((frame_count / cap.get(cv2.CAP_PROP_FPS), detected_text))  # Store timestamp and text
+                    is_valid = validate_subtitle(detected_text)
+                    subtitles.append({
+                        "timestamp": frame_count / cap.get(cv2.CAP_PROP_FPS),
+                        "text": detected_text,
+                        "valid": is_valid
+                    })
                     last_detected_text = detected_text
 
             frame_count += 1
@@ -89,17 +116,15 @@ def extract_subtitles_from_video(video_path, vision_client, frame_skip=30, simil
         logger.error(f"An error occurred: {e}")
         return None
 
-# Function to save extracted subtitles to a file
-def save_subtitles_to_file(subtitles, output_file):
+# Function to save extracted subtitles to a JSON file
+def save_subtitles_to_json(subtitles, output_file):
     try:
-        # Open the file with UTF-8 encoding
+        # Save subtitles with flags to a JSON file
         with open(output_file, 'w', encoding='utf-8') as f:
-            for timestamp, subtitle in subtitles:
-                f.write(f"{timestamp:.2f}: {subtitle}\n")
-        logger.info(f"Subtitles saved to {output_file}")
+            json.dump(subtitles, f, ensure_ascii=False, indent=4)
+        logger.info(f"Subtitles with flags saved to {output_file}")
     except Exception as e:
         logger.error(f"Error saving subtitles to file: {e}")
-
 
 # Main function to run the subtitle extraction
 def main(video_path, output_file):
@@ -114,11 +139,11 @@ def main(video_path, output_file):
     subtitles = extract_subtitles_from_video(video_path, vision_client)
 
     if subtitles:
-        # Save subtitles to a file
-        save_subtitles_to_file(subtitles, output_file)
+        # Save subtitles to a JSON file
+        save_subtitles_to_json(subtitles, output_file)
 
 if __name__ == "__main__":
     video_path = "path_to_your_video.mp4"  # Replace with the path to your video
-    output_file = "extracted_subtitles.txt"  # Replace with your desired output file
+    output_file = "extracted_subtitles.json"  # Replace with your desired output file
 
     main(video_path, output_file)

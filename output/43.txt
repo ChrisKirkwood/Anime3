@@ -1,0 +1,202 @@
+[
+    {
+        "timestamp": 0.0,
+        "text": "The sky is dark",
+        "valid": true
+    },
+    {
+        "timestamp": 6.0,
+        "text": "וור\n荷",
+        "valid": true
+    },
+    {
+        "timestamp": 7.0,
+        "text": "1",
+        "valid": false
+    },
+    {
+        "timestamp": 8.0,
+        "text": "TITT\nT",
+        "valid": true
+    },
+    {
+        "timestamp": 10.0,
+        "text": "ສາວລ",
+        "valid": false
+    },
+    {
+        "timestamp": 11.0,
+        "text": "55\nThe storm rages on",
+        "valid": true
+    },
+    {
+        "timestamp": 12.0,
+        "text": "888\n55\nThe storm rages on",
+        "valid": true
+    },
+    {
+        "timestamp": 13.0,
+        "text": "The storm rages on",
+        "valid": true
+    },
+    {
+        "timestamp": 16.0,
+        "text": "א י/\n2\nThe storm rages on",
+        "valid": true
+    },
+    {
+        "timestamp": 17.0,
+        "text": "酒 酒\nN\nThe storm rages on\n11",
+        "valid": true
+    },
+    {
+        "timestamp": 18.0,
+        "text": "Thank you for your purchase!\nThis one is so fresh!",
+        "valid": true
+    },
+    {
+        "timestamp": 21.0,
+        "text": "I\nAt Onigashima",
+        "valid": true
+    },
+    {
+        "timestamp": 22.0,
+        "text": "At Onigashima",
+        "valid": true
+    },
+    {
+        "timestamp": 24.0,
+        "text": "IWNY'\nAt Onigashima\nII. MINI\nMN",
+        "valid": true
+    },
+    {
+        "timestamp": 25.0,
+        "text": "M\nIWNY'\nAt Onigashima",
+        "valid": true
+    },
+    {
+        "timestamp": 26.0,
+        "text": "0\nO\n0-0-0-0-0",
+        "valid": true
+    },
+    {
+        "timestamp": 27.0,
+        "text": "O",
+        "valid": false
+    },
+    {
+        "timestamp": 28.0,
+        "text": "0-00-0-0\nD\nO",
+        "valid": true
+    },
+    {
+        "timestamp": 31.0,
+        "text": "DE\nS",
+        "valid": true
+    },
+    {
+        "timestamp": 32.0,
+        "text": "DE\nA blue dragon roars",
+        "valid": true
+    },
+    {
+        "timestamp": 33.0,
+        "text": "EATH\nA blue dragon roars\nwww",
+        "valid": true
+    },
+    {
+        "timestamp": 34.0,
+        "text": "DE\nA blue dragon roars",
+        "valid": true
+    },
+    {
+        "timestamp": 35.0,
+        "text": "DF\nA blue dragon roars",
+        "valid": true
+    },
+    {
+        "timestamp": 37.0,
+        "text": "A legion of beasts howl madly",
+        "valid": true
+    },
+    {
+        "timestamp": 38.0,
+        "text": "A legion of beasts howl madly\n88",
+        "valid": true
+    },
+    {
+        "timestamp": 39.0,
+        "text": "A legion of beasts howl madly",
+        "valid": true
+    },
+    {
+        "timestamp": 41.0,
+        "text": "10\nЗа\nE\n和\nA legion of beasts howl madly",
+        "valid": true
+    },
+    {
+        "timestamp": 42.0,
+        "text": "10\nE\n和",
+        "valid": true
+    },
+    {
+        "timestamp": 43.0,
+        "text": "B",
+        "valid": false
+    },
+    {
+        "timestamp": 44.0,
+        "text": "www",
+        "valid": false
+    },
+    {
+        "timestamp": 49.0,
+        "text": "D\n560\nお\n**",
+        "valid": true
+    },
+    {
+        "timestamp": 50.0,
+        "text": "D\n50\nAt Habu Port",
+        "valid": true
+    },
+    {
+        "timestamp": 51.0,
+        "text": "At Habu Port\nman",
+        "valid": true
+    },
+    {
+        "timestamp": 52.0,
+        "text": "アシュラ\nAt Habu Port",
+        "valid": true
+    },
+    {
+        "timestamp": 54.0,
+        "text": "A shower in late autumn passes",
+        "valid": true
+    },
+    {
+        "timestamp": 55.0,
+        "text": "A shower in late autumn passes\n?",
+        "valid": true
+    },
+    {
+        "timestamp": 56.0,
+        "text": "A shower in late autumn passes",
+        "valid": true
+    },
+    {
+        "timestamp": 58.0,
+        "text": "<\nこの助\nA shower in late autumn passes\ne",
+        "valid": true
+    },
+    {
+        "timestamp": 59.0,
+        "text": "ジャー\n河椒\nイヌア\nA shower in late autumn passes",
+        "valid": true
+    },
+    {
+        "timestamp": 60.0,
+        "text": "河椒\n「ネコマムシ\na\n1649\nno-2\nAnd maple leaves turn red",
+        "valid": true
+    }
+]

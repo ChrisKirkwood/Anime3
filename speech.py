@@ -2,38 +2,57 @@ import os
 from google.cloud import texttospeech
 import re
 from pydub import AudioSegment
+import logging
+
+# Set up logging
+log_file_path = r"D:\Anime3\log\backend.log"
+os.makedirs(os.path.dirname(log_file_path), exist_ok=True)  # Ensure the log directory exists
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file_path, mode='a'),  # Append to the log file
+        logging.StreamHandler()  # Also output to console
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # Set up Google Cloud Text-to-Speech client
 def setup_tts_client():
     if "GOOGLE_APPLICATION_CREDENTIALS" not in os.environ:
-        raise EnvironmentError("Google Cloud credentials not found. Set the GOOGLE_APPLICATION_CREDENTIALS environment variable.")
+        logger.error("Google Cloud credentials not found. Set the GOOGLE_APPLICATION_CREDENTIALS environment variable.")
+        raise EnvironmentError("Google Cloud credentials not found.")
     
     client = texttospeech.TextToSpeechClient()
-    print("Google Cloud Text-to-Speech client successfully set up.")
+    logger.info("Google Cloud Text-to-Speech client successfully set up.")
     return client
 
 # Function to synthesize speech from text
 def synthesize_speech(text, output_file, tts_client):
-    synthesis_input = texttospeech.SynthesisInput(text=text)
+    try:
+        synthesis_input = texttospeech.SynthesisInput(text=text)
 
-    # Build the voice request, select the language code ("en-US") and the voice name
-    voice = texttospeech.VoiceSelectionParams(
-        language_code="en-US",
-        ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
-    )
+        # Build the voice request, select the language code ("en-US") and the voice name
+        voice = texttospeech.VoiceSelectionParams(
+            language_code="en-US",
+            ssml_gender=texttospeech.SsmlVoiceGender.NEUTRAL
+        )
 
-    # Select the type of audio file you want returned
-    audio_config = texttospeech.AudioConfig(
-        audio_encoding=texttospeech.AudioEncoding.MP3  # You can change to other formats like LINEAR16, etc.
-    )
+        # Select the type of audio file you want returned
+        audio_config = texttospeech.AudioConfig(
+            audio_encoding=texttospeech.AudioEncoding.MP3  # You can change to other formats like LINEAR16, etc.
+        )
 
-    # Perform the text-to-speech request on the text input with the selected voice parameters and audio config
-    response = tts_client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
+        # Perform the text-to-speech request on the text input with the selected voice parameters and audio config
+        response = tts_client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
 
-    # Save the audio to the output file
-    with open(output_file, "wb") as out:
-        out.write(response.audio_content)
-        print(f"Audio content written to {output_file}")
+        # Save the audio to the output file
+        with open(output_file, "wb") as out:
+            out.write(response.audio_content)
+            logger.info(f"Audio content written to {output_file}")
+    except Exception as e:
+        logger.error(f"Error synthesizing speech for text '{text}': {e}")
 
 # Function to synthesize subtitles into speech with correct timing alignment
 def synthesize_subtitles(input_file, output_dir, tts_client):
@@ -53,7 +72,7 @@ def synthesize_subtitles(input_file, output_dir, tts_client):
         try:
             timestamp, subtitle = line.strip().split(":", 1)
         except ValueError:
-            print(f"Skipping malformed line: {line}")
+            logger.warning(f"Skipping malformed line: {line}")
             continue
 
         subtitle = subtitle.strip()
@@ -90,15 +109,20 @@ def synthesize_subtitles(input_file, output_dir, tts_client):
     # Save the final combined audio
     final_output_file = os.path.join(output_dir, "final_synthesized_audio.mp3")
     combined_audio.export(final_output_file, format="mp3")
-    print(f"Final combined audio saved to {final_output_file}")
+    logger.info(f"Final combined audio saved to {final_output_file}")
 
 # Main function to handle the process
 def main(input_file, output_dir):
-    # Initialize the Google Cloud TTS client
-    tts_client = setup_tts_client()
+    try:
+        # Initialize the Google Cloud TTS client
+        tts_client = setup_tts_client()
 
-    # Convert subtitles to speech with timing alignment
-    synthesize_subtitles(input_file, output_dir, tts_client)
+        # Convert subtitles to speech with timing alignment
+        logger.info("Starting subtitle synthesis process...")
+        synthesize_subtitles(input_file, output_dir, tts_client)
+        logger.info("Subtitle synthesis process completed successfully.")
+    except Exception as e:
+        logger.error(f"Error in subtitle synthesis process: {e}")
 
 if __name__ == "__main__":
     # Replace with your paths
