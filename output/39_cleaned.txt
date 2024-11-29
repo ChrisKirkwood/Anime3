@@ -1,0 +1,13 @@
+0.00: The sky is dark.
+11.00: The storm rages on.
+18.00: Thank you for your purchase! This one is so fresh!
+21.00: At Onigashima.
+32.00: Blue dragon roars.
+37.00: Legion of beasts howl madly.
+41.00: For 和 legion of beasts howl madly.
+50.00: At Habu Port.
+51.00: "At Habu Port, man."
+52.00: Ashura at Habu Port.
+54.00: Shower passes in late autumn.
+55.00: Shower in late autumn passes?
+60.00: Peppered catfish no. 2 And maple leaves turn red.

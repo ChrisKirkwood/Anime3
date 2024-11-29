@@ -2,6 +2,22 @@ import os
 from google.cloud import texttospeech
 import re
 from pydub import AudioSegment
+import logging
+
+# Set up logging
+log_file_path = r"D:\Anime3\log\backend.log"
+os.makedirs(os.path.dirname(log_file_path), exist_ok=True)  # Ensure the log directory exists
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file_path, mode='a'),  # Append to the log file
+        logging.StreamHandler()  # Also output to console
+    ]
+)
+logger = logging.getLogger(__name__)
+
 
 # Set up Google Cloud Text-to-Speech client
 def setup_tts_client():

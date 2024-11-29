@@ -1,0 +1,9 @@
+0.00: The sky is dark.
+2.00: The sky is dark, the sky is dark.
+18.00: Thank you for your purchase! This one is so fresh!
+22.00: Thank you for your purchase! This one is so fresh! At Onigashima, at Onigashima.
+32.00: The blue dragon roars.
+38.00: Legion of beasts howl madly.
+40.00: Legion of beasts howl madly, legion of beasts howl madly.
+55.00: "Shower in late autumn passes?"
+57.00: Showering in late autumn passes, showering in late autumn passes.

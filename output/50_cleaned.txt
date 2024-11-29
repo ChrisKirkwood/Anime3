@@ -1,0 +1,11 @@
+2.00: The sky is dark.
+13.00: The storm rages on.
+18.00: Thank you for your purchase! This one is so fresh!
+21.00: Thank you for your purchase! This one is so fresh! I ate on Onigashima.
+27.00: I won't die at Onigashima.
+32.00: Do de s a blue dragon roars.
+35.00: A blue dragon roars with deafening force.
+39.00: A legion of beasts howl madly.
+43.00: A legion of beasts howl madly for the end of a battle.
+50.00: We docked at Habu Port.
+55.00: A shower in late autumn passes by.

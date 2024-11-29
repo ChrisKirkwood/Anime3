@@ -1,0 +1,12 @@
+0.00: The sky is dark
+6.00: F
+7.00: 1
+9.00: 11
+13.00: The storm rages on
+22.00: At Onigashima
+27.00: O
+39.00: A legion of beasts howl madly
+43.00: B
+44.00: www
+52.00: At Habu Port
+54.00: A shower in late autumn passes

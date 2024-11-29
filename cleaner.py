@@ -3,113 +3,229 @@ import openai
 import logging
 import nltk
 from nltk.corpus import words
+import os
+from difflib import SequenceMatcher
 
+# Ensure NLTK's words corpus is downloaded
 nltk.download('words')
 
 # Set up logging
-logging.basicConfig(level=logging.INFO)
+log_file_path = r"D:\Anime3\log\backend.log"
+os.makedirs(os.path.dirname(log_file_path), exist_ok=True)  # Ensure the log directory exists
+
+logging.basicConfig(
+    level=logging.DEBUG,  # Use DEBUG for verbose logging
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file_path, mode='a'),  # Append to the log file
+        logging.StreamHandler()  # Also output to console
+    ]
+)
 logger = logging.getLogger(__name__)
 
 # Load the English dictionary for validation
 english_vocab = set(words.words())
 
-# Define the whitelist for specific phrases
-whitelist = {"At Onigashima"}
+# Define a whitelist for specific phrases that are always allowed
+whitelist = {"At Onigashima", "Raftel", "Kaido", "Onigashima"}
 
-# Function to check if a subtitle is valid English (with a dictionary check)
-def is_valid_english(text):
-    tokens = text.split()
-    valid_words = [word for word in tokens if word.lower() in english_vocab or word in whitelist]
-    return len(valid_words) / len(tokens) > 0.5  # Consider valid if more than 50% are English words or whitelisted
-
-# Function to check if a subtitle is valid
-def is_valid_subtitle(subtitle):
-    subtitle = subtitle.strip()
-    # Always allow whitelisted subtitles
-    if subtitle in whitelist:
-        return True
-    # Skip subtitles that are too short, numbers, or single characters (unless whitelisted)
-    if len(subtitle) < 3 or re.match(r'^\d+$', subtitle) or len(subtitle.split()) <= 1:
-        return False
-    # Perform a dictionary check to filter out gibberish
-    return is_valid_english(subtitle)
-
-# Function to clean subtitles using OpenAI, while preserving the original meaning
-def clean_subtitle_with_openai(subtitle):
+# Normalize and clean text
+def normalize_text(text):
+    """
+    Cleans up detected text by removing extraneous characters and normalizing spacing.
+    """
     try:
-        # Use OpenAI's new chat model to clean the subtitle
+        logger.debug(f"Normalizing text: {text}")
+        text = re.sub(r'\s+', ' ', text)  # Normalize spaces
+        text = re.sub(r'[^\w .,!?\'"-]', '', text)  # Remove special characters
+        normalized = text.strip()
+        logger.debug(f"Normalized text: {normalized}")
+        return normalized
+    except Exception as e:
+        logger.error(f"Error normalizing text: {e}")
+        return text
+
+# Check if text is valid English
+def is_valid_english(text):
+    """
+    Determines if text is valid English using a combination of word and character checks.
+    """
+    try:
+        logger.debug(f"Validating English text: {text}")
+        tokens = text.split()
+        if not tokens:
+            logger.debug("Text contains no valid tokens.")
+            return False
+
+        valid_words = [word for word in tokens if word.lower() in english_vocab or word in whitelist]
+        word_score = len(valid_words) / len(tokens)
+        logger.debug(f"Word score: {word_score:.2f}")
+
+        english_chars = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,!?'-")
+        char_score = sum(1 for char in text if char in english_chars) / len(text)
+        logger.debug(f"Character score: {char_score:.2f}")
+
+        valid = word_score > 0.5 or char_score > 0.7
+        logger.debug(f"Text is {'valid' if valid else 'invalid'} based on scores.")
+        return valid
+    except Exception as e:
+        logger.error(f"Error validating English text: {e}")
+        return False
+
+# Simplify subtitle validation
+def is_valid_subtitle(subtitle):
+    """
+    Validates a subtitle's structure and content for cleaning.
+    """
+    try:
+        logger.debug(f"Validating subtitle: {subtitle}")
+        subtitle = subtitle.strip()
+        if len(subtitle) < 3:
+            logger.debug("Subtitle is too short.")
+            return False
+        if subtitle.isnumeric():
+            logger.debug("Subtitle is purely numeric.")
+            return False
+        if not any(char.isalpha() for char in subtitle):
+            logger.debug("Subtitle contains no alphabetic characters.")
+            return False
+        valid = is_valid_english(subtitle)
+        logger.debug(f"Subtitle is {'valid' if valid else 'invalid'}.")
+        return valid
+    except Exception as e:
+        logger.error(f"Error validating subtitle: {e}")
+        return False
+
+# Check similarity between subtitles
+def is_similar(text1, text2, threshold=0.85):
+    """
+    Checks similarity between two text strings using Levenshtein ratio.
+    """
+    try:
+        similarity = SequenceMatcher(None, text1, text2).ratio()
+        logger.debug(f"Similarity between '{text1}' and '{text2}' is {similarity:.2f}.")
+        return similarity > threshold
+    except Exception as e:
+        logger.error(f"Error calculating similarity: {e}")
+        return False
+
+# Use OpenAI API to clean a batch of subtitles
+def clean_subtitles_with_openai_batch(subtitles_with_timestamps):
+    """
+    Sends a batch of subtitles with timestamps to OpenAI for cleaning,
+    retaining valid subtitles with proper timestamps and removing artifacts.
+    """
+    try:
+        logger.debug(f"Sending batch of {len(subtitles_with_timestamps)} subtitles with timestamps to OpenAI.")
+
+        # Construct a prompt with explicit cleaning and timestamp retention instructions
+        prompt = (
+    "You are a subtitle cleaning assistant. For each subtitle below:\n"
+    "1. Clean grammar and ensure clarity while preserving meaning.\n"
+    "2. Retain the timestamps and match cleaned subtitles to their timestamps.\n"
+    "3. Remove entries that are gibberish, nonsensical, or invalid (e.g., random characters, 'OOO', 'INN', 'www' 'Oppo').\n"
+    "4. Exclude subtitles with fewer than 3 words or excessive repetition.\n"
+    "5. Exclude subtitles only if they are entirely gibberish, nonsensical, or invalid after cleaning attempts. Do not exclude valid subtitles, even if minimal cleaning is needed to make them clear and meaningful.\n"
+    "6. Return results in the format 'timestamp: cleaned subtitle'.\n"
+)
+        for timestamp, subtitle in subtitles_with_timestamps:
+            prompt += f"{timestamp}: {subtitle}\n"
+
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "You are a subtitle cleaning assistant. Your task is to clean subtitles for grammar and clarity without changing their meaning or adding extra details."},
-                {"role": "user", "content": f"Please clean the following subtitle but preserve the meaning exactly: '{subtitle.strip()}'."}
-            ],
-            temperature=0.0,  # Reduce creativity
-            max_tokens=50
+            messages=[{"role": "system", "content": "You are a helpful assistant."},
+                      {"role": "user", "content": prompt}],
+            temperature=0.0,
+            max_tokens=1500  # Adjust based on subtitle length and batch size
         )
+
         cleaned_text = response['choices'][0]['message']['content'].strip()
+        logger.debug(f"OpenAI batch response: {cleaned_text}")
 
-        # Post-cleaning filter to remove irrelevant completions
-        if any(keyword in cleaned_text for keyword in ["I'm ready", "help", "error", "context"]):
-            logger.info(f"Skipping irrelevant OpenAI response: {cleaned_text}")
-            return None
+        # Parse the cleaned batch response
+        cleaned_subtitles = []
+        for line in cleaned_text.split("\n"):
+            if ":" not in line:
+                logger.warning(f"Malformed line skipped: {line}")
+                continue
+            parts = line.split(":", 1)  # Split into at most 2 parts
+            if len(parts) != 2:
+                logger.warning(f"Malformed line skipped: {line}")
+                continue
+            timestamp, subtitle = parts
+            cleaned_subtitles.append(f"{timestamp.strip()}: {subtitle.strip()}")
+        
+        logger.debug(f"Parsed cleaned subtitles: {cleaned_subtitles}")
+        return cleaned_subtitles
 
-        return cleaned_text
     except Exception as e:
-        logger.error(f"Error cleaning subtitle: {e}")
-        return None
+        logger.error(f"Error cleaning subtitles batch with OpenAI: {e}")
+        return []
 
-# Function to perform post-processing validation (check for significant changes)
-def is_similar_to_original(original, cleaned):
-    original_tokens = original.split()
-    cleaned_tokens = cleaned.split()
-    
-    # Ensure that the cleaned version isn't drastically different in length
-    length_difference = abs(len(original_tokens) - len(cleaned_tokens)) / len(original_tokens)
-    if length_difference > 0.2:
-        return False  # Too much difference in length
-    return True
 
-# Function to clean subtitles file and save results
+
+
+# Clean subtitles from an input file and save results
 def clean_subtitles_file(input_file, output_file):
-    # Read the extracted subtitles from the input file
-    with open(input_file, 'r', encoding='utf-8') as f:
-        subtitles = f.readlines()
+    """
+    Processes subtitles from the input file, sends them in a batch to OpenAI for cleaning,
+    retains timestamps, and saves the cleaned results.
+    """
+    try:
+        logger.info(f"Reading subtitles from file: {input_file}")
+        with open(input_file, 'r', encoding='utf-8') as f:
+            subtitles = f.readlines()
 
-    # Set to track unique cleaned subtitles to avoid duplicates
-    seen_cleaned_subtitles = set()
+        subtitles_with_timestamps = []
+        seen_cleaned_subtitles = set()
 
-    # Process each subtitle through OpenAI for cleaning
-    cleaned_subtitles = []
-    for line in subtitles:
-        # Split the line on the first colon (timestamp:subtitle)
-        try:
-            timestamp, subtitle = line.strip().split(":", 1)
-        except ValueError:
-            logger.warning(f"Skipping malformed line: {line}")
-            continue
+        logger.info(f"Starting subtitle cleaning process. Total lines: {len(subtitles)}")
+        for line in subtitles:
+            try:
+                timestamp, subtitle = line.split(":", 1)
+                subtitle = normalize_text(subtitle.strip())
+                logger.debug(f"Processing subtitle at {timestamp}: {subtitle}")
 
-        # Skip invalid or non-English subtitles
-        if not is_valid_subtitle(subtitle):
-            logger.info(f"Skipping invalid subtitle: {subtitle}")
-            continue
+                if not is_valid_subtitle(subtitle):
+                    logger.info(f"Skipping invalid subtitle: {subtitle}")
+                    continue
 
-        try:
-            # Clean the subtitle using OpenAI
-            cleaned_text = clean_subtitle_with_openai(subtitle.strip())
+                subtitles_with_timestamps.append((timestamp.strip(), subtitle))
+            except ValueError as ve:
+                logger.warning(f"Malformed line: {line}. Error: {ve}")
+                continue
 
-            # Ensure the cleaned text is valid and similar to the original subtitle
-            if cleaned_text and cleaned_text not in seen_cleaned_subtitles and is_similar_to_original(subtitle, cleaned_text):
-                cleaned_subtitles.append(f"{timestamp}: {cleaned_text}")
-                seen_cleaned_subtitles.add(cleaned_text)  # Track cleaned subtitles
-            else:
-                logger.info(f"Skipping altered or duplicate subtitle: {cleaned_text}")
+        # Batch process with OpenAI
+        cleaned_subtitles = []
+        if subtitles_with_timestamps:
+            logger.info("Sending subtitles with timestamps to OpenAI for batch cleaning.")
+            cleaned_batch = clean_subtitles_with_openai_batch(subtitles_with_timestamps)
 
-        except Exception as e:
-            logger.error(f"Error cleaning subtitle: {e}")
+            if cleaned_batch:
+                for cleaned in cleaned_batch:
+                    timestamp, subtitle = cleaned.split(":", 1)
+                    cleaned_text = subtitle.strip()
+                    if cleaned_text and cleaned_text not in seen_cleaned_subtitles:
+                        cleaned_subtitles.append(cleaned)
+                        seen_cleaned_subtitles.add(cleaned_text)
+                        logger.debug(f"Added cleaned subtitle: {cleaned_text}")
+                    else:
+                        logger.info(f"Skipped duplicate or invalid cleaned subtitle: {cleaned_text}")
 
-    # Save the cleaned subtitles to the output file
-    with open(output_file, 'w', encoding='utf-8') as f:
-        f.write("\n".join(cleaned_subtitles))
+        logger.info(f"Writing cleaned subtitles to file: {output_file}")
+        with open(output_file, 'w', encoding='utf-8') as f:
+            f.write("\n".join(cleaned_subtitles))
 
-    logger.info(f"Cleaned subtitles saved to {output_file}") 
+        logger.info(f"Cleaned subtitles successfully saved to {output_file}")
+    except Exception as e:
+        logger.error(f"Error cleaning subtitles file: {e}")
+
+
+# Entry point
+if __name__ == "__main__":
+    input_file = r"D:\Anime3\output\subtitles.txt"  # Replace with your input file path
+    output_file = r"D:\Anime3\output\cleaned_subtitles.txt"  # Replace with your output file path
+
+    logger.info("Starting subtitle cleaning script.")
+    clean_subtitles_file(input_file, output_file)
+    logger.info("Subtitle cleaning script completed.")

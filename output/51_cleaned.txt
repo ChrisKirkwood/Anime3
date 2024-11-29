@@ -1,0 +1,14 @@
+2.00: The sky is dark.
+8.00: The sky is dark, the forecast is rain.
+11.00: The storm rages on.
+18.00: The storm rages on and thank you for your purchase! This one is so fresh!
+19.00: Thank you for your purchase! This one is so fresh!
+22.00: Thank you for your purchase! This one is so fresh! I ate on Onigashima.
+28.00: Oh, oh dear.
+33.00: Since a blue dragon roars, the earth shakes.
+37.00: As a blue dragon roars, a legion of beasts howl madly.
+40.00: A legion of beasts howl madly.
+49.00: And a legion of beasts howl madly, E, B, W, D.
+52.00: D at Habu Port, man.
+55.00: At Habu Port, a shower passes in late autumn.
+58.00: A shower in late autumn passes a e.

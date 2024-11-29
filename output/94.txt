@@ -1,0 +1,496 @@
+0.00: The sky is dark
+6.00: F
+7.37: "
+7.47: 1
+7.80: IT
+7.90: 6530
+TITIT
+7.93: 15330
+TITIT
+8.10: 211
+8.27: 111
+8.40: 25
+8.50: D
+9.00: 11
+9.20: t
+9.27: D
+9.33: t
+9.67: 11
+10.40: 205
+10.97: 55
+The storm rages on
+11.07: The storm rages on
+11.13: 55
+The storm rages on
+11.30: 888
+55
+The storm rages on
+11.33: 200
+55
+The storm rages on
+11.50: OOO
+219
+255
+The storm rages on
+11.53: 205
+355
+The storm rages on
+11.70: 219
+55
+The storm rages on
+11.80: 215
+55
+The storm rages on
+11.87: 200
+355
+The storm rages on
+11.93: 888
+The storm rages on
+12.00: 888
+55
+The storm rages on
+12.10: The storm rages on
+12.13: 888
+55
+The storm rages on
+12.20: 55
+The storm rages on
+12.27: The storm rages on
+14.93: 11
+The storm rages on
+15.30: The storm rages on
+15.33: IN
+The storm rages on
+15.40: The storm rages on
+15.47: INN
+The storm rages on
+15.53: N
+The storm rages on
+15.60: 2
+41
+The storm rages on
+15.67: 2
+C
+The storm rages on
+15.73: N
+IN
+The storm rages on
+15.80: 2
+The storm rages on
+15.87: 2
+H
+The storm rages on
+15.93: 2
+The storm rages on
+16.00: 13
+2
+The storm rages on
+16.07: N
+The storm rages on
+16.27: 2
+N
+The storm rages on
+16.40: 825
+N
+The storm rages on
+16.50: 25
+N
+The storm rages on
+16.53: 2
+The storm rages on
+16.70: INN
+The storm rages on
+16.73: A
+INN
+The storm rages on
+16.80: N
+The storm rages on
+16.90: N
+27
+The storm rages on
+17.07: SASA
+N
+The storm rages on
+17.33: 925
+The storm rages on
+2
+17.40: SAA
+N
+The storm rages on
+17.67: Thank you for your purchase!
+This one is so fresh!
+17.80: Thank you for your purchase!
+que is
+This one is so fresh!
+17.87: Thank you for your purchase!
+one
+This one is so fresh!
+17.93: Thank you for your purchase!
+This one is so fresh!
+18.90: Thank you for your purchase!
+one
+This one is so fresh!
+18.93: Thank you for your purchase!
+This one is so fresh!
+19.33: Thank you for your purchase!
+qule is
+This one is so fresh!
+19.40: Thank you for your purchase!
+dule is
+This one is so fresh!
+19.47: Thank you for your purchase!
+This one is so fresh!
+20.07: E
+Thank you for your purchase!
+This one is so fresh!
+20.17: Thank you for your purchase!
+This one is so fresh!
+20.60: Thank you for your purchase!
+His
+This one is so fresh!
+20.70: Thank you for your purchase!
+This one is so fresh!
+20.93: Oppo
+At Onigashima
+21.00: I
+At Onigashima
+21.90: At Onigashima
+24.00: IWNY'
+At Onigashima
+II. MINI
+MN
+24.03: IWNY'
+At Onigashima
+11. MINI
+MN
+24.13: IWN V
+At Onigashima
+11. MINI
+MN
+24.20: IWNY'
+At Onigashima
+MINI
+24.27: IM
+At Onigashima
+24.40: M
+11. MINI
+IWN Y
+At Onigashima
+24.50: IWN V
+M
+At Onigashima
+25.00: M
+IWNY'
+At Onigashima
+26.40: O
+0-0-0-0-0
+26.83: O
+28.47: IM
+28.70: IN
+29.40: IM
+29.50: MI
+29.53: IM
+29.83: BEEF
+30.60: DE
+31.03: DE
+A blue dragon roars
+31.10: A blue dragon roars
+31.13: A blue dragon roars
+T
+31.20: A blue dragon roars
+31.30: ATH
+A blue dragon roars
+31.33: e
+ATH
+A blue dragon roars
+31.40: DEATH
+A blue dragon roars
+31.47: EATH
+A blue dragon roars
+31.60: DEATH
+A blue dragon roars
+31.73: ATH
+A blue dragon roars
+31.80: A blue dragon roars
+31.87: A blue dragon roars
+www
+31.93: X
+A blue dragon roars
+32.00: DE
+A blue dragon roars
+32.43: DEA
+A blue dragon roars
+32.50: DE
+A blue dragon roars
+32.60: A blue dragon roars
+32.80: ATH
+A blue dragon roars
+32.87: DEATH
+A blue dragon roars
+33.00: EATH
+A blue dragon roars
+www
+33.07: EATH
+A blue dragon roars
+33.13: DEATH
+A blue dragon roars
+33.30: 4
+A blue dragon roars
+33.40: 4
+A blue dragon roars
+2
+33.47: DE
+A blue dragon roars
+33.60: 4
+DE
+A blue dragon roars
+wwwww
+33.67: 4
+DE
+A blue dragon roars
+33.73: DE
+A blue dragon roars
+33.90: DE
+A blue dragon roars
+www
+34.00: DE
+A blue dragon roars
+34.10: A blue dragon roars
+34.20: A blue dragon roars
+ww
+34.27: A blue dragon roars
+34.40: DEATH
+A blue dragon roars
+34.47: EATH
+A blue dragon roars
+34.53: EAT
+A blue dragon roars
+www
+POP
+34.60: JEATH
+A blue dragon roars
+34.80: A blue dragon roars
+www
+34.90: A blue dragon roars
+35.00: DF
+A blue dragon roars
+35.10: DE
+A blue dragon roars
+35.33: DE
+35.50: 8.8
+35.53: 88
+35.60: 4200
+36.27: &8
+D
+A legion of beasts howl madly
+36.40: 88
+D
+A legion of beasts howl madly
+250
+36.47: A legion of beasts howl madly
+88
+2250
+36.60: A legion of beasts howl madly
+88
+36.70: A legion of beasts howl madly
+250
+36.73: A legion of beasts howl madly
+36.80: A legion of beasts howl madly
+250
+36.87: A legion of beasts howl madly
+36.93: (-)
+A legion of beasts howl madly
+250
+37.00: (-)
+A legion of beasts howl madly
+37.07: A legion of beasts howl madly
+250
+37.20: A legion of beasts howl madly
+38.10: A legion of beasts howl madly
+88
+38.40: A legion of beasts howl madly
+38.53: A legion of beasts howl-madly
+38.60: A legion of beasts howl madly
+38.83: A legion of beasts howl madly
+D
+38.87: A legion of beasts howl madly
+40.30: (
+A legion of beasts howl madly
+42.47: D
+43.33: B
+43.60: D
+43.70: B
+44.00: www
+44.10: wwww
+44.27: www
+44.53: wwww
+44.80: www
+44.87: wwwww
+44.93: www.
+45.33: wwww
+45.40: M
+46.13: S
+50.40: At Habu Port
+man
+50.67: At Habu Port
+n
+50.83: At Habu Port
+man
+50.87: At Habu Port
+n
+51.00: At Habu Port
+man
+51.20: At Habu Port
+n
+51.50: At Habu Port
+man
+52.00: At Habu Port
+53.67: A shower in late autumn passes
+55.03: 9.5
+A shower in late autumn passes
+55.20: A shower in late autumn passes
+55.33: 3
+A shower in late autumn passes
+55.40: A shower in late autumn passes
+56.83: OA shower in late autumn passes
+57.00: A shower in late autumn passes
+57.07: shower in late autumn passes
+57.13: A shower in late autumn passes
+57.20: 6
+A shower in late autumn passes
+57.27: 1
+A shower in late autumn passes
+57.33: B
+EN
+]
+A shower in late autumn passes
+57.40: A shower in late autumn-passes
+57.47: A shower in late autumn passes
+En
+57.53: A shower in late autumn-passes
+E
+57.60: A shower in late autumn passes
+En
+57.67: A shower in late autumn passes
+Eth
+57.73: O
+EU
+A shower in late autumn passes
+57.80: 2
+A shower in late autumn-passes
+E
+57.87: FO
+A shower in late autumn passes
+57.93: A shower in late autumn passes
+A sho
+58.00: A shower in late autumn passes
+e
+58.07: 08
+A shower in late autumn passes
+e
+Ve
+58.13: 2
+A shower in late autumn passes
+Ve
+58.20: We
+A shower in late autumn passes
+58.27: 2
+A shower in late autumn passes
+We
+58.33: B
+44444
+427
+A shower in late autumn passes
+58.40: B
+44444
+477
+A shower in late autumn passes
+58.47: B
+44444
+427
+A shower in late autumn passes
+58.60: 1484
+B
+44444
+427
+A shower in late autumn passes
+58.67: B
+427
+A shower in late autumn passes
+305 285
+58.73: 1484
+B
+44444
+427
+A shower in late autumn passes
+55285
+58.80: 14482
+B
+44444
+427
+A shower in late autumn passes
+55285
+58.87: 14482
+B
+44444
+SPE
+A shower in late autumn passes
+58.93: 14482
+B
+44444
+A shower in late autumn passes
+59.00: B
+A shower in late autumn passes
+59.10: B
+14744
+A shower in late autumn passes
+59.13: B
+A shower in late autumn passes
+59.33: B
+44444
+477
+And maple leaves turn red
+59.50: 14482
+B
+477
+49
+And maple leaves turn red
+59.53: B
+427
+And maple leaves turn red
+59.70: B
+44749
+And maple leaves turn red
+59.73: B
+44744
+And maple leaves turn red
+59.80: 127
+44444
+SAPZ Sale
+And maple leaves turn red
+59.87: 44444
+11649
+And maple leaves turn red
+395 265
+59.93: 44444
+477
+And maple leaves turn red
+60.00: no-2
+1649
+B
+44444
+And maple leaves turn red
+60.07: Proz
+1941
+44451
+And maple leaves turn red
+60.13: 44449
+And maple leaves turn red
+95245
+60.20: 14444
+1949
+And maple leaves turn red
+60.27: 11649
+99
+44444
+And maple leaves turn red
