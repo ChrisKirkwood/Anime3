@@ -1,0 +1,6 @@
+0.00: The sky is dark.
+1.00: The sky is dark, the sky is dark.
+2.00: The sky is dark, the sky is dark, the sky is dark.
+4.00: The sky is dark, the sky is dark, the sky is dark, the sky is dark, the sky is dark.
+11.00: The sky is dark, the sky is dark, the sky is dark, the sky is dark, the sky is dark as the storm rages on.
+14.00: The sky is dark, the sky is dark, the sky is dark, the sky is dark, the sky is dark. The storm rages on, the storm rages on, the storm rages on, the storm rages on.

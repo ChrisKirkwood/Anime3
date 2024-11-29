@@ -1,0 +1,4 @@
+0.00: The sky is dark
+5.00: ,
+45.00: Ea
+50.00: VM ail

@@ -1,0 +1,25 @@
+0.00: The sky is dark.
+11.00: The storm rages onL
+12.00: 31.1The storm rages onL
+13.00: The storm rages on
+14.00: PHAZPAMUHURRYRAMThe storm rages.on.
+15.00: CEEEE! The storm continues to rage.
+16.00: 2011.111 The storm rages on.
+17.00: The storm rages on.
+18.00: Thank you for your purchase! This one is so fresh!
+19.00: Thank you for your purchase!This one isfresh!
+21.00: "At Onigashima."
+22.00: At Onigashima.
+24.00: NWAt Onigashima
+25.00: "In Wano! At Onigashima."
+32.00: A blue dragon roars.
+37.00: A legion of beasts howl madly.
+39.00: Alegion of beasts howlmadly
+41.00: Legion of beasts howl madly.
+50.00: At-Habu Port
+51.00: At Habu Port.
+54.00: "A shower passes in late autumn."
+56.00: Arshower in late autumn-passes
+57.00: A shower passes in late autumn.
+59.00: A shower in late autumn passes.
+60.00: "And maple leaves turn red."

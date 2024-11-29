@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import threading
 import os
-from extract import main as extract_subtitles
+from extract import main as extract_subtitles  # Removed load_english_dictionary
 from cleaner import clean_subtitles_file
 from speech import setup_tts_client, synthesize_subtitles
 from merge import replace_audio_in_video  # Import the correct function from merge.py
@@ -42,9 +42,13 @@ class SubtitleExtractorApp:
         self.merge_button = tk.Button(self.frame, text="Merge Audio with Video", command=self.merge_audio_video)
         self.merge_button.grid(row=4, column=0, columnspan=2, pady=5)
 
+        # Add button to clean subtitles only
+        self.clean_only_button = tk.Button(self.frame, text="Clean Subtitles Only", command=self.clean_only)
+        self.clean_only_button.grid(row=5, column=0, columnspan=2, pady=5)
+
         # Text widget to show logs and process updates
         self.log_text = tk.Text(self.frame, width=60, height=10, state=tk.DISABLED)
-        self.log_text.grid(row=5, column=0, columnspan=2, pady=10)
+        self.log_text.grid(row=6, column=0, columnspan=2, pady=10)
 
         # Variables to hold file paths
         self.video_file = None
@@ -86,7 +90,7 @@ class SubtitleExtractorApp:
     # Function to run the extraction process
     def run_extraction(self, video_path, output_file):
         try:
-            extract_subtitles(video_path, output_file)
+            extract_subtitles(video_path, output_file)  # Removed dictionary argument
             self.log_message("Subtitle extraction completed successfully!")
             messagebox.showinfo("Success", "Subtitles extracted successfully!")
         except Exception as e:
@@ -112,7 +116,7 @@ class SubtitleExtractorApp:
     def run_extract_and_clean(self, video_path, output_file):
         try:
             # Step 1: Extract subtitles
-            extract_subtitles(video_path, output_file)
+            extract_subtitles(video_path, output_file)  # Removed dictionary argument
             self.log_message("Subtitle extraction completed successfully!")
 
             # Step 2: Clean the extracted subtitles
@@ -126,6 +130,49 @@ class SubtitleExtractorApp:
         except Exception as e:
             self.log_message(f"Error during extraction and cleaning: {e}")
             messagebox.showerror("Error", f"An error occurred: {e}")
+
+    # Function to clean subtitles only
+    def clean_only(self):
+        # Step 1: Select the input .txt file to clean
+        input_file = filedialog.askopenfilename(
+            title="Select Subtitle File to Clean",
+            filetypes=[("Text Files", "*.txt")]
+        )
+        if not input_file:
+            messagebox.showwarning("No File Selected", "Please select a .txt file to clean.")
+            return
+
+        # Step 2: Select the output file name and directory for the cleaned file
+        cleaned_file = filedialog.asksaveasfilename(
+            title="Save Cleaned Subtitle File As",
+            defaultextension=".txt",
+            filetypes=[("Text Files", "*.txt")],
+            initialfile=os.path.basename(input_file).replace(".txt", "_cleaned.txt")
+        )
+        if not cleaned_file:
+            messagebox.showwarning("No Output File Selected", "Please specify a name for the cleaned file.")
+            return
+
+        # Log the cleaning process
+        self.log_message(f"Starting cleaning of {input_file}...")
+
+        # Start the cleaning process in a separate thread
+        threading.Thread(target=self.run_clean_only, args=(input_file, cleaned_file)).start()
+
+    # Function to perform the cleaning in a thread
+    def run_clean_only(self, input_file, cleaned_file):
+        try:
+            # Call the cleaner function
+            clean_subtitles_file(input_file, cleaned_file)
+
+            # Log success and inform the user
+            self.log_message(f"Subtitles cleaned successfully! Cleaned file saved to {cleaned_file}")
+            messagebox.showinfo("Success", f"Subtitles cleaned successfully! Saved to {cleaned_file}")
+
+        except Exception as e:
+            # Log errors and inform the user
+            self.log_message(f"Error during cleaning: {e}")
+            messagebox.showerror("Error", f"An error occurred during cleaning: {e}")
 
     # Function to select the cleaned subtitles and synthesize them into speech
     def synthesize_speech(self):

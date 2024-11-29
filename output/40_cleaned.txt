@@ -1,0 +1,14 @@
+0.00: The sky is dark.
+11.00: 55: The storm continues to rage.
+18.00: Thank you for your purchase! This one is so fresh!
+25.00: M At Onigashima.
+28.00: 0-00-0-0 D O.
+31.00: DE S.
+32.00: A blue dragon roars.
+37.00: A legion of beasts howl madly.
+50.00: D50 at Habu Port.
+51.00: "At Habu Port, man."
+52.00: Ashura at Habu Port.
+54.00: A shower passes in late autumn.
+59.00: ジャー 河椒 イヌア A shower in late autumn passes.
+60.00: Pepper "Nekomamushi" in 1649 No. 2 and maple leaves turn red.
