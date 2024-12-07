@@ -80,7 +80,7 @@ def is_valid_subtitle(subtitle):
     try:
         logger.debug(f"Validating subtitle: {subtitle}")
         subtitle = subtitle.strip()
-        if len(subtitle) < 3:
+        if len(subtitle) < 2:
             logger.debug("Subtitle is too short.")
             return False
         if subtitle.isnumeric():
@@ -123,10 +123,11 @@ def clean_subtitles_with_openai_batch(subtitles_with_timestamps):
     "You are a subtitle cleaning assistant. For each subtitle below:\n"
     "1. Clean grammar and ensure clarity while preserving meaning.\n"
     "2. Retain the timestamps and match cleaned subtitles to their timestamps.\n"
-    "3. Remove entries that are gibberish, nonsensical, or invalid (e.g., random characters, 'OOO', 'INN', 'www' 'Oppo').\n"
+    "3. Remove entries that are gibberish, nonsensical, noise artifacts, or invalid (e.g., random characters, 'OOO', 'INN', 'www' 'Oppo').\n"
     "4. Exclude subtitles with fewer than 3 words or excessive repetition.\n"
     "5. Exclude subtitles only if they are entirely gibberish, nonsensical, or invalid after cleaning attempts. Do not exclude valid subtitles, even if minimal cleaning is needed to make them clear and meaningful.\n"
     "6. Return results in the format 'timestamp: cleaned subtitle'.\n"
+    "7. If noise artifacts appear with valid subtitles, attempt to remove them while keeping the main content intact.\n"
 )
         for timestamp, subtitle in subtitles_with_timestamps:
             prompt += f"{timestamp}: {subtitle}\n"
@@ -162,6 +163,51 @@ def clean_subtitles_with_openai_batch(subtitles_with_timestamps):
         logger.error(f"Error cleaning subtitles batch with OpenAI: {e}")
         return []
 
+def extract_subtitles_with_timestamps(raw_subtitles):
+    """
+    Parses raw subtitles into a list of (timestamp, subtitle) tuples, handling multiline subtitles.
+
+    Args:
+        raw_subtitles (list of str): List of raw subtitle lines from the input file.
+
+    Returns:
+        list of tuples: List of (timestamp, subtitle) pairs.
+    """
+    subtitles_with_timestamps = []
+    current_timestamp = None
+    current_subtitle = []
+
+    for idx, line in enumerate(raw_subtitles, 1):
+        line = line.strip()  # Remove whitespace
+        if ":" in line:  # Likely a timestamp line
+            if current_timestamp is not None:  # Save the previous subtitle
+                subtitles_with_timestamps.append(
+                    (current_timestamp, " ".join(current_subtitle))
+                )
+                logger.debug(f"[Line {idx}] Parsed: Timestamp='{current_timestamp}', Subtitle='{' '.join(current_subtitle)}'")
+
+            # Start a new subtitle block
+            try:
+                current_timestamp, subtitle = line.split(":", 1)
+                current_timestamp = current_timestamp.strip()
+                current_subtitle = [subtitle.strip()]
+            except ValueError:
+                logger.warning(f"[Line {idx}] Failed to parse line: {line}")
+                continue
+        else:  # Continuation of the previous subtitle
+            if current_timestamp is not None:
+                current_subtitle.append(line)
+            else:
+                logger.warning(f"[Line {idx}] Unhandled line without timestamp: {line}")
+
+    # Save the last subtitle
+    if current_timestamp is not None:
+        subtitles_with_timestamps.append(
+            (current_timestamp, " ".join(current_subtitle))
+        )
+        logger.debug(f"Finalized: Timestamp='{current_timestamp}', Subtitle='{' '.join(current_subtitle)}'")
+
+    return subtitles_with_timestamps
 
 
 
@@ -174,26 +220,16 @@ def clean_subtitles_file(input_file, output_file):
     try:
         logger.info(f"Reading subtitles from file: {input_file}")
         with open(input_file, 'r', encoding='utf-8') as f:
-            subtitles = f.readlines()
+            raw_subtitles = f.readlines()
 
-        subtitles_with_timestamps = []
+        logger.debug(f"Raw content of input file:\n{''.join(raw_subtitles)}")
+
+        # Extract subtitles with timestamps using the updated function
+        subtitles_with_timestamps = extract_subtitles_with_timestamps(raw_subtitles)
+
+        logger.info(f"Extracted {len(subtitles_with_timestamps)} valid subtitles.")
+
         seen_cleaned_subtitles = set()
-
-        logger.info(f"Starting subtitle cleaning process. Total lines: {len(subtitles)}")
-        for line in subtitles:
-            try:
-                timestamp, subtitle = line.split(":", 1)
-                subtitle = normalize_text(subtitle.strip())
-                logger.debug(f"Processing subtitle at {timestamp}: {subtitle}")
-
-                if not is_valid_subtitle(subtitle):
-                    logger.info(f"Skipping invalid subtitle: {subtitle}")
-                    continue
-
-                subtitles_with_timestamps.append((timestamp.strip(), subtitle))
-            except ValueError as ve:
-                logger.warning(f"Malformed line: {line}. Error: {ve}")
-                continue
 
         # Batch process with OpenAI
         cleaned_subtitles = []
@@ -203,14 +239,18 @@ def clean_subtitles_file(input_file, output_file):
 
             if cleaned_batch:
                 for cleaned in cleaned_batch:
-                    timestamp, subtitle = cleaned.split(":", 1)
-                    cleaned_text = subtitle.strip()
-                    if cleaned_text and cleaned_text not in seen_cleaned_subtitles:
-                        cleaned_subtitles.append(cleaned)
-                        seen_cleaned_subtitles.add(cleaned_text)
-                        logger.debug(f"Added cleaned subtitle: {cleaned_text}")
-                    else:
-                        logger.info(f"Skipped duplicate or invalid cleaned subtitle: {cleaned_text}")
+                    try:
+                        timestamp, subtitle = cleaned.split(":", 1)
+                        cleaned_text = subtitle.strip()
+                        if cleaned_text and cleaned_text not in seen_cleaned_subtitles:
+                            cleaned_subtitles.append(cleaned)
+                            seen_cleaned_subtitles.add(cleaned_text)
+                            logger.debug(f"Added cleaned subtitle: {cleaned_text}")
+                        else:
+                            logger.info(f"Skipped duplicate or invalid cleaned subtitle: {cleaned_text}")
+                    except ValueError as ve:
+                        logger.warning(f"Malformed cleaned line: {cleaned}. Error: {ve}")
+                        continue
 
         logger.info(f"Writing cleaned subtitles to file: {output_file}")
         with open(output_file, 'w', encoding='utf-8') as f:
@@ -219,6 +259,7 @@ def clean_subtitles_file(input_file, output_file):
         logger.info(f"Cleaned subtitles successfully saved to {output_file}")
     except Exception as e:
         logger.error(f"Error cleaning subtitles file: {e}")
+
 
 
 # Entry point
