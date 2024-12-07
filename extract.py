@@ -55,10 +55,21 @@ def detect_text_from_frame(frame, vision_client):
     try:
         logger.debug("Starting text detection on the frame.")
 
-        # Convert frame to JPEG bytes
-        _, buffer = cv2.imencode('.jpg', frame)
+        # Define the Region of Interest (ROI)
+        height, width, _ = frame.shape
+        roi_y_start = int(height * 0.8)  # Bottom 20% of the frame
+        roi_y_end = height
+        roi_x_start = 0
+        roi_x_end = width
+
+        # Crop the frame to the ROI
+        cropped_frame = frame[roi_y_start:roi_y_end, roi_x_start:roi_x_end]
+        logger.debug(f"Frame cropped to ROI: x={roi_x_start}:{roi_x_end}, y={roi_y_start}:{roi_y_end}")
+
+        # Convert the cropped frame to JPEG bytes
+        _, buffer = cv2.imencode('.jpg', cropped_frame)
         image_bytes = io.BytesIO(buffer).getvalue()
-        logger.debug("Frame successfully encoded into JPEG bytes.")
+        logger.debug("Cropped frame successfully encoded into JPEG bytes.")
 
         # Create Vision API image object
         image = vision.Image(content=image_bytes)
@@ -102,6 +113,7 @@ def detect_text_from_frame(frame, vision_client):
     except Exception as e:
         logger.error(f"Error detecting text from frame: {e}")
         return None
+
 
 
 # Helper function to check if text is likely English

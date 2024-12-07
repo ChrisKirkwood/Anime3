@@ -1,0 +1,651 @@
+26.37: For the things that's been lost will lose their spark
+26.43: For the things that's been lost will lose their spark
+26.50: For the things that's been lost will lose their spark
+26.57: For the things that's been lost will lose their spark
+26.63: For the things that's been lost will lose their spark
+26.70: For the things that's been lost will lose their spark
+26.77: None
+28.23: At times when you're lost somewhere
+28.30: At times when you're lost somewhere
+28.37: At times when you're lost somewhere
+28.43: At times when you're lost somewhere
+28.50: At times when you're lost somewhere
+28.57: At times when you're lost somewhere
+28.63: At times when you're lost somewhere
+28.70: At times when you're lost somewhere
+28.77: At times when you're lost somewhere
+28.83: At times when you're lost somewhere
+28.90: At times when you're lost somewhere
+28.97: At times when you're lost somewhere
+31.23: At times when you're lost somewhere
+31.27: At times when you're lost somewhere
+31.33: At times when you're lost somewhere
+31.37: At times when you're lost somewhere
+31.43: At times when you're lost somewhere
+31.47: At times when you're lost somewhere
+31.53: At times when you're lost somewhere
+31.57: At times when you're lost somewhere
+31.63: At times when you're lost somewhere
+31.67: At times when you're lost somewhere
+31.73: At times when you're lost somewhere
+31.77: None
+31.83: If my heart is also adrift
+31.90: If my heart is also adrift
+31.97: If my heart is also adrift
+38.23: Your kindness, nor your strength
+38.27: Your kindness, nor your strength
+38.33: Your kindness, nor your strength
+38.37: Your kindness, nor your strength
+38.43: Your kindness, nor your strength
+38.47: Your kindness, nor your strength
+38.53: Your kindness, nor your strength
+38.57: Your kindness, nor your strength
+38.63: Your kindness, nor your strength
+38.67: Your kindness, nor your strength
+38.73: Your kindness, nor your strength
+38.77: Your kindness, nor your strength
+38.83: Your kindness, nor your strength
+38.90: Your kindness, nor your strength
+38.97: Your kindness, nor your strength
+42.30: I already know
+42.33: I already know
+42.37: I already know
+42.43: I already know
+42.47: I already know
+42.53: I already know
+42.57: I already know
+42.63: I already know
+42.67: I already know
+42.73: I already know
+42.77: I already know
+42.83: I already know
+42.90: I already know
+42.97: I already know
+43.03: I already know
+43.07: I already know
+43.13: I already know
+43.17: I already know
+43.23: I already know
+43.27: I already know
+43.33: I already know
+43.37: I already know
+43.43: I already know
+43.47: I already know
+43.53: I already know
+43.57: I already know
+43.63: I already know
+43.67: I already know
+43.73: I already know
+43.77: I already know
+43.83: I already know
+43.87: I already know
+43.93: I already know
+44.00: I already know
+44.07: I already know
+44.13: I already know
+44.17: I already know
+44.23: I already know
+44.27: None
+48.10: It's the break of dawn
+48.13: It's the break of dawn
+48.20: It's the break of dawn
+48.23: It's the break of dawn
+48.27: It's the break of dawn
+48.30: It's the break of dawn
+48.33: It's the break of dawn
+48.40: It's the break of dawn
+48.70: It's the break of dawn
+50.00: To the highest point of reach
+53.30: I'll dash through all the way, yeah
+57.40: I bet you're laughing, numbed by it all
+60.10: For the pain of those days is now in the past, perhaps
+64.60: With the world as my enemy
+64.90: With the world as my enemy
+67.40: I stand my ground on quivering legs
+71.83: Keep moving, just a bit more for me
+74.60: The awakening moment
+82.23: WIT
+82.27: EVE
+94.17: RPEX-DAD
+94.20: CEG-FAM
+94.23: RRP-
+95.17: "The Last Curtain!
+95.27: None
+95.30: None
+95.43: None
+95.50: None
+95.57: None
+95.60: None
+95.77: None
+95.80: None
+95.83: None
+95.90: None
+95.97: None
+96.00: None
+96.03: None
+96.07: None
+96.17: None
+96.27: None
+96.30: None
+96.33: None
+96.37: None
+96.40: None
+96.43: None
+96.47: None
+96.50: None
+96.60: None
+96.63: None
+96.67: None
+96.70: None
+96.73: None
+96.77: None
+96.80: None
+96.93: None
+96.97: None
+97.03: None
+97.07: None
+97.10: None
+97.13: None
+97.17: None
+97.20: None
+97.23: None
+97.60: None
+97.80: None
+97.87: None
+97.93: None
+98.20: None
+98.27: None
+98.33: None
+98.40: None
+98.53: None
+98.57: None
+98.67: None
+98.70: None
+98.80: None
+98.83: None
+98.93: None
+98.97: None
+99.07: None
+99.10: None
+99.20: None
+99.23: None
+99.33: None
+99.37: None
+99.47: None
+99.50: None
+99.60: None
+99.63: None
+99.67: None
+99.70: None
+99.73: None
+99.77: None
+99.80: None
+99.83: None
+99.87: None
+99.90: None
+99.93: None
+99.97: None
+100.00: None
+100.03: None
+100.07: None
+100.10: None
+100.13: None
+100.17: None
+100.20: None
+100.23: None
+100.27: None
+100.30: None
+100.33: None
+100.37: None
+100.40: None
+100.43: None
+100.47: None
+100.50: None
+100.53: None
+100.57: None
+100.60: None
+100.63: None
+100.67: None
+100.70: None
+100.73: None
+100.77: None
+100.80: None
+100.83: None
+100.87: None
+100.90: None
+100.93: None
+100.97: None
+101.00: None
+101.03: None
+101.07: None
+101.10: None
+101.13: None
+101.17: None
+101.20: None
+101.23: None
+101.27: None
+101.30: None
+101.33: None
+101.37: None
+101.40: None
+101.43: None
+101.47: None
+101.50: None
+101.53: None
+101.57: None
+101.60: None
+101.63: None
+101.67: None
+101.70: None
+101.73: None
+101.77: None
+101.80: None
+101.83: None
+101.87: None
+101.90: None
+101.93: None
+101.97: None
+102.00: None
+102.03: None
+102.07: None
+102.10: None
+102.13: None
+102.17: None
+102.20: None
+102.23: None
+102.27: None
+102.30: None
+102.33: None
+102.37: None
+102.40: None
+102.43: None
+102.47: None
+102.50: None
+102.53: None
+102.57: None
+102.60: None
+102.63: None
+102.67: None
+102.70: None
+102.73: None
+102.77: None
+102.80: None
+102.83: None
+102.87: None
+102.90: None
+102.93: None
+102.97: None
+103.00: None
+103.03: None
+103.07: None
+103.10: None
+103.13: None
+103.17: None
+103.20: None
+103.23: None
+103.27: None
+103.30: None
+103.33: None
+103.37: None
+103.40: None
+103.43: None
+103.47: None
+103.50: None
+103.53: "The Last Curtain!
+103.57: None
+103.63: None
+103.67: None
+103.70: None
+103.73: None
+103.77: None
+103.80: None
+103.83: None
+103.87: None
+103.90: None
+103.93: None
+103.97: None
+104.00: None
+104.03: None
+104.07: None
+104.10: None
+104.13: None
+104.17: None
+104.20: None
+104.23: None
+104.27: None
+104.30: None
+104.33: None
+104.37: None
+104.40: None
+104.43: None
+104.47: None
+104.50: None
+104.53: None
+104.57: None
+104.60: None
+104.63: None
+104.67: None
+104.70: None
+104.73: None
+104.77: None
+104.80: None
+104.83: None
+104.87: None
+104.90: None
+104.93: None
+104.97: None
+105.00: None
+105.03: None
+105.07: None
+105.10: None
+105.13: None
+105.17: None
+105.20: None
+105.23: None
+105.27: None
+105.30: None
+105.33: None
+105.37: None
+105.40: None
+105.43: None
+105.47: None
+105.50: None
+105.53: None
+105.57: None
+105.60: None
+105.63:
+138.27: None
+138.30: None
+138.33: None
+138.37: None
+138.40: None
+138.43: None
+138.47: None
+138.50: None
+138.53: None
+138.57: None
+138.60: None
+138.70: None
+138.93: None
+139.13: None
+139.17: TTTTT
+139.20: TTTTT
+139.23: TTTTT
+139.27: None
+139.30: None
+139.33: None
+139.37: None
+139.57: None
+139.60: None
+139.63: ITTTT
+139.67: None
+139.70: None
+139.73: None
+139.77: None
+139.80: None
+139.83: None
+139.87: None
+139.90: None
+139.93: None
+139.97: None
+140.00: None
+140.03: None
+140.07: None
+140.10: None
+140.27: None
+140.40: None
+140.43: None
+140.47: None
+140.50: None
+140.53: None
+140.57: None
+140.60: None
+140.63: None
+140.67: None
+140.70: None
+140.73: None
+140.77: None
+140.80: None
+140.83: None
+140.87: None
+140.90: None
+140.93: None
+140.97: None
+141.00: None
+141.03: None
+141.07: None
+141.10: None
+141.13: None
+141.17: None
+141.20: None
+141.23: None
+141.27: None
+141.30: None
+141.33: None
+141.37: None
+141.40: None
+141.43: None
+141.47: None
+141.50: None
+141.53: None
+141.57: None
+141.60: None
+141.63: None
+141.67: None
+141.70: None
+141.73: None
+141.77: None
+141.80: None
+141.83: None
+141.87: The storm rages on
+141.90: The storm rages on
+141.93: The storm rages on
+142.00: The storm rages on
+142.03: The storm rages on
+142.07: The storm rages on
+142.10: The storm rages on
+142.13: The storm rages on
+142.17: The storm rages on
+142.20: The storm rages on
+142.23: The storm rages on
+142.27: The storm rages on
+142.30: The storm rages on
+142.33: The storm rages on
+142.37: The storm rages on
+142.40: The storm rages on
+142.43: The storm rages on
+142.47: The storm rages on
+142.50: The storm rages on
+142.53: The storm rages on
+142.57: The storm rages on
+142.60: The storm rages on
+142.63: The storm rages on
+142.67: The storm rages on
+142.70: The storm rages on
+142.73: The storm rages on
+142.77: The storm rages on
+142.80: The storm rages on
+142.83: The storm rages on
+142.87: The storm rages on
+142.90: The storm rages on
+142.93: The storm rages on
+142.97: The storm rages on
+143.00: The storm rages on
+143.03: The storm rages on
+143.07: The storm rages on
+143.10: The storm rages on
+143.13: The storm rages on
+143.17: The storm rages on
+143.20: The storm rages on
+143.23: The storm rages on
+143.27: The storm rages on
+143.30: The storm rages on
+143.33: The storm rages on
+143.37: The storm rages on
+143.40: The storm rages on
+143.43: The storm rages on
+143.47: The storm rages on
+143.50: The storm rages on
+143.53: The storm rages on
+143.57: The storm rages on
+143.60: The storm rages on
+143.63: The storm rages on
+143.67: The storm rages on
+143.70: The storm rages on
+143.73: The storm rages on
+143.77: The storm rages on
+143.80: The storm rages on
+143.83: The storm rages on
+143.87: The storm rages on
+143.90: The storm rages on
+143.93: The storm rages on
+143.97: The storm rages on
+144.00: The storm rages on
+144.03: The storm rages on
+144.07: The storm rages on
+144.10: The storm rages on
+144.13: The storm rages on
+144.17: The storm rages on
+144.20: The storm rages on
+144.23: The storm rages on
+144.27: The storm rages on
+144.30: The storm rages on
+144.33: The storm rages on
+144.37: The storm rages on
+144.40: The storm rages on
+144.43: The storm rages on
+144.47: The storm rages on
+144.50: The storm rages on
+144.53: The storm rages on
+144.57: The storm rages on
+144.60: The storm rages on
+144.63: The storm rages on
+144.67: The storm rages on
+144.70: The storm rages on
+144.73: The storm rages on
+144.77: The storm rages on
+144.80: The storm rages on
+144.83: The storm rages on
+144.87: The storm rages on
+144.90: The storm rages on
+144.93: The storm rages on
+144.97: The storm rages on
+145.00: The storm rages on
+145.03: The storm rages on
+145.07: The storm rages on
+145.10: The storm rages on
+145.13: The storm rages on
+145.17: The storm rages on
+145.20:
+168.00: A legion of beasts howl madly
+184.53: A shower in late autumn passes
+190.27: And maple leaves turn red
+194.77: And maple leaves turn red
+204.23: To avenge Kozuki Oden,
+206.00: his retainers raced around.
+213.60: Though I am not so eloquent
+217.57: --Yes!
+219.60: I will try my best to tell the story
+221.50: I will try my best to tell the story
+237.60: before a stormy night with pouring rain,
+242.30: gathering at Habu Port...
+245.80: ...to raid Onigashima
+247.67: ...to raid Onigashima
+264.33: Leaving the boisterous Flower Capital
+267.10: Momonosuke and the others are heading
+272.43: Momonosuke and the others are heading
+272.77: None
+273.10: None
+273.43: None
+273.77: None
+274.03: None
+274.37: None
+274.70: None
+275.03: None
+275.37: None
+275.70: None
+276.03: None
+276.37: None
+276.70: None
+277.03: None
+277.37: None
+277.70: None
+278.13: None
+278.17: None
+278.20: None
+278.23: What?!
+278.83: None
+278.87: None
+278.90: None
+279.00: None
+279.23: What?!
+279.83: None
+279.87: None
+279.90: None
+280.00: None
+280.23: What?!
+280.83: None
+280.87: None
+280.90: None
+281.00: None
+281.23: Mm-hm! I'm not!
+281.47: Mm-hm! I'm not!
+281.70: Mm-hm! I'm not!
+281.93: Mm-hm! I'm not!
+282.17: Mm-hm! I'm not!
+282.40: Mm-hm! I'm not!
+282.63: Mm-hm! I'm not!
+282.87: Mm-hm! I'm not!
+283.10: Mm-hm! I'm not!
+283.33: Mm-hm! I'm not!
+283.57: Mm-hm! I'm not!
+283.80: Mm-hm! I'm not!
+284.03: Mm-hm! I'm not!
+284.27: Mm-hm! I'm not!
+284.50: Mm-hm! I'm not!
+284.73: Mm-hm! I'm not!
+284.97: Mm-hm! I'm not!
+285.20: Mm-hm! I'm not!
+285.43: Mm-hm! I'm not!
+285.67: Mm-hm! I'm not!
+285.90: Mm-hm! I'm not!
+286.13: Mm-hm! I'm not!
+286.37: Mm-hm! I'm not!
+286.60: Mm-hm! I'm not!
+286.83: Mm-hm! I'm not!
+287.07: Should I not?
+287.30: Should I not?
+287.53: Should I not?
+287.77: Should I not?
+288.00: Should I not?
+288.23: No, it is reassuring to have you here...
+288.47: No, it is reassuring to have you here...
+288.70: No, it is reassuring to have you here...
+288.93: No, it is reassuring to have you here...
+289.17: No, it is reassuring to have you here...
+289.40: No, it is reassuring to have you here...
+289.63: No, it is reassuring to have you here...
+289.87: No, it is reassuring to have you here...
+290.10: No, it is reassuring to have you here...
+290.33: No, it is reassuring to have you here...
+290.57: No, it is reassuring to have you here...
+290.80: No, it is reassuring to have you here...
+291.03: No, it is reassuring to have you here...
+291.27: No, it is reassuring to have you here...
+291.50: No, it is reassuring to have you here...
+291.73: No, it is reassuring to have you here...
+291.97: No, it is reassuring to have you here...
+292.20: No, it is reassuring to have you here...
+292.43: No, it is reassuring to have you here...
+292.67: No, it is reassuring to have you here...
+292.90: No, it is reassuring to have you here...
+293.13: No, it is reassuring to have you here...
+293.37: No, it is reassuring to have you here...
+293.60: No, it is reassuring to have you here...
+293.83: No, it is reassuring to have you here...
+294.77: But did you not say
+295.30: None
+295.33: I thought you decided to leave
+296.27: I thought you decided to leave
+297.00: SAM
+299.43: None

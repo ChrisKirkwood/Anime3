@@ -1,0 +1,1915 @@
+0.00: The sky is dark
+0.10: The sky is dark
+0.13: The sky is dark
+0.17: The sky is dark
+0.20: The sky is dark
+0.23: The sky is dark
+0.27: The sky is dark
+0.30: The sky is dark
+0.33: The sky is dark
+0.37: The sky is dark
+0.40: The sky is dark
+0.43: The sky is dark
+0.47: The sky is dark
+0.50: The sky is dark
+0.53: The sky is dark
+0.57: The sky is dark
+0.60: The sky is dark
+0.63: The sky is dark
+0.67: The sky is dark
+0.70: The sky is dark
+0.73: The sky is dark
+0.77: The sky is dark
+0.80: The sky is dark
+0.83: The sky is dark
+0.87: The sky is dark
+0.90: The sky is dark
+0.93: The sky is dark
+0.97: The sky is dark
+1.00: The sky is dark
+1.03: The sky is dark
+1.07: The sky is dark
+1.10: The sky is dark
+1.13: The sky is dark
+1.17: The sky is dark
+1.20: The sky is dark
+1.23: The sky is dark
+1.27: The sky is dark
+1.30: The sky is dark
+1.33: The sky is dark
+1.37: The sky is dark
+1.40: The sky is dark
+1.43: The sky is dark
+1.47: The sky is dark
+1.50: The sky is dark
+1.53: The sky is dark
+1.57: The sky is dark
+1.60: The sky is dark
+1.63: The sky is dark
+1.67: The sky is dark
+1.70: The sky is dark
+1.73: The sky is dark
+1.77: The sky is dark
+1.80: The sky is dark
+1.83: The sky is dark
+1.87: The sky is dark
+1.90: The sky is dark
+1.93: The sky is dark
+1.97: The sky is dark
+2.00: The sky is dark
+2.03: The sky is dark
+2.07: The sky is dark
+2.10: The sky is dark
+2.13: The sky is dark
+2.17: The sky is dark
+2.20: The sky is dark
+2.23: The sky is dark
+2.27: The sky is dark
+2.30: The sky is dark
+2.33: The sky is dark
+2.37: The sky is dark
+2.40: The sky is dark
+2.43: The sky is dark
+2.47: The sky is dark
+2.50: The sky is dark
+2.53: The sky is dark
+2.57: The sky is dark
+2.60: The sky is dark
+2.63: The sky is dark
+2.67: The sky is dark
+2.70: The sky is dark
+2.73: The sky is dark
+2.77: The sky is dark
+2.80: The sky is dark
+2.83: The sky is dark
+2.87: The sky is dark
+2.90: The sky is dark
+2.93: The sky is dark
+2.97: The sky is dark
+3.00: The sky is dark
+3.03: The sky is dark
+3.07: The sky is dark
+3.10: The sky is dark
+3.13: The sky is dark
+3.17: The sky is dark
+3.20: The sky is dark
+3.23: The sky is dark
+3.27: The sky is dark
+3.30: The sky is dark
+3.33: The sky is dark
+3.37: The sky is dark
+3.40: The sky is dark
+3.43: The sky is dark
+3.47: The sky is dark
+3.50: The sky is dark
+3.53: The sky is dark
+3.57: The sky is dark
+3.60: The sky is dark
+3.63: The sky is dark
+3.67: The sky is dark
+3.70: The sky is dark
+3.73: The sky is dark
+3.77: The sky is dark
+3.80: The sky is dark
+3.83: The sky is dark
+3.87: The sky is dark
+3.90: The sky is dark
+3.93: The sky is dark
+3.97: The sky is dark
+4.00: The sky is dark
+4.03: The sky is dark
+4.07: The sky is dark
+4.10: The sky is dark
+4.13: The sky is dark
+4.17: The sky is dark
+4.20: The sky is dark
+4.23: The sky is dark
+4.27: The sky is dark
+4.30: The sky is dark
+4.33: The sky is dark
+4.37: The sky is dark
+4.40: The sky is dark
+4.43: The sky is dark
+4.47: The sky is dark
+4.50: The sky is dark
+4.53: The sky is dark
+4.57: The sky is dark
+4.60: The sky is dark
+4.63: The sky is dark
+4.67: The sky is dark
+4.70: The sky is dark
+4.73: The sky is dark
+4.77: The sky is dark
+4.80: The sky is dark
+4.83: None
+4.87: None
+4.90: E
+4.93: E
+4.97: None
+5.00: None
+5.03: None
+5.07: None
+5.10: None
+5.13: None
+5.17: None
+5.20: None
+5.23: None
+5.27: None
+5.30: None
+5.33: None
+5.37: None
+5.40: None
+5.43: None
+5.47: None
+5.50: None
+5.53: None
+5.57: None
+5.60: None
+5.63: None
+5.67: None
+5.70: None
+5.73: None
+5.77: None
+5.80: None
+5.83: None
+5.87: None
+5.90: None
+5.93: None
+5.97: None
+6.00: None
+6.03: None
+6.07: None
+6.10: None
+6.13: None
+6.17: None
+6.20: None
+6.23: None
+6.27: None
+6.30: None
+6.33: None
+6.37: None
+6.40: None
+6.43: None
+6.47: None
+6.50: None
+6.53: None
+6.57: None
+6.60: None
+6.63: None
+6.67: None
+6.70: None
+6.73: None
+6.77: None
+6.80: None
+6.83: None
+6.87: None
+6.90: None
+6.93: None
+6.97: None
+7.00: None
+7.03: None
+7.07: None
+7.10: None
+7.13: None
+7.17: None
+7.20: TT
+7.23: TT
+7.27: TT
+7.30: TT
+7.33: None
+7.37: None
+7.40: None
+7.43: None
+7.47: 1
+7.50: 1
+7.53: 1
+7.57: None
+7.60: None
+7.63: None
+7.67: None
+7.70: Tull
+7.73: IT
+7.77: IT
+7.80: IT
+7.83: None
+7.87: None
+7.90: None
+7.93: None
+7.97: None
+8.00: None
+8.03: None
+8.07: None
+8.10: None
+8.13: None
+8.17: None
+8.20: None
+8.23: None
+8.27: None
+8.30: None
+8.33: None
+8.37: None
+8.40: None
+8.43: None
+8.47: None
+8.50: None
+8.53: None
+8.57: D
+8.60: D
+8.63: None
+8.67: None
+8.70: None
+8.73: None
+8.77: None
+8.80: None
+8.83: None
+8.87: None
+8.90: None
+8.93: None
+8.97: None
+9.00: None
+9.03: None
+9.07: None
+9.10: None
+9.13: None
+9.17: None
+9.20: t
+9.23: None
+9.27: None
+9.30: None
+9.33: None
+9.37: None
+9.40: None
+9.43: None
+9.47: None
+9.50: None
+9.53: None
+9.57: None
+9.60: None
+9.63: None
+9.67: None
+9.70: None
+9.73: None
+9.77: None
+9.80: None
+9.83: None
+9.87: None
+9.90: None
+9.93: None
+9.97: None
+10.00: None
+10.03: None
+10.07: None
+10.10: None
+10.13: None
+10.17: None
+10.20: None
+10.23: None
+10.27: None
+10.30: None
+10.33: None
+10.37: None
+10.40: None
+10.43: None
+10.47: None
+10.50: None
+10.53: None
+10.57: None
+10.60: None
+10.63: None
+10.67: None
+10.70: None
+10.73: None
+10.77: None
+10.80: None
+10.83: None
+10.87: None
+10.90: None
+10.93: The storm rages on
+10.97: The storm rages on
+11.00: The storm rages on
+11.03: The storm rages on
+11.07: The storm rages on
+11.10: The storm rages on
+11.13: The storm rages on
+11.17: The storm rages on
+11.20: The storm rages on
+11.23: The storm rages on
+11.27: The storm rages on
+11.30: The storm rages on
+11.33: The storm rages on
+11.37: The storm rages on
+11.40: The storm rages on
+11.43: The storm rages on
+11.47: The storm rages on
+11.50: The storm rages on
+11.53: The storm rages on
+11.57: The storm rages on
+11.60: The storm rages on
+11.63: The storm rages on
+11.67: The storm rages on
+11.70: The storm rages on
+11.73: The storm rages on
+11.77: The storm rages on
+11.80: The storm rages on
+11.83: The storm rages on
+11.87: The storm rages on
+11.90: The storm rages on
+11.93: The storm rages on
+11.97: The storm rages on
+12.00: The storm rages on
+12.03: The storm rages on
+12.07: The storm rages on
+12.10: The storm rages on
+12.13: The storm rages on
+12.17: The storm rages on
+12.20: The storm rages on
+12.23: The storm rages on
+12.27: The storm rages on
+12.30: The storm rages on
+12.33: The storm rages on
+12.37: The storm rages on
+12.40: The storm rages on
+12.43: The storm rages on
+12.47: The storm rages on
+12.50: The storm rages on
+12.53: The storm rages on
+12.57: The storm rages on
+12.60: The storm rages on
+12.63: The storm rages on
+12.67: The storm rages on
+12.70: The storm rages on
+12.73: The storm rages on
+12.77: The storm rages on
+12.80: The storm rages on
+12.83: The storm rages on
+12.87: The storm rages on
+12.90: The storm rages on
+12.93: The storm rages on
+12.97: The storm rages on
+13.00: The storm rages on
+13.03: The storm rages on
+13.07: The storm rages on
+13.10: The storm rages on
+13.13: The storm rages on
+13.17: The storm rages on
+13.20: The storm rages on
+13.23: The storm rages on
+13.27: The storm rages on
+13.30: The storm rages on
+13.33: The storm rages on
+13.37: The storm rages on
+13.40: The storm rages on
+13.43: The storm rages on
+13.47: The storm rages on
+13.50: The storm rages on
+13.53: The storm rages on
+13.57: The storm rages on
+13.60: The storm rages on
+13.63: The storm rages on
+13.67: The storm rages on
+13.70: The storm rages on
+13.73: The storm rages on
+13.77: The storm rages on
+13.80: The storm rages on
+13.83: The storm rages on
+13.87: The storm rages on
+13.90: The storm rages on
+13.93: The storm rages on
+13.97: The storm rages on
+14.00: The storm rages on
+14.03: The storm rages on
+14.07: The storm rages on
+14.10: The storm rages on
+14.13: The storm rages on
+14.17: The storm rages on
+14.20: The storm rages on
+14.23: The storm rages on
+14.27: The storm rages on
+14.30: The storm rages on
+14.33: The storm rages on
+14.37: The storm rages on
+14.40: The storm rages on
+14.43: The storm rages on
+14.47: The storm rages on
+14.50: The storm rages on
+14.53: The storm rages on
+14.57: The storm rages on
+14.60: The storm rages on
+14.63: The storm rages on
+14.67: The storm rages on
+14.70: The storm rages on
+14.73: The storm rages on
+14.77: The storm rages on
+14.80: The storm rages on
+14.83: The storm rages on
+14.87: The storm rages on
+14.90: The storm rages on
+14.93: The storm rages on
+14.97: The storm rages on
+15.00: The storm rages on
+15.03: The storm rages on
+15.07: The storm rages on
+15.10: The storm rages on
+15.13: The storm rages on
+15.17: The storm rages on
+15.20: The storm rages on
+15.23: The storm rages on
+15.27: The storm rages on
+15.30: The storm rages on
+15.33: The storm rages on
+15.37: The storm rages on
+15.40: The storm rages on
+15.43: The storm rages on
+15.47: The storm rages on
+15.50: The storm rages on
+15.53: The storm rages on
+15.57: The storm rages on
+15.60: The storm rages on
+15.63: The storm rages on
+15.67: The storm rages on
+15.70: The storm rages on
+15.73: The storm rages on
+15.77: The storm rages on
+15.80: The storm rages on
+15.83: The storm rages on
+15.87: The storm rages on
+15.90: The storm rages on
+15.93: The storm rages on
+15.97: The storm rages on
+form rages on
+16.00: The storm rages on
+storm rages on
+16.03: The storm rages on
+16.07: The storm rages on
+16.10: The storm rages on
+16.13: The storm rages on
+16.17: The storm rages on
+16.20: The storm rages on
+16.23: The storm rages on
+16.27: The storm rages on
+storm/rages on
+16.30: The storm rages on
+16.33: The storm rages on
+16.37: The storm rages on
+16.40: The storm rages on
+16.43: The storm rages on
+16.47: The storm rages on
+16.50: The storm rages on
+16.53: The storm rages on
+16.57: The storm rages on
+16.60: The storm rages on
+16.63: The storm rages on
+16.67: The storm rages on
+16.70: The storm rages on
+16.73: The storm rages on
+16.77: The storm rages on
+16.80: The storm rages on
+16.83: The storm rages on
+16.87: The storm rages on
+16.90: The storm rages on
+16.93: The storm rages on
+16.97: The storm rages on
+17.00: The storm rages on
+17.03: The storm rages on
+17.07: The storm rages on
+17.10: The storm rages on
+17.13: The storm rages on
+17.17: The storm rages on
+17.20: The storm rages on
+17.23: The storm rages on
+17.27: The storm rages on
+17.30: The storm rages on
+17.33: The storm rages on
+17.37: The storm rages on
+17.40: The storm rages on
+17.43: The storm rages on
+17.47: The storm rages on
+17.50: None
+17.53: None
+17.57: None
+17.60: None
+17.63: Thank you for your purchase!
+This one is so fresh!
+17.67: Thank you for your purchase!
+This one is so fresh!
+17.70: Thank you for your purchase!
+This one is so fresh!
+17.73: Thank you for your purchase!
+This one is so fresh!
+17.77: Thank you for your purchase!
+This one is so fresh!
+17.80: Thank you for your purchase!
+This one is so fresh!
+17.83: Thank you for your purchase!
+This one is so fresh!
+17.87: Thank you for your purchase!
+This one is so fresh!
+17.90: Thank you for your purchase!
+This one is so fresh!
+17.93: Thank you for your purchase!
+This one is so fresh!
+17.97: Thank you for your purchase!
+This one is so fresh!
+18.00: Thank you for your purchase!
+This one is so fresh!
+18.03: Thank you for your purchase!
+This one is so fresh!
+18.07: Thank you for your purchase!
+This one is so fresh!
+18.10: Thank you for your purchase!
+This one is so fresh!
+18.13: Thank you for your purchase!
+This one is so fresh!
+18.17: Thank you for your purchase!
+This one is so fresh!
+18.20: Thank you for your purchase!
+This one is so fresh!
+18.23: Thank you for your purchase!
+This one is so fresh!
+18.27: Thank you for your purchase!
+This one is so fresh!
+18.30: Thank you for your purchase!
+This one is so fresh!
+18.33: Thank you for your purchase!
+This one is so fresh!
+18.37: Thank you for your purchase!
+This one is so fresh!
+18.40: Thank you for your purchase!
+This one is so fresh!
+18.43: Thank you for your purchase!
+This one is so fresh!
+18.47: Thank you for your purchase!
+This one is so fresh!
+18.50: Thank you for your purchase!
+This one is so fresh!
+18.53: Thank you for your purchase!
+This one is so fresh!
+18.57: Thank you for your purchase!
+This one is so fresh!
+18.60: Thank you for your purchase!
+This one is so fresh!
+18.63: Thank you for your purchase!
+This one is so fresh!
+18.67: Thank you for your purchase!
+This one is so fresh!
+18.70: Thank you for your purchase!
+This one is so fresh!
+18.73: Thank you for your purchase!
+This one is so fresh!
+18.77: Thank you for your purchase!
+This one is so fresh!
+18.80: Thank you for your purchase!
+This one is so fresh!
+18.83: Thank you for your purchase!
+This one is so fresh!
+18.87: Thank you for your purchase!
+This one is so fresh!
+18.90: Thank you for your purchase!
+This one is so fresh!
+18.93: Thank you for your purchase!
+This one is so fresh!
+18.97: Thank you for your purchase!
+This one is so fresh!
+19.00: Thank you for your purchase!
+This one is so fresh!
+19.03: Thank you for your purchase!
+This one is so fresh!
+19.07: Thank you for your purchase!
+This one is so fresh!
+19.10: Thank you for your purchase!
+This one is so fresh!
+19.13: Thank you for your purchase!
+This one is so fresh!
+19.17: Thank you for your purchase!
+This one is so fresh!
+19.20: Thank you for your purchase!
+This one is so fresh!
+19.23: Thank you for your purchase!
+This one is so fresh!
+19.27: Thank you for your purchase!
+This one is so fresh!
+19.30: Thank you for your purchase!
+This one is so fresh!
+19.33: Thank you for your purchase!
+This one is so fresh!
+19.37: Thank you for your purchase!
+This one is so fresh!
+19.40: Thank you for your purchase!
+This one is so fresh!
+19.43: Thank you for your purchase!
+This one is so fresh!
+19.47: Thank you for your purchase!
+This one is so fresh!
+19.50: Thank you for your purchase!
+This one is so fresh!
+19.53: Thank you for your purchase!
+This one is so fresh!
+19.57: Thank you for your purchase!
+This one is so fresh!
+19.60: Thank you for your purchase!
+This one is so fresh!
+19.63: Thank you for your purchase!
+This one is so fresh!
+19.67: Thank you for your purchase!
+This one is so fresh!
+19.70: Thank you for your purchase!
+This one is so fresh!
+19.73: Thank you for your purchase!
+This one is so fresh!
+19.77: Thank you for your purchase!
+This one is so fresh!
+19.80: Thank you for your purchase!
+This one is so fresh!
+19.83: Thank you for your purchase!
+This one is so fresh!
+19.87: Thank you for your purchase!
+This one is so fresh!
+19.90: Thank you for your purchase!
+This one is so fresh!
+19.93: Thank you for your purchase!
+This one is so fresh!
+19.97: Thank you for your purchase!
+This one is so fresh!
+20.00: Thank you for your purchase!
+This one is so fresh!
+20.03: Thank you for your purchase!
+This one is so fresh!
+20.07: Thank you for your purchase!
+This one is so fresh!
+20.10: Thank you for your purchase!
+This one is so fresh!
+20.13: Thank you for your purchase!
+This one is so fresh!
+20.17: Thank you for your purchase!
+This one is so fresh!
+20.20: Thank you for your purchase!
+This one is so fresh!
+20.23: Thank you for your purchase!
+This one is so fresh!
+20.27: Thank you for your purchase!
+This one is so fresh!
+20.30: Thank you for your purchase!
+This one is so fresh!
+20.33: Thank you for your purchase!
+This one is so fresh!
+20.37: Thank you for your purchase!
+This one is so fresh!
+20.40: Thank you for your purchase!
+This one is so fresh!
+20.43: Thank you for your purchase!
+This one is so fresh!
+20.47: Thank you for your purchase!
+This one is so fresh!
+20.50: Thank you for your purchase!
+This one is so fresh!
+20.53: Thank you for your purchase!
+This one is so fresh!
+20.57: Thank you for your purchase!
+This one is so fresh!
+20.60: Thank you for your purchase!
+This one is so fresh!
+20.63: Thank you for your purchase!
+This one is so fresh!
+20.67: Thank you for your purchase!
+This one is so fresh!
+20.70: Thank you for your purchase!
+This one is so fresh!
+20.73: Thank you for your purchase!
+This one is so fresh!
+20.77: None
+20.80: None
+20.83: None
+20.87: None
+20.90: At Onigashima
+20.93: At Onigashima
+20.97: At Onigashima
+21.00: At Onigashima
+21.03: At Onigashima
+21.07: At Onigashima
+21.10: At Onigashima
+21.13: At Onigashima
+21.17: At Onigashima
+21.20: At Onigashima
+21.23: At Onigashima
+21.27: At Onigashima
+21.30: At Onigashima
+21.33: At Onigashima
+21.37: At Onigashima
+21.40: At Onigashima
+21.43: At Onigashima
+21.47: At Onigashima
+21.50: At Onigashima
+21.53: At Onigashima
+21.57: At Onigashima
+21.60: At Onigashima
+21.63: At Onigashima
+21.67: At Onigashima
+21.70: At Onigashima
+21.73: At Onigashima
+21.77: At Onigashima
+21.80: At Onigashima
+21.83: At Onigashima
+21.87: At Onigashima
+21.90: At Onigashima
+21.93: At Onigashima
+21.97: At Onigashima
+22.00: At Onigashima
+22.03: At Onigashima
+22.07: At Onigashima
+22.10: At Onigashima
+22.13: At Onigashima
+22.17: At Onigashima
+22.20: At Onigashima
+22.23: At Onigashima
+22.27: At Onigashima
+22.30: At Onigashima
+22.33: At Onigashima
+22.37: At Onigashima
+22.40: At Onigashima
+22.43: At Onigashima
+22.47: At Onigashima
+22.50: At Onigashima
+22.53: At Onigashima
+22.57: At Onigashima
+22.60: At Onigashima
+22.63: At Onigashima
+22.67: At Onigashima
+22.70: At Onigashima
+22.73: At Onigashima
+22.77: At Onigashima
+22.80: At Onigashima
+22.83: At Onigashima
+22.87: At Onigashima
+22.90: At Onigashima
+22.93: At Onigashima
+22.97: At Onigashima
+23.00: At Onigashima
+23.03: At Onigashima
+23.07: At Onigashima
+23.10: At Onigashima
+23.13: At Onigashima
+23.17: At Onigashima
+23.20: At Onigashima
+23.23: At Onigashima
+23.27: At Onigashima
+23.30: At Onigashima
+23.33: At Onigashima
+23.37: At Onigashima
+23.40: At Onigashima
+23.43: At Onigashima
+23.47: At Onigashima
+23.50: At Onigashima
+23.53: At Onigashima
+23.57: At Onigashima
+23.60: At Onigashima
+23.63: At Onigashima
+23.67: At Onigashima
+23.70: At Onigashima
+23.73: At Onigashima
+23.77: At Onigashima
+23.80: At Onigashima
+23.83: At Onigashima
+23.87: At Onigashima
+23.90: At Onigashima
+23.93: At Onigashima
+23.97: At Onigashima
+24.00: At Onigashima
+24.03: At Onigashima
+24.07: At Onigashima
+24.10: At Onigashima
+24.13: At Onigashima
+24.17: At Onigashima
+24.20: At Onigashima
+24.23: At Onigashima
+24.27: At Onigashima
+24.30: At Onigashima
+24.33: At Onigashima
+24.37: At Onigashima
+24.40: At Onigashima
+24.43: At Onigashima
+24.47: At Onigashima
+24.50: At Onigashima
+24.53: At Onigashima
+24.57: At Onigashima
+24.60: At Onigashima
+24.63: At Onigashima
+24.67: At Onigashima
+24.70: At Onigashima
+24.73: At Onigashima
+24.77: At Onigashima
+24.80: At Onigashima
+24.83: At Onigashima
+24.87: At Onigashima
+24.90: At Onigashima
+24.93: At Onigashima
+24.97: At Onigashima
+25.00: At Onigashima
+25.03: At Onigashima
+25.07: At Onigashima
+25.10: At Onigashima
+25.13: At Onigashima
+25.17: At Onigashima
+25.20: At Onigashima
+25.23: At Onigashima
+25.27: At Onigashima
+25.30: At Onigashima
+25.33: At Onigashima
+25.37: At Onigashima
+25.40: At Onigashima
+25.43: At Onigashima
+25.47: At Onigashima
+25.50: At Onigashima
+25.53: At Onigashima
+25.57: At Onigashima
+25.60: At Onigashima
+25.63: At Onigashima
+25.67: None
+25.70: None
+25.73: None
+25.77: None
+25.80: None
+25.83: None
+25.87: None
+25.90: None
+25.93: None
+25.97: None
+26.00: None
+26.03: None
+26.07: None
+26.10: None
+26.13: None
+26.17: None
+26.20: None
+26.23: None
+26.27: None
+26.30: None
+26.33: None
+26.37: None
+26.40: None
+26.43: None
+26.47: None
+26.50: None
+26.53: None
+26.57: None
+26.60: None
+26.63: None
+26.67: None
+26.70: None
+26.73: None
+26.77: None
+26.80: None
+26.83: None
+26.87: None
+26.90: None
+26.93: None
+26.97: None
+27.00: None
+27.03: None
+27.07: None
+27.10: None
+27.13: None
+27.17: None
+27.20: None
+27.23: None
+27.27: None
+27.30: None
+27.33: None
+27.37: None
+27.40: None
+27.43: None
+27.47: None
+27.50: None
+27.53: None
+27.57: None
+27.60: None
+27.63: None
+27.67: None
+27.70: None
+27.73: None
+27.77: None
+27.80: None
+27.83: None
+27.87: None
+27.90: None
+27.93: None
+27.97: None
+28.00: None
+28.03: None
+28.07: None
+28.10: None
+28.13: None
+28.17: None
+28.20: None
+28.23: None
+28.27: None
+28.30: None
+28.33: None
+28.37: None
+28.40: None
+28.43: None
+28.47: None
+28.50: None
+28.53: None
+28.57: None
+28.60: None
+28.63: None
+28.67: None
+28.70: None
+28.73: None
+28.77: None
+28.80: None
+28.83: None
+28.87: None
+28.90: None
+28.93: None
+28.97: None
+29.00: None
+29.03: None
+29.07: None
+29.10: None
+29.13: None
+29.17: None
+29.20: None
+29.23: None
+29.27: None
+29.30: None
+29.33: None
+29.37: None
+29.40: None
+29.43: None
+29.47: None
+29.50: None
+29.53: None
+29.57: None
+29.60: None
+29.63: None
+29.67: None
+29.70: None
+29.73: None
+29.77: None
+29.80: None
+29.83: None
+29.87: None
+29.90: None
+29.93: None
+29.97: None
+30.00: None
+30.03: None
+30.07: None
+30.10: None
+30.13: None
+30.17: None
+30.20: None
+30.23: None
+30.27: None
+30.30: None
+30.33: None
+30.37: None
+30.40: None
+30.43: None
+30.47: 9241
+30.50: None
+30.53: 9241
+30.57: 9241
+30.60: None
+30.63: None
+30.67: None
+30.70: None
+30.73: None
+30.77: None
+30.80: None
+30.83: None
+30.87: None
+30.90: None
+30.93: None
+30.97: None
+31.00: None
+31.03: A blue dragon roars
+31.07: A blue dragon roars
+31.10: A blue dragon roars
+31.13: A blue dragon roars
+31.17: A blue dragon roars
+31.20: A blue dragon roars
+31.23: A blue dragon roars
+31.27: A blue dragon roars
+31.30: A blue dragon roars
+31.33: A blue dragon roars
+31.37: A blue dragon roars
+31.40: A blue dragon roars
+31.43: A blue dragon roars
+31.47: A blue dragon roars
+31.50: A blue dragon roars
+31.53: A blue dragon roars
+31.57: A blue dragon roars
+31.60: A blue dragon roars
+31.63: A blue dragon roars
+31.67: A blue dragon roars
+31.70: A blue dragon roars
+31.73: A blue dragon roars
+31.77: A blue dragon roars
+31.80: A blue dragon roars
+31.83: A blue dragon roars
+31.87: A blue dragon roars
+31.90: A blue dragon roars
+31.93: A blue dragon roars
+31.97: A blue dragon roars
+32.00: A blue dragon roars
+32.03: A blue dragon roars
+32.07: A blue dragon roars
+32.10: A blue dragon roars
+32.13: A blue dragon roars
+32.17: A blue dragon roars
+32.20: A blue dragon roars
+32.23: A blue dragon roars
+32.27: A blue dragon roars
+32.30: A blue dragon roars
+32.33: A blue dragon roars
+32.37: A blue dragon roars
+32.40: A blue dragon roars
+32.43: A blue dragon roars
+32.47: A blue dragon roars
+32.50: A blue dragon roars
+32.53: A blue dragon roars
+32.57: A blue dragon roars
+32.60: A blue dragon roars
+32.63: A blue dragon roars
+32.67: A blue dragon roars
+32.70: A blue dragon roars
+32.73: A blue dragon roars
+32.77: A blue dragon roars
+32.80: A blue dragon roars
+32.83: A blue dragon roars
+32.87: A blue dragon roars
+32.90: A blue dragon roars
+32.93: A blue dragon roars
+32.97: A blue dragon roars
+33.00: A blue dragon roars
+33.03: A blue dragon roars
+33.07: A blue dragon roars
+33.10: A blue dragon roars
+33.13: A blue dragon roars
+33.17: A blue dragon roars
+33.20: A blue dragon roars
+33.23: A blue dragon roars
+33.27: A blue dragon roars
+33.30: A blue dragon roars
+33.33: A blue dragon roars
+33.37: A blue dragon roars
+33.40: A blue dragon roars
+P
+33.43: A blue dragon roars
+33.47: A blue dragon roars
+33.50: A blue dragon roars
+33.53: A blue dragon roars
+33.57: A blue dragon roars
+33.60: A blue dragon roars
+33.63: A blue dragon roars
+33.67: A blue dragon roars
+33.70: A blue dragon roars
+33.73: A blue dragon roars
+33.77: A blue dragon roars
+33.80: A blue dragon roars
+33.83: A blue dragon roars
+33.87: A blue dragon roars
+33.90: A blue dragon roars
+33.93: A blue dragon roars
+33.97: A blue dragon roars
+34.00: A blue dragon roars
+34.03: A blue dragon roars
+34.07: A blue dragon roars
+34.10: A blue dragon roars
+34.13: A blue dragon roars
+34.17: A blue dragon roars
+34.20: A blue dragon roars
+34.23: A blue dragon roars
+34.27: A blue dragon roars
+34.30: A blue dragon roars
+34.33: A blue dragon roars
+34.37: A blue dragon roars
+34.40: A blue dragon roars
+34.43: A blue dragon roars
+34.47: A blue dragon roars
+34.50: A blue dragon roars
+34.53: A blue dragon roars
+34.57: A blue dragon roars
+34.60: A blue dragon roars
+34.63: A blue dragon roars
+34.67: A blue dragon roars
+34.70: A blue dragon roars
+34.73: A blue dragon roars
+34.77: A blue dragon roars
+34.80: A blue dragon roars
+34.83: A blue dragon roars
+34.87: A blue dragon roars
+34.90: A blue dragon roars
+34.93: A blue dragon roars
+34.97: A blue dragon roars
+35.00: A blue dragon roars
+35.03: A blue dragon roars
+35.07: A blue dragon roars
+35.10: A blue dragon roars
+35.13: A blue dragon roars
+35.17: A blue dragon roars
+35.20: A blue dragon roars
+35.23: A blue dragon roars
+35.27: A blue dragon roars
+35.30: None
+35.33: None
+35.37: None
+35.40: None
+35.43: None
+35.47: None
+35.50: None
+35.53: None
+35.57: None
+35.60: None
+35.63: None
+35.67: None
+35.70: None
+35.73: None
+35.77: None
+35.80: None
+35.83: None
+35.87: None
+35.90: None
+35.93: None
+35.97: None
+36.00: None
+36.03: None
+36.07: None
+36.10: None
+36.13: None
+36.17: None
+36.20: A legion of beasts howl madly
+36.23: A legion of beasts howl madly
+36.27: A legion of beasts howl madly
+36.30: A legion of beasts howl madly
+36.33: A legion of beasts howl madly
+36.37: A legion of beasts howl madly
+36.40: A legion of beasts howl madly
+36.43: A legion of beasts howl madly
+36.47: A legion of beasts howl madly
+36.50: A legion of beasts howl madly
+36.53: A legion of beasts howl madly
+36.57: A legion of beasts howl madly
+36.60: A legion of beasts howl madly
+36.63: A legion of beasts howl madly
+36.67: A legion of beasts howl madly
+36.70: A legion of beasts howl madly
+36.73: A legion of beasts howl madly
+36.77: A legion of beasts howl madly
+36.80: A legion of beasts howl madly
+36.83: A legion of beasts howl madly
+36.87: A legion of beasts howl madly
+36.90: A legion of beasts howl madly
+36.93: A legion of beasts howl madly
+36.97: A legion of beasts howl madly
+37.00: A legion of beasts howl madly
+37.03: A legion of beasts howl madly
+37.07: A legion of beasts howl madly
+37.10: A legion of beasts howl madly
+37.13: A legion of beasts howl madly
+37.17: A legion of beasts howl madly
+37.20: A legion of beasts howl madly
+37.23: A legion of beasts howl madly
+37.27: A legion of beasts howl madly
+37.30: A legion of beasts howl madly
+37.33: A legion of beasts howl madly
+37.37: A legion of beasts howl madly
+37.40: A legion of beasts howl madly
+37.43: A legion of beasts howl madly
+37.47: A legion of beasts howl madly
+37.50: A legion of beasts howl madly
+37.53: A legion of beasts howl madly
+37.57: A legion of beasts howl madly
+37.60: A legion of beasts howl madly
+37.63: A legion of beasts howl madly
+37.67: A legion of beasts howl madly
+37.70: A legion of beasts howl madly
+37.73: A legion of beasts howl madly
+37.77: A legion of beasts howl madly
+37.80: A legion of beasts howl madly
+37.83: A legion of beasts howl madly
+37.87: A legion of beasts howl madly
+37.90: A legion of beasts howl madly
+37.93: A legion of beasts howl madly
+37.97: A legion of beasts howl madly
+38.00: A legion of beasts howl madly
+38.03: A legion of beasts howl madly
+38.07: A legion of beasts howl madly
+38.10: A legion of beasts howl madly
+38.13: A legion of beasts howl madly
+38.17: A legion of beasts howl madly
+38.20: A legion of beasts howl madly
+38.23: A legion of beasts howl madly
+38.27: A legion of beasts howl madly
+38.30: A legion of beasts howl madly
+38.33: Alegion of beasts howl madly
+38.37: Alegion of beasts howl madly
+38.40: A legion of beasts howl madly
+38.43: A legion of beasts howl madly
+38.47: A legion of beasts howl madly
+38.50: A legion of beasts howl madly
+38.53: A legion of beasts howl madly
+38.57: A legion of beasts howl madly
+38.60: Alegion of beasts howl madly
+38.63: Alegion of beasts howl madly
+38.67: Alegion of beasts howl madly
+38.70: Alegion of beasts howl madly
+38.73: Alegion of beasts howl madly
+38.77: Alegion of beasts howl madly
+38.80: Alegion of beasts howl madly
+38.83: A legion of beasts howl madly
+38.87: A legion of beasts howl madly
+38.90: A legion of beasts howl madly
+38.93: A legion of beasts howl madly
+38.97: A legion of beasts howl madly
+39.00: Alegion of beasts howl madly
+39.03: Alegion of beasts howl madly
+39.07: Alegion of beasts howl madly
+39.10: Alegion of beasts howl madly
+39.13: A legion of beasts howl madly
+39.17: Alegion of beasts howl madly
+39.20: Alegion of beasts howl madly
+39.23: Alegion of beasts howl madly
+39.27: Alegion of beasts howl madly
+39.30: Alegion of beasts howl madly
+39.33: Alegion of beasts howl madly
+39.37: Alegion of beasts howl madly
+39.40: A legion of beasts howl madly
+39.43: Alegion of beasts howl madly
+39.47: Alegion of beasts howl madly
+39.50: A legion of beasts howl-madly
+39.53: A legion of beasts howl-madly
+39.57: A legion of beasts howl madly
+39.60: Alegion of beasts howl madly
+39.63: Alegion of beasts howl madly
+39.67: Alegion of beasts howl madly
+39.70: A legion of beasts howl madly
+39.73: A legion of beasts howl madly
+39.77: Alegion of beasts howl madly
+39.80: Alegion of beasts howl madly
+39.83: Alegion of beasts howl madly
+39.87: A legion of beasts howl madly
+39.90: A legion of beasts howl madly
+39.93: A legion of beasts howl madly
+39.97: A legion of beasts howl madly
+40.00: A legion of beasts howl madly
+40.03: A legion of beasts howl madly
+40.07: A legion of beasts howl madly
+40.10: A legion of beasts howl madly
+40.13: Alegion of beasts howl madly
+40.17: A legion of beasts howl madly
+40.20: Alegion of beasts howl madly
+40.23: Alegion of beasts howl madly
+40.27: Alegion of beasts howl madly
+40.30: Alegion of beasts howl madly
+40.33: Alegion of beasts howl madly
+40.37: A legion of beasts howl madly
+40.40: A legion of beasts howl madly
+40.43: A legion of beasts howl madly
+40.47: A legion of beasts howl madly
+40.50: A legion of beasts howl madly
+40.53: A legion of beasts howl madly
+40.57: A legion of beasts howl madly
+40.60: A legion of beasts howl madly
+40.63: A legion of beasts howl madly
+40.67: A legion of beasts howl madly
+40.70: A legion of beasts howl madly
+40.73: A legion of beasts howl madly
+40.77: A legion of beasts howl madly
+40.80: A legion of beasts howl madly
+40.83: A legion of beasts howl madly
+40.87: A legion of beasts howl madly
+40.90: A legion of beasts howl madly
+40.93: A legion of beasts howl madly
+40.97: A legion of beasts howl madly
+41.00: A legion of beasts howl madly
+41.03: A legion of beasts howl madly
+41.07: A legion of beasts howl madly
+41.10: A legion of beasts howl madly
+41.13: A legion of beasts howl madly
+41.17: A legion of beasts howl madly
+41.20: A legion of beasts howl madly
+41.23: A legion of beasts howl madly
+41.27: A legion of beasts howl madly
+41.30: A legion of beasts howl madly
+41.33: A legion of beasts howl madly
+41.37: A legion of beasts howl madly
+41.40: A legion of beasts howl madly
+41.43: A legion of beasts howl madly
+41.47: A legion of beasts howl madly
+41.50: A legion of beasts howl madly
+41.53: A legion of beasts howl madly
+41.57: A legion of beasts howl madly
+41.60: A legion of beasts howl madly
+41.63: A legion of beasts howl madly
+41.67: A legion of beasts howl madly
+41.70: A legion of beasts howl madly
+41.73: legion of beasts howl madly
+41.77: A legion of beasts howl madly
+41.80: A legion of beasts howl madly
+41.83: A legion of beasts howl madly
+41.87: A legion of beasts howl madly
+41.90: A legion of beasts howl madly
+41.93: None
+41.97: None
+42.00: None
+42.03: None
+42.07: None
+42.10: None
+42.13: None
+42.17: None
+42.20: None
+42.23: None
+42.27: None
+42.30: None
+42.33: None
+42.37: None
+42.40: None
+42.43: None
+42.47: None
+42.50: None
+42.53: None
+42.57: None
+42.60: None
+42.63: None
+42.67: None
+42.70: None
+42.73: None
+42.77: None
+42.80: None
+42.83: None
+42.87: None
+42.90: None
+42.93: None
+42.97: None
+43.00: None
+43.03: None
+43.07: None
+43.10: None
+43.13: None
+43.17: None
+43.20: None
+43.23: None
+43.27: None
+43.30: None
+43.33: None
+43.37: None
+43.40: None
+43.43: None
+43.47: None
+43.50: None
+43.53: None
+43.57: None
+43.60: None
+43.63: None
+43.67: None
+43.70: None
+43.73: None
+43.77: None
+43.80: None
+43.83: None
+43.87: None
+43.90: None
+43.93: None
+43.97: None
+44.00: None
+44.03: None
+44.07: None
+44.10: None
+44.13: None
+44.17: None
+44.20: None
+44.23: None
+44.27: None
+44.30: None
+44.33: None
+44.37: None
+44.40: None
+44.43: None
+44.47: None
+44.50: None
+44.53: None
+44.57: None
+44.60: None
+44.63: None
+44.67: None
+44.70: None
+44.73: None
+44.77: None
+44.80: None
+44.83: None
+44.87: None
+44.90: None
+44.93: None
+44.97: None
+45.00: None
+45.03: None
+45.07: None
+45.10: None
+45.13: None
+45.17: None
+45.20: None
+45.23: None
+45.27: None
+45.30: None
+45.33: None
+45.37: None
+45.40: None
+45.43: None
+45.47: None
+45.50: None
+45.53: None
+45.57: None
+45.60: None
+45.63: None
+45.67: None
+45.70: None
+45.73: None
+45.77: None
+45.80: None
+45.83: None
+45.87: None
+45.90: None
+45.93: None
+45.97: None
+46.00: None
+46.03: None
+46.07: None
+46.10: None
+46.13: None
+46.17: None
+46.20: None
+46.23: None
+46.27: None
+46.30: None
+46.33: None
+46.37: None
+46.40: None
+46.43: None
+46.47: None
+46.50: None
+46.53: None
+46.57: None
+46.60: None
+46.63: None
+46.67: None
+46.70: None
+46.73: None
+46.77: None
+46.80: None
+46.83: None
+46.87: None
+46.90: None
+46.93: None
+46.97: None
+47.00: None
+47.03: None
+47.07: None
+47.10: None
+47.13: None
+47.17: None
+47.20: None
+47.23: None
+47.27: None
+47.30: None
+47.33: None
+47.37: None
+47.40: None
+47.43: None
+47.47: None
+47.50: None
+47.53: None
+47.57: None
+47.60: None
+47.63: None
+47.67: None
+47.70: None
+47.73: None
+47.77: None
+47.80: None
+47.83: None
+47.87: None
+47.90: None
+47.93: None
+47.97: None
+48.00: None
+48.03: None
+48.07: None
+48.10: None
+48.13: None
+48.17: None
+48.20: None
+48.23: None
+48.27: None
+48.30: None
+48.33: None
+48.37: None
+48.40: None
+48.43: None
+48.47: None
+48.50: None
+48.53: None
+48.57: None
+48.60: None
+48.63: None
+48.67: None
+48.70: None
+48.73: None
+48.77: None
+48.80: None
+48.83: None
+48.87: None
+48.90: None
+48.93: None
+48.97: None
+49.00: None
+49.03: None
+49.07: None
+49.10: None
+49.13: None
+49.17: None
+49.20: None
+49.23: At Habu Port
+49.27: At Habu Port
+49.30: At Habu Port
+49.33: At Habu Port
+49.37: At Habu Port
+49.40: At Habu Port
+49.43: At Habu Port
+49.47: At Habu Port
+49.50: At Habu Port
+49.53: At Habu Port
+49.57: At Habu Port
+49.60: At Habu Port
+49.63: At Habu Port
+49.67: At Habu Port
+49.70: At Habu Port
+49.73: At Habu Port
+49.77: At Habu Port
+49.80: At Habu Port
+49.83: At Habu Port
+49.87: At Habu Port
+49.90: At Habu Port
+49.93: At Habu Port
+49.97: At Habu Port
+50.00: At Habu Port
+50.03: At Habu Port
+50.07: At Habu Port
+50.10: At Habu Port
+50.13: At Habu Port
+50.17: At Habu Port
+50.20: At Habu Port
+50.23: At Habu Port
+50.27: At Habu Port
+50.30: At Habu Port
+50.33: At Habu Port
+50.37: At Habu Port
+50.40: At Habu Port
+50.43: At Habu Port
+50.47: At Habu Port
+50.50: At Habu Port
+50.53: At Habu Port
+50.57: At Habu Port
+50.60: At Habu Port
+50.63: At Habu Port
+50.67: At Habu Port
+50.70: At Habu Port
+50.73: At Habu Port
+50.77: At Habu Port
+50.80: At Habu Port
+50.83: At Habu Port
+50.87: At Habu Port
+50.90: At Habu Port
+50.93: At Habu Port
+50.97: At Habu Port
+51.00: At Habu Port
+51.03: At Habu Port
+51.07: At Habu Port
+51.10: At Habu Port
+51.13: At Habu Port
+51.17: At Habu Port
+51.20: At Habu Port
+51.23: At Habu Port
+51.27: At Habu Port
+51.30: At Habu Port
+51.33: At Habu Port
+51.37: At Habu Port
+51.40: At Habu Port
+51.43: At Habu Port
+51.47: At Habu Port
+51.50: At Habu Port
+51.53: At Habu Port
+51.57: At Habu Port
+51.60: At Habu Port
+51.63: At Habu Port
+51.67: At Habu Port
+51.70: At Habu Port
+51.73: At Habu Port
+51.77: At Habu Port
+51.80: At Habu Port
+51.83: At Habu Port
+51.87: At Habu Port
+51.90: At Habu Port
+51.93: At Habu Port
+51.97: At Habu Port
+52.00: At Habu Port
+52.03: At Habu Port
+52.07: At Habu Port
+52.10: At Habu Port
+52.13: At Habu Port
+52.17: At Habu Port
+52.20: At Habu Port
+52.23: At Habu Port
+52.27: At Habu Port
+52.30: At Habu Port
+52.33: At Habu Port
+52.37: At Habu Port
+52.40: At Habu Port
+52.43: At Habu Port
+52.47: At Habu Port
+52.50: At Habu Port
+52.53: At Habu Port
+52.57: At Habu Port
+52.60: At Habu Port
+52.63: At Habu Port
+52.67: At Habu Port
+52.70: At Habu Port
+52.73: At Habu Port
+52.77: At Habu Port
+52.80: At Habu Port
+52.83: At Habu Port
+52.87: At Habu Port
+52.90: At Habu Port
+52.93: At Habu Port
+52.97: At Habu Port
+53.00: At Habu Port
+53.03: At Habu Port
+53.07: At Habu Port
+53.10: At Habu Port
+53.13: At Habu Port
+53.17: At Habu Port
+53.20: At Habu Port
+53.23: At Habu Port
+53.27: At Habu Port
+53.30: At Habu Port
+53.33: At Habu Port
+53.37: At Habu Port
+53.40: At Habu Port
+53.43: At Habu Port
+53.47: At Habu Port
+53.50: At Habu Port
+53.53: C
+53.57: C
+53.60: A shower in late autumn passes
+53.63: A shower in late autumn passes
+53.67: A shower in late autumn passes
+53.70: A shower in late autumn passes
+53.73: A shower in late autumn passes
+53.77: A shower in late autumn passes
+53.80: A shower in late autumn passes
+53.83: A shower in late autumn passes
+53.87: A shower in late autumn passes
+53.90: A shower in late autumn passes
+53.93: A shower in late autumn passes
+53.97: A shower in late autumn passes
+54.00: A shower in late autumn passes
+54.03: A shower in late autumn passes
+54.07: A shower in late autumn passes
+54.10: A shower in late autumn passes
+54.13: A shower in late autumn passes
+54.17: A shower in late autumn passes
+54.20: A shower in late autumn passes
+54.23: A shower in late autumn passes
+54.27: A shower in late autumn passes
+54.30: A shower in late autumn passes
+54.33: A shower in late autumn passes
+54.37: A shower in late autumn passes
+54.40: A shower in late autumn passes
+54.43: A shower in late autumn passes
+54.47: A shower in late autumn passes
+54.50: A shower in late autumn passes
+54.53: A shower in late autumn passes
+54.57: A shower in late autumn passes
+54.60: A shower in late autumn passes
+54.63: A shower in late autumn passes
+54.67: A shower in late autumn passes
+54.70: A shower in late autumn passes
+54.73: A shower in late autumn passes
+54.77: A shower in late autumn passes
+54.80: A shower in late autumn passes
+54.83: A shower in late autumn passes
+54.87: A shower in late autumn passes
+54.90: A shower in late autumn passes
+54.93: A shower in late autumn passes
+54.97: A shower in late autumn passes
+456
+55.00: A shower in late autumn passes
+55.03: A shower in late autumn passes
+55.07: A shower in late autumn passes
+55.10: A shower in late autumn passes
+55.13: A shower in late autumn passes
+55.17: A shower in late autumn passes
+55.20: A shower in late autumn passes
+55.23: A shower in late autumn passes
+55.27: A shower in late autumn passes
+55.30: A shower in late autumn passes
+55.33: A shower in late autumn passes
+55.37: A shower in late autumn passes
+W
+55.40: A shower in late autumn passes
+W
+55.43: A shower in late autumn passes
+55.47: A shower in late autumn passes
+55.50: A shower in late autumn passes
+55.53: A shower in late autumn passes
+55.57: A shower in late autumn passes
+55.60: A shower in late autumn passes
+55.63: A shower in late autumn passes
+55.67: A shower in late autumn passes
+55.70: A shower in late autumn passes
+55.73: A shower in late autumn passes
+55.77: A shower in late autumn passes
+55.80: A shower in late autumn passes
+55.83: A shower in late autumn passes
+55.87: 3
+A shower in late autumn-passes
+55.90: A shower in late autumn-passes
+55.93: A shower in late autumn passes
+55.97: A shower in late autumn passes
+56.00: A shower in late autumn passes
+56.03: A shower in late autumn passés
+56.07: A shower in late autumn passés
+56.10: A shower in late autumn passes
+56.13: A shower in late autumn passes
+56.17: A shower in late autumn passes
+56.20: A shower in late autumn passes
+56.23: A shower in late autumn passes
+56.27: A shower in late autumn passes
+56.30: A shower in late autumn passes
+56.33: A shower in late autumn passes
+56.37: A shower in late autumn passes
+56.40: A shower in late autumn passes
+56.43: A shower in late autumn passes
+56.47: A shower in late autumn passes
+56.50: A shower in late autumn passes
+56.53: A shower in late autumn passes
+56.57: A shower in late autumn passes
+56.60: A shower in late autumn passes
+56.63: A shower in late autumn passes
+56.67: A shower in late autumn passes
+56.70: A shower in late autumn passes
+56.73: A shower in late autumn passes
+56.77: A shower in late autumn passes
+56.80: OA shower in late autumn passes
+56.83: OA shower in late autumn passes
+56.87: OA shower in late autumn passes
+56.90: OA shower in late autumn passes
+56.93: OA shower in late autumn passes
+56.97: A shower in late autumn passes
+57.00: A shower in late autumn passes
+57.03: shower in late autumn passes
+57.07: shower in late autumn passes
+57.10: A shower in late autumn passes
+57.13: A shower in late autumn passes
+57.17: A shower in late autumn passes
+57.20: A shower in late autumn passes
+57.23: A shower in late autumn passes
+57.27: A shower in late autumn passes
+57.30: A shower in late autumn passes
+57.33: A shower in late autumn passes
+57.37: A shower in late autumn passes
+57.40: A shower in late autumn passes
+57.43: A shower in late autumn passes
+N
+57.47: A shower in late autumn passes
+57.50: A shower in late autumn passes
+57.53: A shower in late autumn-passes
+57.57: A shower in late autumn-passes
+57.60: A shower in late autumn-passes
+57.63: A shower in late autumn passes
+57.67: A shower in late autumn passes
+57.70: A shower in late autumn passes
+Lin
+57.73: A shower in late autumn passes
+Lin
+57.77: A shower in late autumn-passes
+57.80: A shower in late autumn-passes
+57.83: A shower in late autumn passes
+57.87: A shower in late autumn passes
+57.90: A shower in late autumn passes
+57.93: A shower in late autumn passes
+57.97: A shower in late autumn passes
+58.00: A shower in late autumn passes
+58.03: A shower in late autumn passes
+passe
+58.07: A shower in late autumn passes
+passe
+58.10: A shower in late autumn passes
+58.13: A shower in late autumn passes
+58.17: A shower in late autumn passes
+58.20: A shower in late autumn passes
+58.23: A shower in late autumn passes
+58.27: A shower in late autumn passes
+58.30: A shower in late autumn passes
+58.33: A shower in late autumn passes
+58.37: A shower in late autumn passes
+58.40: A shower in late autumn passes
+58.43: A shower in late autumn passes
+58.47: A shower in late autumn passes
+58.50: A shower in late autumn passes
+58.53: A shower in late autumn passes
+58.57: A shower in late autumn passes
+58.60: A shower in late autumn passes
+58.63: A shower in late autumn passes
+58.67: A shower in late autumn passes
+58.70: A shower in late autumn passes
+58.73: A shower in late autumn passes
+58.77: A shower in late autumn passes
+58.80: A shower in late autumn passes
+58.83: A shower in late autumn passes
+58.87: A shower in late autumn passes
+58.90: A shower in late autumn passes
+58.93: A shower in late autumn passes
+58.97: A shower in late autumn passes
+59.00: A shower in late autumn passes
+59.03: A shower in late autumn passes
+59.07: A shower in late autumn passes
+59.10: A shower in late autumn passes
+59.13: A shower in late autumn passes
+59.17: A shower in late autumn passes
+59.20: A shower in late autumn passes
+59.23: A shower in late autumn passes
+59.27: A shower in late autumn passes
+59.30: None
+59.33: And maple leaves turn red
+59.37: And maple leaves turn red
+59.40: And maple leaves turn red
+59.43: And maple leaves turn red
+59.47: And maple leaves turn red
+59.50: And maple leaves turn red
+59.53: And maple leaves turn red
+59.57: And maple leaves turn red
+59.60: And maple leaves turn red
+59.63: And maple leaves turn red
+59.67: And maple leaves turn red
+59.70: And maple leaves turn red
+59.73: And maple leaves turn red
+59.77: And maple leaves turn red
+59.80: And maple leaves turn red
+59.83: And maple leaves turn red
+59.87: And maple leaves turn red
+59.90: And maple leaves turn red
+59.93: And maple leaves turn red
+59.97: And maple leaves turn red
+60.00: And maple leaves turn red
+60.03: And maple leaves turn red
+60.07: And maple leaves turn red
+60.10: And maple leaves turn red
+60.13: And maple leaves turn red
+60.17: And maple leaves turn red
+60.20: And maple leaves turn red
+60.23: And maple leaves turn red
+60.27: And maple leaves turn red
+60.30: And maple leaves turn red
