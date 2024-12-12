@@ -71,3 +71,6 @@ dmypy.json
 # Windows
 Thumbs.db
 ehthumbs.db
+
+# Ignore large files
+*.mp4
