@@ -1,0 +1,418 @@
+Extract 12/7 10:04
+import cv2
+import io
+import os
+import logging
+import re
+from google.cloud import vision
+import numpy as np
+from collections import Counter
+import math
+from difflib import SequenceMatcher
+import openai
+
+# Set up logging
+log_file_path = r"D:\Anime3\log\backend.log"
+os.makedirs(os.path.dirname(log_file_path), exist_ok=True)  # Ensure the log directory exists
+
+logging.basicConfig(
+    level=logging.DEBUG,  # Use DEBUG level for detailed logs
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler(log_file_path, mode='a'),  # Append to the log file
+        logging.StreamHandler()  # Also output to console
+    ]
+)
+logger = logging.getLogger(__name__)
+
+# Set up OpenAI API key
+try:
+    openai.api_key = os.environ["OPENAI_API_KEY"]
+    if not openai.api_key:
+        raise KeyError("OpenAI API key is empty.")
+    logger.info("OpenAI API key successfully loaded from environment.")
+except KeyError:
+    logger.error("OpenAI API key not found. Set it as the 'OPENAI_API_KEY' environment variable.")
+    raise RuntimeError("OpenAI API key is required but not set.")
+
+# Initialize the Google Cloud Vision client
+def setup_vision_client():
+    """
+    Sets up the Google Cloud Vision API client.
+    """
+    try:
+        if "GOOGLE_APPLICATION_CREDENTIALS" not in os.environ:
+            raise EnvironmentError("Google credentials not found. Set the GOOGLE_APPLICATION_CREDENTIALS environment variable.")
+        
+        vision_client = vision.ImageAnnotatorClient()
+        logger.info("Google Cloud Vision client successfully set up.")
+        return vision_client
+    except Exception as e:
+        logger.error(f"Error setting up Vision client: {e}")
+        return None
+
+# Helper function to determine subtitle region
+def get_subtitle_region(frame, height_ratio=0.2, width_ratio=0.8):
+    """
+    Determines the region of the frame where subtitles typically appear 
+    (bottom-center) and crops that region.
+
+    Args:
+        frame (np.ndarray): The video frame.
+        height_ratio (float): Proportion of the frame height to include in the subtitle region (default: 20% of height).
+        width_ratio (float): Proportion of the frame width to include in the subtitle region (default: 80% of width).
+
+    Returns:
+        tuple: Cropped subtitle region and its bounding box coordinates (x, y, w, h).
+    """
+    try:
+        # Get frame dimensions
+        frame_height, frame_width = frame.shape[:2]
+
+        # Calculate the height and width of the subtitle box
+        subtitle_height = int(frame_height * height_ratio)
+        subtitle_width = int(frame_width * width_ratio)
+
+        # Center the subtitle box horizontally and align it at the bottom
+        x_start = (frame_width - subtitle_width) // 2  # Centered horizontally
+        y_start = frame_height - subtitle_height      # Bottom aligned
+
+        # Crop the subtitle region
+        cropped_region = frame[y_start:frame_height, x_start:x_start + subtitle_width]
+
+        logger.debug(f"Cropped subtitle region: x={x_start}, y={y_start}, w={subtitle_width}, h={subtitle_height}")
+        return cropped_region, (x_start, y_start, subtitle_width, subtitle_height)
+
+    except Exception as e:
+        logger.error(f"Error cropping subtitle region: {e}")
+        return None, None
+
+# Function to save the first N frames of a video
+def save_first_n_frames(video_path, output_dir="D:\\Anime3\\output", num_frames=15):
+    """
+    Saves the first N frames of a video to the specified output directory.
+
+    Args:
+        video_path (str): Path to the video file.
+        output_dir (str): Directory to save the frames.
+        num_frames (int): Number of frames to save (default: 15).
+    """
+    try:
+        # Open the video file
+        cap = cv2.VideoCapture(video_path)
+        if not cap.isOpened():
+            raise IOError(f"Cannot open video file: {video_path}")
+
+        # Create the output directory if it doesn't exist
+        os.makedirs(output_dir, exist_ok=True)
+
+        frame_count = 0
+
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                logging.info("End of video reached or unable to read frame.")
+                break
+
+            # Save the frame to the output directory
+            frame_filename = os.path.join(output_dir, f"frame_{frame_count:03d}.jpg")
+            cv2.imwrite(frame_filename, frame)
+            logging.info(f"Saved frame {frame_count} to {frame_filename}")
+
+            frame_count += 1
+
+            # Stop after saving the desired number of frames
+            if frame_count >= num_frames:
+                logging.info(f"Saved {num_frames} frames. Exiting.")
+                break
+
+        # Release the video capture
+        cap.release()
+
+    except Exception as e:
+        logging.error(f"Error saving frames: {e}")
+
+# Enhanced function to extract English text from a video frame using Google Cloud Vision API
+def detect_text_from_frame(frame, vision_client):
+    """
+    Detects text from the subtitle region of a video frame using Google Cloud Vision API.
+
+    Args:
+        frame (np.ndarray): The video frame.
+        vision_client (google.cloud.vision.ImageAnnotatorClient): The Google Cloud Vision client.
+
+    Returns:
+        str: Detected text if valid, otherwise None.
+    """
+    try:
+        logger.debug("Starting text detection on the frame.")
+
+        # Crop the subtitle region using get_subtitle_region
+        cropped_frame, region_coords = get_subtitle_region(frame)
+        if cropped_frame is None:
+            logger.warning("Subtitle region could not be determined. Skipping frame.")
+            return None
+
+        logger.debug(f"Subtitle region cropped with coordinates: {region_coords}")
+
+        # Convert cropped frame to JPEG bytes
+        _, buffer = cv2.imencode('.jpg', cropped_frame)
+        image_bytes = io.BytesIO(buffer).getvalue()
+        logger.debug("Cropped subtitle region successfully encoded into JPEG bytes.")
+
+        # Create Vision API image object
+        image = vision.Image(content=image_bytes)
+
+        # Set the request with language hints for English
+        image_context = vision.ImageContext(language_hints=['en'])
+        logger.debug("Google Vision API request created with language hints set to 'en'.")
+
+        # Call the Vision API text detection
+        response = vision_client.text_detection(image=image, image_context=image_context)
+        logger.debug("Google Vision API text detection response received.")
+
+        # Log raw response for debugging
+        if response.text_annotations:
+            logger.debug(f"Vision API response text annotations: {response.text_annotations}")
+        else:
+            logger.debug("Vision API response contains no text annotations.")
+
+        # Check for errors in the response
+        if response.error.message:
+            logger.error(f"Vision API returned an error: {response.error.message}")
+            raise Exception(f"Vision API error: {response.error.message}")
+
+        texts = response.text_annotations
+        if not texts:
+            logger.info("No text detected in the cropped subtitle region.")
+            return None
+
+        # Process the detected text
+        detected_text = texts[0].description.strip()
+        logger.debug(f"Raw detected text from subtitle region: '{detected_text}'")
+
+        # Filter non-English text using heuristic: ASCII filtering
+        if not is_likely_english(detected_text):
+            logger.info(f"Detected text excluded as non-English or invalid: '{detected_text}'")
+            return None
+
+        logger.debug(f"Accepted English text: '{detected_text}'")
+        return detected_text
+
+    except Exception as e:
+        logger.error(f"Error detecting text from frame: {e}")
+        return None
+
+# Helper function to check if text is likely English
+def is_likely_english(text):
+    try:
+        english_chars = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 .,!?'-\"()[]")
+        non_english_chars = [char for char in text if char not in english_chars]
+        result = len(non_english_chars) / len(text) <= 0.1  # Adjust tolerance as needed
+
+        logger.debug(f"Text '{text}' English validation: {result}, Non-English characters: {non_english_chars}")
+        return result
+    except Exception as e:
+        logger.error(f"Error in English validation for text '{text}': {e}")
+        return False
+
+# Pre-filtering utilities: Entropy, Diversity, and Fuzzy Matching
+def calculate_entropy(text):
+    try:
+        if not text:
+            logger.debug("Entropy calculation skipped for empty text.")
+            return 0
+
+        counter = Counter(text)
+        probabilities = [freq / len(text) for freq in counter.values()]
+        entropy = -sum(p * math.log2(p) for p in probabilities)
+
+        logger.debug(f"Entropy for text '{text}': {entropy:.4f}")
+        return entropy
+    except Exception as e:
+        logger.error(f"Error calculating entropy for text '{text}': {e}")
+        return 0
+
+# Function to filter text based on entropy
+def is_high_entropy(text, threshold=2.0):  # Lower threshold for more inclusivity
+    """
+    Filters text based on entropy.
+    """
+    return calculate_entropy(text) > threshold
+
+# Function to filter text based on character diversity
+def has_character_diversity(text, threshold=0.4):  # Lower diversity threshold
+    """
+    Ensures text has sufficient character diversity.
+    """
+    unique_chars = set(text)
+    return len(unique_chars) / len(text) > threshold
+
+#Functrion to check similarity between two texts
+def is_similar(text1, text2, threshold=0.85):
+    """
+    Checks if two texts are similar above a certain threshold.
+    """
+    return SequenceMatcher(None, text1, text2).ratio() > threshold
+
+# GPT Validation
+def is_coherent_with_gpt(text, model="gpt-4", max_tokens=50):
+    """
+    Determines if a given text is coherent and meaningful using OpenAI's GPT models.
+    """
+    try:
+        prompt = {
+            "role": "user",
+            "content": f"Is the following text meaningful as a subtitle? Reply 'Yes' or 'No'.\n\nText: \"{text}\""
+        }
+
+        response = openai.ChatCompletion.create(
+            model=model,
+            messages=[prompt],
+            max_tokens=max_tokens,
+            temperature=0.2
+        )
+
+        reply = response['choices'][0]['message']['content'].strip().lower()
+        return reply == "yes"
+    except Exception as e:
+        logger.error(f"Error validating text with GPT: {e}")
+        return False
+
+# Filtering subtitles
+def filter_subtitles(subtitles):
+    filtered_subtitles = []
+    last_text = None
+
+    for timestamp, text in subtitles:
+        logger.debug(f"Processing subtitle at timestamp {timestamp:.2f}: '{text}'")
+
+        # Check duplication
+        if last_text and is_similar(text, last_text):
+            logger.info(f"Excluded as duplicate: '{text}'")
+            continue
+
+        # Check entropy
+        entropy = calculate_entropy(text)
+        if not is_high_entropy(text):
+            logger.info(f"Excluded due to low entropy ({entropy:.4f}): '{text}'")
+            continue
+
+        # Check diversity
+        diversity = has_character_diversity(text)
+        if not diversity:
+            logger.info(f"Excluded due to low diversity: '{text}'")
+            continue
+
+        # Add the subtitle to the accepted list
+        filtered_subtitles.append((timestamp, text))
+        last_text = text
+
+    logger.info(f"Filtering complete. Accepted {len(filtered_subtitles)} out of {len(subtitles)} subtitles.")
+    return filtered_subtitles
+
+
+# Function to save filtered subtitles
+def save_subtitles_to_file(subtitles, output_file):
+    try:
+        logger.info(f"Saving {len(subtitles)} subtitles to file: {output_file}")
+        with open(output_file, 'w', encoding='utf-8') as f:
+            for timestamp, subtitle in subtitles:
+                logger.debug(f"Saving subtitle: {timestamp:.2f}: {subtitle}")
+                f.write(f"{timestamp:.2f}: {subtitle}\n")
+    except Exception as e:
+        logger.error(f"Error saving subtitles: {e}")
+
+
+# Function to extract subtitles from video
+def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=5, min_frame_skip=1, max_frame_skip=15):
+    """
+    Extracts subtitles from the video by analyzing frames using Google Cloud Vision API with adaptive frame skipping.
+
+    Args:
+        video_path (str): Path to the video file.
+        vision_client (vision.ImageAnnotatorClient): Initialized Google Cloud Vision API client.
+        initial_frame_skip (int): Initial number of frames to skip during processing.
+        min_frame_skip (int): Minimum number of frames to skip (default: 1).
+        max_frame_skip (int): Maximum number of frames to skip (default: 15).
+
+    Returns:
+        list: A list of tuples containing timestamps and detected subtitles.
+    """
+    try:
+        # Open video file
+        cap = cv2.VideoCapture(video_path)
+        if not cap.isOpened():
+            raise IOError(f"Cannot open video file: {video_path}")
+
+        subtitles = []
+        frame_count = 0
+        last_detected_text = None
+        frame_skip = initial_frame_skip  # Start with the initial frame skip
+        fps = cap.get(cv2.CAP_PROP_FPS)
+
+        while cap.isOpened():
+            ret, frame = cap.read()
+            if not ret:
+                logger.info("End of video reached.")
+                break
+
+            # Process every nth frame, where n is defined by frame_skip
+            if frame_count % frame_skip == 0:
+                logger.info(f"Processing frame {frame_count} (current frame_skip={frame_skip})")
+                try:
+                    # Detect text from the current frame
+                    detected_text = detect_text_from_frame(frame, vision_client)
+
+                    # If new or changed text is detected, reduce the frame skip
+                    # if detected_text and (last_detected_text is None or not is_similar(detected_text, last_detected_text)):
+                    timestamp = frame_count / fps
+                    subtitles.append((timestamp, detected_text))  # Store timestamp and text
+                    last_detected_text = detected_text
+
+                    # Reduce frame_skip more conservatively
+                    frame_skip = max(min_frame_skip, int(frame_skip / 1.5))
+                    logger.debug(f"Subtitle detected. Reducing frame_skip to {frame_skip}")
+                except Exception as e:
+                    logger.error(f"Error detecting text from frame {frame_count}: {e}")
+                    # Gradually increase frame_skip when no new subtitles are detected
+                    frame_skip = min(max_frame_skip, frame_skip + 1)
+                    logger.debug(f"No new subtitle detected. Increasing frame_skip to {frame_skip}")
+
+                except Exception as e:
+                    logger.error(f"Error processing frame {frame_count}: {e}")
+
+            # Increment frame count
+            frame_count += 1
+
+        # Release the video capture
+        cap.release()
+        logger.info(f"Finished extracting subtitles from {video_path}")
+        return subtitles
+
+    except Exception as e:
+        logger.error(f"Error extracting subtitles from video: {e}")
+        return []
+
+
+# Main function to run the subtitle extraction
+def main(video_path, output_file):
+    """
+    Main function to extract and save subtitles from a video file.
+    """
+    try:
+        vision_client = setup_vision_client()
+        if not vision_client:
+            raise RuntimeError("Vision client setup failed. Exiting pipeline.")
+
+        subtitles = extract_subtitles_from_video(video_path, vision_client)
+        save_subtitles_to_file(subtitles, output_file)
+
+    except Exception as e:
+        logger.error(f"Fatal error in main pipeline: {e}")
+
+if __name__ == "__main__":
+    video_path = "path_to_your_video.mp4"  # Replace with the path to your video
+    output_file = "extracted_subtitles.txt"  # Replace with your desired output file
+
+    main(video_path, output_file)
