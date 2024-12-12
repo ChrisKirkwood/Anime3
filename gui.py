@@ -2,13 +2,13 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 import threading
 import os
-from extract import main as extract_subtitles  # Removed load_english_dictionary
+from glob import glob
+from extract import main as extract_subtitles
 from cleaner import clean_subtitles_file
 from speech import setup_tts_client, synthesize_subtitles
-from merge import replace_audio_in_video  # Import the correct function from merge.py
+from merge import main as merge_main
+from chunked import split_video, process_chunks, merge_results
 
-
-# Create the main application class
 class SubtitleExtractorApp:
     def __init__(self, root):
         self.root = root
@@ -46,9 +46,13 @@ class SubtitleExtractorApp:
         self.clean_only_button = tk.Button(self.frame, text="Clean Subtitles Only", command=self.clean_only)
         self.clean_only_button.grid(row=5, column=0, columnspan=2, pady=5)
 
+        # Add button to process full video
+        self.process_full_video_button = tk.Button(self.frame, text="Process Full Video", command=self.process_full_video)
+        self.process_full_video_button.grid(row=6, column=0, columnspan=2, pady=5)
+
         # Text widget to show logs and process updates
         self.log_text = tk.Text(self.frame, width=60, height=10, state=tk.DISABLED)
-        self.log_text.grid(row=6, column=0, columnspan=2, pady=10)
+        self.log_text.grid(row=7, column=0, columnspan=2, pady=10)
 
         # Variables to hold file paths
         self.video_file = None
@@ -56,7 +60,6 @@ class SubtitleExtractorApp:
         self.cleaned_file = None  # Variable to hold the cleaned subtitles file
         self.synthesized_audio_file = None  # Variable to hold synthesized audio file
 
-    # Function to select a file
     def select_file(self):
         file_path = filedialog.askopenfilename(title="Select Video File", filetypes=[("MP4 Files", "*.mp4")])
         if file_path:
@@ -65,14 +68,12 @@ class SubtitleExtractorApp:
         else:
             self.file_label.config(text="No file selected")
 
-    # Function to log messages in the GUI
     def log_message(self, message):
         self.log_text.config(state=tk.NORMAL)
         self.log_text.insert(tk.END, message + "\n")
         self.log_text.config(state=tk.DISABLED)
         self.log_text.see(tk.END)
 
-    # Function to start the extraction in a new thread
     def start_extraction(self):
         if not self.video_file:
             messagebox.showwarning("No File Selected", "Please select a video file first.")
@@ -87,17 +88,15 @@ class SubtitleExtractorApp:
         self.log_message("Starting subtitle extraction...")
         threading.Thread(target=self.run_extraction, args=(self.video_file, self.output_file)).start()
 
-    # Function to run the extraction process
     def run_extraction(self, video_path, output_file):
         try:
-            extract_subtitles(video_path, output_file)  # Removed dictionary argument
+            extract_subtitles(video_path, output_file)
             self.log_message("Subtitle extraction completed successfully!")
             messagebox.showinfo("Success", "Subtitles extracted successfully!")
         except Exception as e:
             self.log_message(f"Error during extraction: {e}")
             messagebox.showerror("Error", f"An error occurred: {e}")
 
-    # Function to extract and clean subtitles
     def extract_and_clean(self):
         if not self.video_file:
             messagebox.showwarning("No File Selected", "Please select a video file first.")
@@ -112,11 +111,10 @@ class SubtitleExtractorApp:
         self.log_message("Starting subtitle extraction and cleaning...")
         threading.Thread(target=self.run_extract_and_clean, args=(self.video_file, self.output_file)).start()
 
-    # Function to run extraction and cleaning in one step
     def run_extract_and_clean(self, video_path, output_file):
         try:
             # Step 1: Extract subtitles
-            extract_subtitles(video_path, output_file)  # Removed dictionary argument
+            extract_subtitles(video_path, output_file)
             self.log_message("Subtitle extraction completed successfully!")
 
             # Step 2: Clean the extracted subtitles
@@ -131,7 +129,6 @@ class SubtitleExtractorApp:
             self.log_message(f"Error during extraction and cleaning: {e}")
             messagebox.showerror("Error", f"An error occurred: {e}")
 
-    # Function to clean subtitles only
     def clean_only(self):
         # Step 1: Select the input .txt file to clean
         input_file = filedialog.askopenfilename(
@@ -159,7 +156,6 @@ class SubtitleExtractorApp:
         # Start the cleaning process in a separate thread
         threading.Thread(target=self.run_clean_only, args=(input_file, cleaned_file)).start()
 
-    # Function to perform the cleaning in a thread
     def run_clean_only(self, input_file, cleaned_file):
         try:
             # Call the cleaner function
@@ -174,7 +170,6 @@ class SubtitleExtractorApp:
             self.log_message(f"Error during cleaning: {e}")
             messagebox.showerror("Error", f"An error occurred during cleaning: {e}")
 
-    # Function to select the cleaned subtitles and synthesize them into speech
     def synthesize_speech(self):
         if not self.cleaned_file:
             self.cleaned_file = filedialog.askopenfilename(title="Select Cleaned Subtitles File", filetypes=[("Text Files", "*.txt")])
@@ -193,7 +188,6 @@ class SubtitleExtractorApp:
         # Start the TTS synthesis process in a separate thread to keep the GUI responsive
         threading.Thread(target=self.run_synthesize_speech, args=(self.cleaned_file, output_dir)).start()
 
-    # Function to run the TTS synthesis process
     def run_synthesize_speech(self, cleaned_file, output_dir):
         try:
             # Initialize the TTS client
@@ -211,13 +205,10 @@ class SubtitleExtractorApp:
             self.log_message(f"Error during Text-to-Speech synthesis: {e}")
             messagebox.showerror("Error", f"An error occurred: {e}")
 
-    # Function to merge synthesized audio with the original video
     def merge_audio_video(self):
-        if not self.synthesized_audio_file:
-            self.synthesized_audio_file = filedialog.askopenfilename(title="Select Synthesized Audio File", filetypes=[("MP3 Files", "*.mp3")])
-
-        if not self.synthesized_audio_file:
-            messagebox.showwarning("No Audio File Selected", "Please select a synthesized audio file.")
+        video_file = filedialog.askopenfilename(title="Select Video File", filetypes=[("MP4 Files", "*.mp4")])
+        if not video_file:
+            messagebox.showwarning("No Video File Selected", "Please select a video file.")
             return
 
         output_video_file = filedialog.asksaveasfilename(defaultextension=".mp4", filetypes=[("MP4 Files", "*.mp4")])
@@ -228,25 +219,68 @@ class SubtitleExtractorApp:
         self.log_message("Starting the merge of audio and video...")
 
         # Start the merge process in a separate thread to keep the GUI responsive
-        threading.Thread(target=self.run_merge_audio_video, args=(self.video_file, self.synthesized_audio_file, output_video_file)).start()
+        threading.Thread(target=self.run_merge_audio_video, args=(video_file, output_video_file)).start()
 
-    # Function to run the merge process
-    def run_merge_audio_video(self, video_file, audio_file, output_video_file):
+    def run_merge_audio_video(self, video_file, output_video_file):
         try:
-            replace_audio_in_video(video_file, audio_file, output_video_file)  # Corrected function call
+            # Example paths
+            audio_files = sorted(glob(os.path.join(os.path.dirname(output_video_file), "subtitle_*.mp3")))  # List of synthesized audio files
+            merged_audio_file = os.path.join(os.path.dirname(output_video_file), "final_synthesized_audio.mp3")  # Path to the merged audio file
+
+            # Call the main function from merge.py
+            merge_main(video_file, audio_files, merged_audio_file, output_video_file)
+
             self.log_message(f"Audio merged with video successfully! Video saved to {output_video_file}")
             messagebox.showinfo("Success", f"Audio merged with video successfully! Video saved to {output_video_file}")
         except Exception as e:
             self.log_message(f"Error during merging or video overlay: {e}")
             messagebox.showerror("Error", f"An error occurred: {e}")
 
+    def process_full_video(self):
+        if not self.video_file:
+            messagebox.showwarning("No File Selected", "Please select a video file first.")
+            return
+
+        output_dir = filedialog.askdirectory(title="Select Output Directory")
+        if not output_dir:
+            messagebox.showwarning("No Output Directory Selected", "Please select an output directory.")
+            return
+
+        self.log_message("Starting full video processing...")
+
+        # Start the chunking pipeline in a separate thread to keep the GUI responsive
+        threading.Thread(target=self.run_chunking_pipeline, args=(self.video_file, output_dir)).start()
+
+    def run_chunking_pipeline(self, video_file, output_dir):
+        try:
+            chunk_dir = os.path.join(output_dir, "chunks")
+            os.makedirs(chunk_dir, exist_ok=True)
+            final_output = os.path.join(output_dir, "final_output.mp4")
+
+            # Step 1: Split the video
+            chunk_files = split_video(video_file, chunk_dir)
+            if not chunk_files:
+                self.log_message("No chunks generated. Exiting.")
+                return
+
+            # Step 2: Process each chunk
+            cleaned_subtitle_files, synthesized_audio_files = process_chunks(chunk_files)
+
+            # Step 3: Merge results
+            merge_results(cleaned_subtitle_files, synthesized_audio_files, final_output)
+
+            self.log_message(f"Full video processing completed successfully! Final video saved to {final_output}")
+            messagebox.showinfo("Success", f"Full video processing completed successfully! Final video saved to {final_output}")
+
+        except Exception as e:
+            self.log_message(f"Error during full video processing: {e}")
+            messagebox.showerror("Error", f"An error occurred: {e}")
 
 # Main function to set up and run the GUI
 def main():
     root = tk.Tk()
     app = SubtitleExtractorApp(root)
     root.mainloop()
-
 
 if __name__ == "__main__":
     main()

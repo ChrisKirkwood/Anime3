@@ -3,6 +3,7 @@ from google.cloud import texttospeech
 import re
 from pydub import AudioSegment
 import logging
+import time
 
 # Set up logging
 log_file_path = r"D:\Anime3\log\backend.log"
@@ -18,14 +19,13 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
 # Set up Google Cloud Text-to-Speech client
 def setup_tts_client():
     if "GOOGLE_APPLICATION_CREDENTIALS" not in os.environ:
         raise EnvironmentError("Google Cloud credentials not found. Set the GOOGLE_APPLICATION_CREDENTIALS environment variable.")
     
     client = texttospeech.TextToSpeechClient()
-    print("Google Cloud Text-to-Speech client successfully set up.")
+    logger.info("Google Cloud Text-to-Speech client successfully set up.")
     return client
 
 # Function to synthesize speech from text
@@ -49,10 +49,26 @@ def synthesize_speech(text, output_file, tts_client):
     # Save the audio to the output file
     with open(output_file, "wb") as out:
         out.write(response.audio_content)
-        print(f"Audio content written to {output_file}")
+    logger.info(f"Audio content written to {output_file}")
+
+# Function to batch subtitles for synthesis
+def batch_subtitles(subtitles, max_batch_size=10):
+    for i in range(0, len(subtitles), max_batch_size):
+        yield subtitles[i:i + max_batch_size]
 
 # Function to synthesize subtitles into speech with correct timing alignment
-def synthesize_subtitles(input_file, output_dir, tts_client):
+# Function to synthesize subtitles into speech with correct timing alignment
+def synthesize_subtitles(input_file, output_dir, tts_client, batch_delay=5, max_batch_size=10):
+    """
+    Synthesizes speech from cleaned subtitles and saves the audio files.
+
+    Args:
+        input_file (str): Path to the cleaned subtitles file.
+        output_dir (str): Directory to save the audio files.
+        tts_client (texttospeech.TextToSpeechClient): Initialized Google Cloud TTS client.
+        batch_delay (int): Delay between batches to avoid rate limits.
+        max_batch_size (int): Maximum number of subtitles to process in each batch.
+    """
     # Ensure the output directory exists
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
@@ -62,51 +78,55 @@ def synthesize_subtitles(input_file, output_dir, tts_client):
 
     combined_audio = AudioSegment.silent(duration=0)  # Initialize with silence at the start
 
-    last_timestamp = 0  # Track the last processed timestamp
+    # Process subtitles in batches
+    for batch_idx, batch in enumerate(batch_subtitles(subtitles, max_batch_size=max_batch_size), start=1):
+        logger.info(f"Processing batch {batch_idx} with {len(batch)} subtitles.")
+        for idx, line in enumerate(batch):
+            # Extract the timestamp and subtitle from each line
+            try:
+                timestamp, subtitle = line.strip().split(":", 1)
+                subtitle = subtitle.strip()
+                if not subtitle:
+                    continue
 
-    for idx, line in enumerate(subtitles):
-        # Extract the timestamp and subtitle from each line
-        try:
-            timestamp, subtitle = line.strip().split(":", 1)
-        except ValueError:
-            print(f"Skipping malformed line: {line}")
-            continue
+                # Convert timestamp (in seconds) to milliseconds
+                time_in_ms = int(float(timestamp) * 1000)
 
-        subtitle = subtitle.strip()
-        if not subtitle:
-            continue
+                # Generate output filename based on subtitle index
+                output_file = os.path.join(output_dir, f"subtitle_{batch_idx}_{idx+1}.mp3")
 
-        # Convert timestamp (in seconds) to milliseconds
-        time_in_ms = int(float(timestamp) * 1000)
+                # Synthesize the subtitle into speech
+                synthesize_speech(subtitle, output_file, tts_client)
 
-        # Generate output filename based on subtitle index
-        output_file = os.path.join(output_dir, f"subtitle_{idx+1}.mp3")
+                # Load the generated MP3
+                generated_audio = AudioSegment.from_mp3(output_file)
 
-        # Synthesize the subtitle into speech
-        synthesize_speech(subtitle, output_file, tts_client)
+                # Calculate the duration of silence needed before this subtitle's speech starts
+                silence_duration = max(0, time_in_ms - len(combined_audio))
+                silence = AudioSegment.silent(duration=silence_duration)
 
-        # Load the generated MP3
-        generated_audio = AudioSegment.from_mp3(output_file)
+                # Add silence + generated audio to the combined audio track
+                combined_audio += silence + generated_audio
 
-        # Calculate the duration of silence needed before this subtitle's speech starts
-        silence_duration = max(0, time_in_ms - len(combined_audio))
-        silence = AudioSegment.silent(duration=silence_duration)
+                # If there is more time after this subtitle, add more silence to stretch it out
+                if idx < len(batch) - 1:
+                    # Calculate the time until the next subtitle
+                    next_timestamp = int(float(batch[idx + 1].split(":")[0]) * 1000)
+                    gap_duration = next_timestamp - time_in_ms - len(generated_audio)
+                    if gap_duration > 0:
+                        combined_audio += AudioSegment.silent(duration=gap_duration)
 
-        # Add silence + generated audio to the combined audio track
-        combined_audio += silence + generated_audio
+            except Exception as e:
+                logger.error(f"Error processing subtitle: {line}. Error: {e}")
 
-        # If there is more time after this subtitle, add more silence to stretch it out
-        if idx < len(subtitles) - 1:
-            # Calculate the time until the next subtitle
-            next_timestamp = int(float(subtitles[idx + 1].split(":")[0]) * 1000)
-            gap_duration = next_timestamp - time_in_ms - len(generated_audio)
-            if gap_duration > 0:
-                combined_audio += AudioSegment.silent(duration=gap_duration)
+        # Apply delay between batches to avoid rate limits
+        logger.info(f"Batch {batch_idx} processed. Sleeping for {batch_delay} seconds to avoid rate limits.")
+        time.sleep(batch_delay)
 
     # Save the final combined audio
     final_output_file = os.path.join(output_dir, "final_synthesized_audio.mp3")
     combined_audio.export(final_output_file, format="mp3")
-    print(f"Final combined audio saved to {final_output_file}")
+    logger.info(f"Final combined audio saved to {final_output_file}")
 
 # Main function to handle the process
 def main(input_file, output_dir):

@@ -2,6 +2,8 @@ from pydub import AudioSegment
 from moviepy.editor import VideoFileClip, AudioFileClip
 import os
 import logging
+import subprocess
+from glob import glob
 
 # Set up logging
 log_file_path = r"D:\Anime3\log\backend.log"
@@ -17,33 +19,30 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-
-# Function to merge audio files into one
 def merge_audio_files(audio_files, output_file):
     """
-    Merges multiple MP3 audio files into a single MP3 file.
+    Merges multiple MP3 audio files into a single MP3 file using FFmpeg.
 
     Args:
         audio_files (list): List of MP3 file paths to merge.
         output_file (str): Output file path for the merged audio.
     """
     try:
-        merged_audio = AudioSegment.empty()
-        
-        # Loop through all audio files and concatenate them
-        for file in audio_files:
-            logger.info(f"Processing audio file: {file}")
-            audio = AudioSegment.from_mp3(file)
-            merged_audio += audio
-        
-        # Export the merged audio to an output file
-        merged_audio.export(output_file, format="mp3")
+        # Create a temporary text file with the list of audio files
+        with open("audio_files.txt", "w") as f:
+            for file in audio_files:
+                f.write(f"file '{file}'\n")
+
+        # Use FFmpeg to concatenate the audio files
+        command = ["ffmpeg", "-f", "concat", "-safe", "0", "-i", "audio_files.txt", "-c", "copy", output_file]
+        subprocess.run(command, check=True)
         logger.info(f"Merged audio saved to {output_file}")
+
+        # Clean up the temporary text file
+        os.remove("audio_files.txt")
     except Exception as e:
         logger.error(f"Error while merging audio files: {e}")
 
-
-# Function to replace audio in an MP4 video file with the merged audio
 def replace_audio_in_video(video_file, audio_file, output_file):
     """
     Replaces the audio in a video file with a new audio track.
@@ -54,6 +53,9 @@ def replace_audio_in_video(video_file, audio_file, output_file):
         output_file (str): Path to the output video file with replaced audio.
     """
     try:
+        if not os.path.exists(video_file):
+            raise FileNotFoundError(f"The video file {video_file} does not exist.")
+        
         logger.info(f"Loading video file: {video_file}")
         video = VideoFileClip(video_file)
         
@@ -70,33 +72,22 @@ def replace_audio_in_video(video_file, audio_file, output_file):
     except Exception as e:
         logger.error(f"Error while replacing audio in video: {e}")
 
-
-# Main function to handle merging and overlaying
-def main():
+def main(video_file, audio_files, merged_audio_file, output_video_file):
     """
     Main function to merge audio files and overlay the merged audio onto a video.
     """
     try:
-        # List of MP3 subtitle files to merge
-        audio_files = ["subtitle_1.mp3", "subtitle_2.mp3", "subtitle_3.mp3", "subtitle_4.mp3"]
-        
-        # File paths
-        merged_audio_file = "merged_subtitles.mp3"
-        original_video_file = "path_to_your_original_video.mp4"  # Replace with the original MP4 file
-        output_video_file = "output_video_with_new_audio.mp4"
-        
         # Merge audio files into one
         logger.info("Starting audio merging process...")
         merge_audio_files(audio_files, merged_audio_file)
         
         # Replace the original audio in the video with the merged audio
         logger.info("Starting audio replacement in video...")
-        replace_audio_in_video(original_video_file, merged_audio_file, output_video_file)
+        replace_audio_in_video(video_file, merged_audio_file, output_video_file)
         
         logger.info("Process completed successfully.")
     except Exception as e:
         logger.error(f"Error in main function: {e}")
-
 
 if __name__ == "__main__":
     main()
