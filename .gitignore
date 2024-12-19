@@ -75,3 +75,5 @@ ehthumbs.db
 # Ignore large files
 *.mp4
 
+#ignore json files
+api_credentials/credentials.json
