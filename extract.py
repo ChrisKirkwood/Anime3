@@ -9,6 +9,8 @@ from collections import Counter
 import math
 from difflib import SequenceMatcher
 import openai
+import concurrent.futures
+import time
 
 # Set up logging
 log_file_path = r"D:\Anime3\log\backend.log"
@@ -114,7 +116,159 @@ def detect_text_from_frame(frame, vision_client):
         logger.error(f"Error detecting text from frame: {e}")
         return None
 
+# New function to detect text from a batch of frames
+def detect_text_from_frames(frames, vision_client):
+    """
+    Detects text from a batch of video frames using Google Cloud Vision API.
 
+    Args:
+        frames (list): List of video frames.
+        vision_client (vision.ImageAnnotatorClient): Initialized Google Cloud Vision API client.
+
+    Returns:
+        list: List of detected texts for each frame.
+    """
+    try:
+        requests = []
+        last_processed_frame = None  # Track the last processed frame for duplicate detection
+        brightness_threshold = 10  # Threshold for skipping dark frames
+        variance_threshold = 5  # Threshold for skipping solid frames
+        valid_frames = []  # Store validated frames
+        valid_indices = []  # Track indices of valid frames
+
+        for idx, frame in enumerate(frames):
+            # Check for low brightness (black frames)
+            frame_mean = np.mean(frame)
+            if frame_mean < brightness_threshold:
+                logger.info(f"Skipped frame {idx} due to low brightness (mean: {frame_mean:.2f}).")
+                continue
+
+            # Check for low variance (solid or nearly solid frames)
+            frame_variance = np.std(frame)
+            if frame_variance < variance_threshold:
+                logger.info(f"Skipped frame {idx} due to low variance (std: {frame_variance:.2f}).")
+                continue
+
+            # Check for duplicate frames
+            if last_processed_frame is not None and np.array_equal(frame, last_processed_frame):
+                logger.info(f"Skipped frame {idx} as it is identical to the last processed frame.")
+                continue
+
+            # Update the last processed frame
+            last_processed_frame = frame
+
+            # Define the Region of Interest (ROI)
+            height, width, _ = frame.shape
+            roi_y_start = int(height * 0.8)  # Bottom 20% of the frame
+            roi_y_end = height
+            roi_x_start = 0
+            roi_x_end = width
+
+            # Crop the frame to the ROI
+            cropped_frame = frame[roi_y_start:roi_y_end, roi_x_start:roi_x_end]
+            logger.debug(f"Frame cropped to ROI: x={roi_x_start}:{roi_x_end}, y={roi_y_start}:{roi_y_end}")
+
+            # Convert the cropped frame to JPEG bytes
+            _, buffer = cv2.imencode('.jpg', cropped_frame)
+            image_bytes = io.BytesIO(buffer).getvalue()
+            logger.debug("Cropped frame successfully encoded into JPEG bytes.")
+
+            # Create Vision API image object
+            image = vision.Image(content=image_bytes)
+            requests.append(vision.AnnotateImageRequest(
+                image=image,
+                features=[vision.Feature(type_=vision.Feature.Type.TEXT_DETECTION)],
+                image_context=vision.ImageContext(language_hints=['en'])
+            ))
+            valid_frames.append(frame)
+            valid_indices.append(idx)
+
+        # Send batch request only if there are valid frames
+        if not requests:
+            logger.info("No valid frames to process.")
+            return [None] * len(frames)
+
+        response = vision_client.batch_annotate_images(requests=requests)
+        logger.debug("Google Vision API batch text detection response received.")
+
+        detected_texts = [None] * len(frames)  # Default list with None for all frames
+        for valid_idx, res in zip(valid_indices, response.responses):
+            if res.error.message:
+                logger.error(f"Vision API returned an error: {res.error.message}")
+                detected_texts[valid_idx] = None
+            elif res.text_annotations:
+                detected_text = res.text_annotations[0].description.strip()
+                logger.debug(f"Raw detected text: '{detected_text}'")
+                if is_likely_english(detected_text):
+                    logger.debug(f"Accepted English text: '{detected_text}'")
+                    detected_texts[valid_idx] = detected_text
+                else:
+                    logger.info(f"Detected text excluded as non-English or invalid: '{detected_text}'")
+                    detected_texts[valid_idx] = None
+            else:
+                logger.info("No text detected in the frame.")
+                detected_texts[valid_idx] = None
+
+        return detected_texts
+
+    except Exception as e:
+        logger.error(f"Error detecting text from frames: {e}")
+        return [None] * len(frames)
+
+def process_frame(frame, vision_client):
+    """
+    Validates a video frame and extracts text using Google Cloud OCR if valid.
+    """
+    # Validate the frame
+    if frame is None:
+        logger.info("Frame is None, skipping...")
+        return None
+
+    frame_mean = np.mean(frame)
+    frame_std = np.std(frame)
+
+    # Check for low brightness (blank frame)
+    if frame_mean < 10:
+        logger.info("Frame is too dark, skipping...")
+        return None
+
+    # Check for low variance (solid or near-solid frame)
+    if frame_std < 5:
+        logger.info("Frame has low variance, skipping...")
+        return None
+
+    # Define the Region of Interest (ROI)
+    height, width, _ = frame.shape
+    roi_y_start = int(height * 0.8)  # Bottom 20% of the frame
+    roi_y_end = height
+    roi_x_start = 0
+    roi_x_end = width
+    cropped_frame = frame[roi_y_start:roi_y_end, roi_x_start:roi_x_end]
+
+    # Convert cropped frame to JPEG bytes
+    _, buffer = cv2.imencode('.jpg', cropped_frame)
+    image_bytes = io.BytesIO(buffer).getvalue()
+
+    # Perform OCR using Google Cloud Vision
+    try:
+        image = vision.Image(content=image_bytes)
+        response = vision_client.text_detection(image=image)
+
+        if response.error.message:
+            logger.error(f"Google Vision error: {response.error.message}")
+            return None
+
+        texts = response.text_annotations
+        if not texts:
+            logger.info("No text detected.")
+            return None
+
+        # Return the first detected text
+        return texts[0].description.strip()
+
+    except Exception as e:
+        logger.error(f"Error during text detection: {e}")
+        return None
 
 # Helper function to check if text is likely English
 def is_likely_english(text):
@@ -237,19 +391,9 @@ def save_subtitles_to_file(subtitles, output_file):
 
 
 # Function to extract subtitles from video
-def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=15, min_frame_skip=2, max_frame_skip=30):
+def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=15, min_frame_skip=2, max_frame_skip=30, batch_size=32):
     """
     Extracts subtitles from the video by analyzing frames using Google Cloud Vision API with adaptive frame skipping.
-
-    Args:
-        video_path (str): Path to the video file.
-        vision_client (vision.ImageAnnotatorClient): Initialized Google Cloud Vision API client.
-        initial_frame_skip (int): Initial number of frames to skip during processing.
-        min_frame_skip (int): Minimum number of frames to skip (when subtitles are detected).
-        max_frame_skip (int): Maximum number of frames to skip (when no subtitles are detected).
-
-    Returns:
-        list: A list of tuples containing timestamps and detected subtitles.
     """
     try:
         # Open video file
@@ -262,41 +406,56 @@ def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=1
         last_detected_text = None
         frame_skip = initial_frame_skip  # Start with the initial frame skip
         fps = cap.get(cv2.CAP_PROP_FPS)
+        batch_frames = []
+        batch_timestamps = []
 
-        while cap.isOpened():
-            ret, frame = cap.read()
-            if not ret:
-                logger.info("End of video reached.")
-                break
+        # Use ThreadPoolExecutor for batch processing
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+            while cap.isOpened():
+                ret, frame = cap.read()
+                if not ret:
+                    logger.info("End of video reached.")
+                    break
 
-            # Process every nth frame, where n is defined by frame_skip
-            if frame_count % frame_skip == 0:
-                logger.info(f"Processing frame {frame_count} (current frame_skip={frame_skip})")
-                try:
-                    # Detect text from the current frame
-                    detected_text = detect_text_from_frame(frame, vision_client)
+                # Skip frames based on frame_skip
+                if frame_count % frame_skip != 0:
+                    frame_count += 1
+                    continue
 
-                    # If new or changed text is detected, reduce the frame skip for more frequent checks
-                    if detected_text and (last_detected_text is None or detected_text != last_detected_text):
-                        timestamp = frame_count / fps
-                        subtitles.append((timestamp, detected_text))  # Store timestamp and text
-                        last_detected_text = detected_text
-                        frame_skip = max(min_frame_skip, frame_skip // 2)  # Reduce frame skip aggressively
-                        logger.debug(f"Subtitle detected. Reducing frame_skip to {frame_skip}")
-                    else:
-                        # Gradually increase frame skip when no new subtitles are detected
-                        frame_skip = min(max_frame_skip, frame_skip + 1)  # Increase skip slowly
-                        logger.debug(f"No new subtitle detected. Increasing frame_skip to {frame_skip}")
+                # Add frame and timestamp to batch
+                batch_frames.append(frame)
+                batch_timestamps.append(frame_count / fps)
 
-                except Exception as e:
-                    logger.error(f"Error processing frame {frame_count}: {e}")
+                # Process batch when ready
+                if len(batch_frames) >= batch_size:
+                    logger.info(f"Processing batch of {len(batch_frames)} frames.")
+                    future = executor.submit(
+                        lambda frames: [process_frame(f, vision_client) for f in frames],
+                        batch_frames,
+                    )
+                    detected_texts = future.result()
+                    for ts, text in zip(batch_timestamps, detected_texts):
+                        if text:
+                            subtitles.append((ts, text))
+                            last_detected_text = text
+                            frame_skip = max(min_frame_skip, frame_skip // 2)  # Reduce frame skip aggressively
+                        else:
+                            frame_skip = min(max_frame_skip, frame_skip * 2)  # Increase frame skip conservatively
 
-            # Increment frame count
-            frame_count += 1
+                    batch_frames = []
+                    batch_timestamps = []
 
-        # Release the video capture
+                frame_count += 1
+
+            # Process any remaining frames in the batch
+            if batch_frames:
+                logger.info(f"Processing remaining {len(batch_frames)} frames in the final batch.")
+                detected_texts = [process_frame(f, vision_client) for f in batch_frames]
+                for ts, text in zip(batch_timestamps, detected_texts):
+                    if text:
+                        subtitles.append((ts, text))
+
         cap.release()
-        logger.info(f"Finished extracting subtitles from {video_path}")
         return subtitles
 
     except Exception as e:
@@ -304,24 +463,33 @@ def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=1
         return []
 
 
+
+
 # Main function to run the subtitle extraction
-def main(video_path, output_file):
+def main(video_path, output_file, batch_size=16):
     """
     Main function to extract and save subtitles from a video file.
+    Args:
+        video_path (str): Path to the video file.
+        output_file (str): Path to save the extracted subtitles.
+        batch_size (int): Number of frames to process in each batch.
     """
     try:
         vision_client = setup_vision_client()
         if not vision_client:
             raise RuntimeError("Vision client setup failed. Exiting pipeline.")
 
-        subtitles = extract_subtitles_from_video(video_path, vision_client)
+        # Pass batch_size to the extract_subtitles_from_video function
+        subtitles = extract_subtitles_from_video(video_path, vision_client, batch_size=batch_size)
         save_subtitles_to_file(subtitles, output_file)
 
     except Exception as e:
         logger.error(f"Fatal error in main pipeline: {e}")
 
+
 if __name__ == "__main__":
     video_path = "path_to_your_video.mp4"  # Replace with the path to your video
     output_file = "extracted_subtitles.txt"  # Replace with your desired output file
+    batch_size = 16  # Adjust as needed
 
-    main(video_path, output_file)
+    main(video_path, output_file, batch_size=batch_size)

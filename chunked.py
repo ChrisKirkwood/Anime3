@@ -5,7 +5,9 @@ from glob import glob
 from extract import extract_subtitles_from_video, setup_vision_client, save_subtitles_to_file
 from cleaner import clean_subtitles_file
 from speech import setup_tts_client, synthesize_subtitles
-from merge import replace_audio_in_video
+from pydub import AudioSegment
+from speech import synthesize_speech_to_audio_segment
+import re
 
 # Set up logging
 log_file_path = r"D:\Anime3\log\automation.log"
@@ -21,17 +23,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Paths
-input_video = r"D:\Anime3\input\video_reencoded.mp4"  # Replace with your video path
-output_dir = r"D:\Anime3\output"
-os.makedirs(output_dir, exist_ok=True)
-
-chunk_dir = os.path.join(output_dir, "chunks")
-os.makedirs(chunk_dir, exist_ok=True)
-
-final_output = os.path.join(output_dir, "final_output.mp4")
-
-# Step 1: Split video into chunks
 def split_video(input_video, chunk_dir, chunk_duration=300):
     """
     Splits the input video into chunks using FFmpeg.
@@ -53,132 +44,237 @@ def split_video(input_video, chunk_dir, chunk_duration=300):
             "-f", "segment",
             os.path.join(chunk_dir, "chunk_%03d.mp4")
         ]
-        subprocess.run(command, check=True)
+        result = subprocess.run(command, capture_output=True, text=True)
+        if result.returncode != 0:
+            logger.error(f"FFmpeg command failed with error: {result.stderr}")
+            return []
         chunk_files = sorted(glob(os.path.join(chunk_dir, "chunk_*.mp4")))
+        
+        if not chunk_files:
+            raise FileNotFoundError("No chunks were created during the splitting process.")
+        
         logger.info(f"Video successfully split into {len(chunk_files)} chunks.")
+        logger.debug(f"Chunks created: {chunk_files}")
         return chunk_files
     except Exception as e:
         logger.error(f"Error splitting video: {e}")
         return []
 
-# Step 2: Process each chunk through your pipeline
-def process_chunks(chunk_files):
+def get_last_audio_index(output_dir):
+    """
+    Gets the highest numbered `final_synthesized_audio_*.mp3` file in the output directory.
+
+    Args:
+        output_dir (str): Directory to check for audio files.
+
+    Returns:
+        int: The highest audio file index found, or 0 if no files are found.
+    """
+    audio_files = glob(os.path.join(output_dir, "final_synthesized_audio_*.mp3"))
+    if not audio_files:
+        logger.info(f"No audio files found in {output_dir}. Starting index will be 1.")
+        return 0
+
+    max_index = 0
+    for file in audio_files:
+        match = re.search(r"final_synthesized_audio_(\d+)\.mp3", file)
+        if match:
+            index = int(match.group(1))
+            max_index = max(max_index, index)
+
+    logger.info(f"Highest audio index found: {max_index}")
+    return max_index
+
+
+def process_chunks(chunk_files, output_dir):
     """
     Processes each video chunk through the pipeline.
 
     Args:
         chunk_files (list): List of video chunk paths.
+        output_dir (str): Directory to save processed files.
 
     Returns:
         tuple: Paths to all cleaned subtitle files and synthesized audio files.
     """
     cleaned_subtitle_files = []
-    synthesized_audio_files = []
+    final_audio_files = []
 
+    # Initialize Google Cloud Vision and TTS clients
     vision_client = setup_vision_client()
     tts_client = setup_tts_client()
+
+    # Initialize the current time in milliseconds for audio continuity
+    current_time_in_ms = 0
+
+    # Get the last audio index to ensure continuity
+    start_index = get_last_audio_index(output_dir) + 1
 
     for idx, chunk in enumerate(chunk_files):
         try:
             logger.info(f"Processing chunk {idx + 1}/{len(chunk_files)}: {chunk}")
 
-            # Update file paths for each chunk
-            subtitle_file = os.path.join(output_dir, f"chunk_{idx+1}_subtitles.txt")
-            cleaned_file = os.path.join(output_dir, f"chunk_{idx+1}_cleaned.txt")
-            audio_file = os.path.join(output_dir, f"chunk_{idx+1}_audio.mp3")
+            # Paths for intermediate outputs
+            subtitle_file = os.path.join(output_dir, f"chunk_{idx + 1}_subtitles.txt")
+            cleaned_file = os.path.join(output_dir, f"chunk_{idx + 1}_cleaned.txt")
 
             # Extract subtitles
             logger.info("Extracting subtitles...")
             subtitles = extract_subtitles_from_video(chunk, vision_client)
+            if not subtitles:
+                logger.error(f"No subtitles extracted from chunk {chunk}. Skipping...")
+                continue
             save_subtitles_to_file(subtitles, subtitle_file)
 
             # Clean subtitles
             logger.info("Cleaning subtitles...")
             clean_subtitles_file(subtitle_file, cleaned_file)
+            if not os.path.exists(cleaned_file):
+                logger.error(f"Cleaned subtitle file not found for chunk {chunk}.")
+                continue
+            cleaned_subtitle_files.append(cleaned_file)
 
             # Synthesize audio
             logger.info("Synthesizing audio...")
-            synthesize_subtitles(cleaned_file, output_dir, tts_client)
+            new_start_index, updated_time_in_ms = synthesize_subtitles(
+                input_file=cleaned_file,
+                output_dir=output_dir,
+                tts_client=tts_client,
+                start_index=start_index,
+                current_time_in_ms=current_time_in_ms
+            )
 
-            # Collect processed files
-            cleaned_subtitle_files.append(cleaned_file)
-            synthesized_audio_files.append(audio_file)
+            # Update `current_time_in_ms` and `start_index`
+            current_time_in_ms = updated_time_in_ms
+            audio_files = [
+                os.path.join(output_dir, f"final_synthesized_audio_{i}.mp3")
+                for i in range(start_index, new_start_index)
+            ]
+            final_audio_files.extend(audio_files)
+            start_index = new_start_index
 
         except Exception as e:
             logger.error(f"Error processing chunk {idx + 1}: {e}")
             continue
 
-    return cleaned_subtitle_files, synthesized_audio_files
+    if not cleaned_subtitle_files or not final_audio_files:
+        logger.error("No cleaned subtitles or synthesized audio files generated.")
+    else:
+        logger.info(f"Processed {len(cleaned_subtitle_files)} subtitle files and {len(final_audio_files)} audio files.")
 
-# Step 3: Merge results
-def merge_results(cleaned_subtitle_files, synthesized_audio_files, final_output, chunk_files):
+    return cleaned_subtitle_files, final_audio_files
+
+
+
+
+
+
+
+
+def merge_results(cleaned_subtitle_files, output_dir, final_output, chunk_files):
     """
-    Merges cleaned subtitles and audio files into a final video with adjusted timestamps.
+    Merges video chunks, concatenates synthesized audio, adjusts subtitle timestamps,
+    and replaces the audio in the final merged video.
 
     Args:
         cleaned_subtitle_files (list): Paths to cleaned subtitle files.
-        synthesized_audio_files (list): Paths to synthesized audio files.
-        final_output (str): Path to the final merged video.
-        chunk_files (list): Paths to the original chunk files for duration calculation.
+        output_dir (str): Directory to save intermediate and final outputs.
+        final_output (str): Path to the final video output.
+        chunk_files (list): List of chunked video files.
+
+    Returns:
+        None
     """
     try:
         logger.info("Merging results...")
 
-        # Calculate chunk durations
-        chunk_durations = []
-        for chunk in chunk_files:
-            command = [
-                "ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries",
-                "stream=duration", "-of", "default=noprint_wrappers=1:nokey=1", chunk
-            ]
-            result = subprocess.run(command, capture_output=True, text=True)
-            if result.returncode == 0:
-                chunk_durations.append(float(result.stdout.strip()))
-            else:
-                logger.error(f"Error calculating duration for chunk {chunk}: {result.stderr}")
-                return
+        # Step 1: Locate all synthesized audio files
+        logger.info("Locating all synthesized audio files...")
+        audio_files = sorted(glob(os.path.join(output_dir, "final_synthesized_audio_*.mp3")))
+        if not audio_files:
+            raise FileNotFoundError("No synthesized audio files found to concatenate.")
 
-        # Combine subtitles with adjusted timestamps
-        combined_subtitles = os.path.join(output_dir, "combined_subtitles.txt")
-        offset = 0
-        with open(combined_subtitles, 'w', encoding='utf-8') as f_out:
-            for idx, file in enumerate(cleaned_subtitle_files):
-                with open(file, 'r', encoding='utf-8') as f_in:
-                    for line in f_in:
-                        if ":" in line:
-                            timestamp, subtitle = line.split(":", 1)
-                            adjusted_timestamp = float(timestamp) + offset
-                            f_out.write(f"{adjusted_timestamp:.2f}: {subtitle}")
-                offset += chunk_durations[idx]
-        logger.info(f"Combined subtitles saved to {combined_subtitles}")
+        # Step 2: Create a text file listing all audio files for FFmpeg concatenation
+        audio_list_file = os.path.join(output_dir, "audio_list.txt")
+        with open(audio_list_file, 'w') as f:
+            for audio_file in audio_files:
+                f.write(f"file '{audio_file}'\n")
+        logger.info(f"Audio list file created at: {audio_list_file}")
 
-        # Synthesize audio for the combined subtitles
-        combined_audio = os.path.join(output_dir, "final_synthesized_audio.mp3")
-        logger.info("Synthesizing final audio...")
-        synthesize_subtitles(combined_subtitles, combined_audio, setup_tts_client())
+        # Step 3: Concatenate all audio files into a single audio file
+        combined_audio_path = os.path.join(output_dir, "final_combined_audio.mp3")
+        ffmpeg_concat_audio_cmd = [
+            "ffmpeg", "-f", "concat", "-safe", "0", "-i", audio_list_file,
+            "-c", "copy", combined_audio_path
+        ]
+        logger.info("Concatenating all synthesized audio files into one final audio file...")
+        subprocess.run(ffmpeg_concat_audio_cmd, check=True)
+        logger.info(f"Combined audio file saved at: {combined_audio_path}")
 
-        # Merge audio with the video
-        replace_audio_in_video(input_video, combined_audio, final_output)
-        logger.info(f"Final video saved to {final_output}")
+        # Step 4: Recombine all video chunks into a single video file
+        logger.info("Recombining video chunks into a single video...")
+        video_list_file = os.path.join(output_dir, "video_chunks_list.txt")
+        recombined_video_path = os.path.join(output_dir, "recombined_video.mp4")
+
+        with open(video_list_file, 'w') as f:
+            for chunk in chunk_files:
+                f.write(f"file '{chunk}'\n")
+        logger.info(f"Video list file created at: {video_list_file}")
+
+        ffmpeg_concat_video_cmd = [
+            "ffmpeg", "-f", "concat", "-safe", "0", "-i", video_list_file,
+            "-c", "copy", recombined_video_path
+        ]
+        subprocess.run(ffmpeg_concat_video_cmd, check=True)
+        logger.info(f"Recombined video file saved at: {recombined_video_path}")
+
+        # Step 5: Replace the audio in the final recombined video
+        logger.info("Replacing audio in the final video...")
+        ffmpeg_replace_audio_cmd = [
+            "ffmpeg", "-i", recombined_video_path, "-i", combined_audio_path,
+            "-c:v", "copy", "-map", "0:v:0", "-map", "1:a:0", "-y", final_output
+        ]
+        subprocess.run(ffmpeg_replace_audio_cmd, check=True)
+        logger.info(f"Final video with combined audio saved at: {final_output}")
+
+        # Step 6: Log completion
+        logger.info("Merging results completed successfully!")
 
     except Exception as e:
         logger.error(f"Error merging results: {e}")
+        raise
 
+def main(video_file, output_dir):
+    chunk_dir = os.path.join(output_dir, "chunks")
+    os.makedirs(chunk_dir, exist_ok=True)
+    final_output = os.path.join(output_dir, "final_output.mp4")
 
-
-
-
-# Main workflow
-if __name__ == "__main__":
     # Step 1: Split the video
-    chunk_files = split_video(input_video, chunk_dir)
-
+    chunk_files = split_video(video_file, chunk_dir)
     if not chunk_files:
         logger.error("No chunks generated. Exiting.")
-        exit(1)
+        return
 
     # Step 2: Process each chunk
-    cleaned_subtitle_files, synthesized_audio_files = process_chunks(chunk_files)
+    cleaned_subtitle_files, final_audio_files = process_chunks(chunk_files, output_dir)
 
     # Step 3: Merge results
-    merge_results(cleaned_subtitle_files, synthesized_audio_files, final_output)
+    if cleaned_subtitle_files and final_audio_files:
+        merge_results(
+            cleaned_subtitle_files=cleaned_subtitle_files,
+            output_dir=output_dir,
+            final_output=final_output,
+            chunk_files=chunk_files
+        )
+    else:
+        logger.error("Failed to process all chunks. Exiting.")
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 3:
+        print("Usage: python chunked.py <video_file> <output_dir>")
+        sys.exit(1)
+
+    video_file = sys.argv[1]
+    output_dir = sys.argv[2]
+    main(video_file, output_dir)

@@ -8,6 +8,7 @@ from cleaner import clean_subtitles_file
 from speech import setup_tts_client, synthesize_subtitles
 from merge import main as merge_main
 from chunked import split_video, process_chunks, merge_results
+from pipeline import main_pipeline
 
 class SubtitleExtractorApp:
     def __init__(self, root):
@@ -47,8 +48,13 @@ class SubtitleExtractorApp:
         self.clean_only_button.grid(row=5, column=0, columnspan=2, pady=5)
 
         # Add button to process full video
-        self.process_full_video_button = tk.Button(self.frame, text="Process Full Video", command=self.process_full_video)
+        self.process_full_video_button = tk.Button(
+            self.frame, 
+            text="Process Full Video", 
+            command=self.process_full_video  # Ensures the button triggers the process_full_video method
+        )
         self.process_full_video_button.grid(row=6, column=0, columnspan=2, pady=5)
+
 
         # Text widget to show logs and process updates
         self.log_text = tk.Text(self.frame, width=60, height=10, state=tk.DISABLED)
@@ -249,32 +255,53 @@ class SubtitleExtractorApp:
         self.log_message("Starting full video processing...")
 
         # Start the chunking pipeline in a separate thread to keep the GUI responsive
-        threading.Thread(target=self.run_chunking_pipeline, args=(self.video_file, output_dir)).start()
+        threading.Thread(target=self.run_full_pipeline, args=(self.video_file, output_dir)).start()
 
-    def run_chunking_pipeline(self, video_file, output_dir):
-        try:
-            chunk_dir = os.path.join(output_dir, "chunks")
-            os.makedirs(chunk_dir, exist_ok=True)
-            final_output = os.path.join(output_dir, "final_output.mp4")
+    def start_processing(self):
+        if not self.video_file:
+            messagebox.showwarning("No Video File Selected", "Please select a video file.")
+            return
 
-            # Step 1: Split the video
-            chunk_files = split_video(video_file, chunk_dir)
-            if not chunk_files:
-                self.log_message("No chunks generated. Exiting.")
-                return
+        if not self.output_dir:
+            messagebox.showwarning("No Output Directory Selected", "Please select an output directory.")
+            return
 
-            # Step 2: Process each chunk
-            cleaned_subtitle_files, synthesized_audio_files = process_chunks(chunk_files)
+        self.log_message("Starting full video processing...")
 
-            # Step 3: Merge results
-            merge_results(cleaned_subtitle_files, synthesized_audio_files, final_output)
+        # Start the chunking pipeline in a separate thread to keep the GUI responsive
+        threading.Thread(target=self.run_chunking_pipeline, args=(self.video_file, self.output_dir)).start()
 
-            self.log_message(f"Full video processing completed successfully! Final video saved to {final_output}")
-            messagebox.showinfo("Success", f"Full video processing completed successfully! Final video saved to {final_output}")
+    def run_full_pipeline(self, video_file, output_dir):
+      try:
+          # Construct the final output file path dynamically
+          final_output = os.path.join(output_dir, "final_output.mp4")
 
-        except Exception as e:
-            self.log_message(f"Error during full video processing: {e}")
-            messagebox.showerror("Error", f"An error occurred: {e}")
+          # Check if the file already exists
+          if os.path.exists(final_output):
+              overwrite = messagebox.askyesno(
+                  "File Exists",
+                  f"The file '{final_output}' already exists. Do you want to overwrite it?"
+              )
+              if not overwrite:
+                  self.log_message("Operation canceled by the user.")
+                  return
+
+          # Call the centralized pipeline
+          main_pipeline(video_file, output_dir, final_output)
+
+          # Log and notify the user upon successful processing
+          self.log_message(f"Full video processing completed successfully! Final video saved to {final_output}")
+          messagebox.showinfo("Success", f"Full video processing completed successfully! Final video saved to {final_output}")
+      except Exception as e:
+          # Log and notify the user of errors
+          self.log_message(f"Error during full video processing: {e}")
+          messagebox.showerror("Error", f"An error occurred: {e}")
+
+
+
+
+
+
 
 # Main function to set up and run the GUI
 def main():

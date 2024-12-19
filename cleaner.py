@@ -111,6 +111,16 @@ def is_similar(text1, text2, threshold=0.85):
         logger.error(f"Error calculating similarity: {e}")
         return False
 
+# Function to check if a timestamp is validc
+def is_valid_timestamp(timestamp):
+    try:
+        float(timestamp)
+        return True
+    except ValueError:
+        logger.warning(f"Invalid timestamp: {timestamp}")
+        return False
+
+
 # Function for generating a unique hash
 def generate_hash(text, timestamp=None, similarity_check=False, existing_hashes=None, similarity_threshold=0.94):
     """
@@ -343,7 +353,20 @@ def extract_subtitles_with_timestamps(raw_subtitles):
         subtitles_with_timestamps.append((current_timestamp, " ".join(current_subtitle)))
         logger.debug(f"Finalized subtitle: {current_timestamp}: {' '.join(current_subtitle)}")
 
-    return subtitles_with_timestamps
+    # Validate timestamps after extracting all subtitles
+    logger.info("Filtering subtitles with invalid timestamps...")
+    valid_subtitles = [
+        (timestamp, subtitle) for timestamp, subtitle in subtitles_with_timestamps
+        if is_valid_timestamp(timestamp)
+    ]
+
+    # Log invalid timestamps for debugging
+    invalid_count = len(subtitles_with_timestamps) - len(valid_subtitles)
+    if invalid_count > 0:
+        logger.warning(f"Filtered out {invalid_count} subtitles with invalid timestamps.")
+
+    return valid_subtitles
+
 
 # Use OpenAI API to clean a batch of subtitles
 def clean_subtitles_with_openai_batch(subtitles_with_timestamps, max_tokens=1500):
@@ -476,16 +499,33 @@ def clean_subtitles_file(input_file, output_file, batch_size=10, iterations=2):
                     if cleaned_batch:
                         for cleaned in cleaned_batch:
                             try:
-                                timestamp, subtitle = cleaned.split(":", 1)
+                                # New logic to validate OpenAI output lines
+                                if ":" not in cleaned:
+                                    logger.warning(f"Malformed line in OpenAI output: {cleaned}")
+                                    continue
+
+                                parts = cleaned.split(":", 1)
+                                if len(parts) != 2 or not is_valid_timestamp(parts[0]):
+                                    logger.warning(f"Invalid line in OpenAI output: {cleaned}")
+                                    continue
+
+                                timestamp, subtitle = parts
+                                timestamp = timestamp.strip()
+                                subtitle = subtitle.strip()
+
+                                # Validate the timestamp further
+                                if not is_valid_timestamp(timestamp):
+                                    raise ValueError(f"Invalid timestamp: {timestamp}")
+
                                 cleaned_text = subtitle.strip()
                                 if cleaned_text and cleaned_text not in seen_cleaned_subtitles:
-                                    cleaned_subtitles.append((timestamp.strip(), cleaned_text))
+                                    cleaned_subtitles.append((timestamp, cleaned_text))
                                     seen_cleaned_subtitles.add(cleaned_text)
                                     logger.debug(f"Added cleaned subtitle: {cleaned_text}")
                                 else:
                                     logger.info(f"Skipped duplicate or invalid cleaned subtitle: {cleaned_text}")
                             except ValueError as ve:
-                                logger.warning(f"Malformed cleaned line in batch: {cleaned}. Error: {ve}")
+                                logger.warning(f"Malformed cleaned line: {cleaned}. Error: {ve}")
                                 continue
                 except Exception as e:
                     logger.error(f"Error processing batch {i // batch_size + 1}: {e}")
@@ -508,18 +548,6 @@ def clean_subtitles_file(input_file, output_file, batch_size=10, iterations=2):
     except Exception as e:
         logger.error(f"Error cleaning subtitles file: {e}")
 
-
-        # Sort cleaned subtitles by timestamp
-        cleaned_subtitles.sort(key=lambda x: float(x[0]))
-
-        logger.info(f"Writing cleaned subtitles to file: {output_file}")
-        with open(output_file, 'w', encoding='utf-8') as f:
-            for timestamp, subtitle in cleaned_subtitles:
-                f.write(f"{timestamp}: {subtitle}\n")
-
-        logger.info(f"Cleaned subtitles successfully saved to {output_file}")
-    except Exception as e:
-        logger.error(f"Error cleaning subtitles file: {e}")
 
 # Function to batch subtitles based on token limit
 def batch_subtitles(subtitles_with_timestamps, max_tokens=1500):
