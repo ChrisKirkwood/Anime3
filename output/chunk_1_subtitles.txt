@@ -1,0 +1,842 @@
+0.00: At Onigashima
+0.50: At Onigashima
+1.00: At Onigashima
+1.50: At Onigashima
+2.00: At Onigashima
+2.50: At Onigashima
+3.00: At Onigashima
+3.50: At Onigashima
+4.00: At Onigashima
+10.00: A blue dragon roars
+10.50: A blue dragon roars
+11.00: A blue dragon roars
+11.50: A blue dragon roars
+12.00: A blue dragon roars
+12.50: A blue dragon roars
+13.00: A blue dragon roars
+13.50: A blue dragon roars
+15.00: A legion of beasts howl madly
+15.50: A legion of beasts howl madly
+15.53: A legion of beasts howl madly
+15.60: A legion of beasts howl madly
+15.67: A legion of beasts howl madly
+15.73: A legion of beasts howl madly
+15.80: A legion of beasts howl madly
+15.87: A legion of beasts howl madly
+15.93: A legion of beasts howl madly
+16.00: A legion of beasts howl madly
+16.07: A legion of beasts howl madly
+16.13: A legion of beasts howl madly
+16.20: A legion of beasts howl madly
+16.27: A legion of beasts howl madly
+16.33: A legion of beasts howl madly
+16.40: A legion of beasts howl madly
+16.47: A legion of beasts howl madly
+16.53: A legion of beasts howl madly
+16.60: A legion of beasts howl madly
+16.67: A legion of beasts howl madly
+16.73: A legion of beasts howl madly
+16.80: A legion of beasts howl madly
+16.87: A legion of beasts howl madly
+16.93: Alegion of beasts howl madly
+17.00: Alegion of beasts howl madly
+17.07: A legion of beasts howl madly
+17.13: A legion of beasts howl madly
+17.20: A legion of beasts howl madly
+17.27: A legion of beasts howl madly
+17.33: A legion of beasts howl madly
+17.40: A legion of beasts howl madly
+17.47: A legion of beasts howl madly
+17.53: A legion of beasts howl madly
+17.60: A legion of beasts howl madly
+17.67: A legion of beasts howl madly
+17.73: A legion of beasts howl madly
+17.80: A legion of beasts howl madly
+17.87: A legion of beasts howl madly
+17.93: A legion of beasts howl madly
+18.00: A legion of beasts howl madly
+18.07: A legion of beasts howl madly
+18.13: A legion of beasts howl madly
+18.20: A legion of beasts howl madly
+18.27: A legion of beasts howl madly
+18.33: A legion of beasts howl madly
+18.40: A legion of beasts howl madly
+18.47: A legion of beasts howl madly
+18.53: A legion of beasts howl madly
+18.60: A legion of beasts howl madly
+18.67: A legion of beasts howl madly
+18.73: A legion of beasts howl madly
+18.80: A legion of beasts howl madly
+18.87: A legion of beasts howl madly
+18.93: A legion of beasts howl madly
+19.00: A legion of beasts howl madly
+19.07: A legion of beasts howl madly
+19.13: A legion of beasts howl madly
+19.20: A legion of beasts howl madly
+19.27: A legion of beasts howl madly
+19.33: A legion of beasts howl madly
+19.40: A legion of beasts howl madly
+19.47: A legion of beasts howl madly
+19.53: A legion of beasts howl madly
+19.60: A legion of beasts howl madly
+19.67: A legion of beasts howl madly
+19.73: A legion of beasts howl madly
+19.80: A legion of beasts howl madly
+19.87: A legion of beasts howl madly
+19.93: A legion of beasts howl madly
+20.00: A legion of beasts howl madly
+20.07: A legion of beasts howl madly
+20.13: A legion of beasts howl madly
+20.20: A legion of beasts howl madly
+20.27: A legion of beasts howl madly
+20.33: A legion of beasts howl madly
+20.40: A legion of beasts howl madly
+20.47: A legion of beasts howl madly
+20.53: A legion of beasts howl madly
+28.00: At Habu Port
+29.00: At Habu Port
+30.00: At Habu Port
+31.00: At Habu Port
+32.00: At Habu Port
+33.00: A shower in late autumn passes
+34.00: A shower in late autumn passes
+35.00: A shower in late autumn passes
+36.00: A shower in late autumn passes
+37.00: A shower in late autumn passes
+38.00: And maple leaves turn red
+39.00: And maple leaves turn red
+40.00: And maple leaves turn red
+41.00: And maple leaves turn red
+42.00: And maple leaves turn red
+43.00: And maple leaves turn red
+49.00: 回
+To avenge Kozuki Oden,
+50.00: To avenge Kozuki Oden,
+51.00: To avenge Kozuki Oden,
+52.00: To avenge Kozuki Oden,
+54.80: his retainers raced around.
+This is a story of loyalty.
+54.93: his retainers raced around.
+This is a story of loyalty.
+55.07: his retainers raced around.
+This is a story of loyalty.
+55.20: his retainers raced around.
+This is a story of loyalty.
+55.33: his retainers raced around.
+This is a story of loyalty.
+55.47: his retainers raced around.
+This is a story of loyalty.
+55.60: his retainers raced around.
+This is a story of loyalty.
+55.73: his retainers raced around.
+This is a story of loyalty.
+55.87: his retainers raced around.
+This is a story of loyalty.
+56.00: his retainers raced around.
+This is a story of loyalty.
+56.13: his retainers raced around.
+This is a story of loyalty.
+56.27: his retainers raced around.
+This is a story of loyalty.
+56.40: his retainers raced around.
+This is a story of loyalty.
+56.53: his retainers raced around.
+This is a story of loyalty.
+56.67: his retainers raced around.
+This is a story of loyalty.
+56.80: his retainers raced around.
+This is a story of loyalty.
+56.93: his retainers raced around.
+This is a story of loyalty.
+57.07: his retainers raced around.
+This is a story of loyalty.
+57.20: his retainers raced around.
+This is a story of loyalty.
+57.27: his retainers raced around.
+This is a story of loyalty.
+57.33: his retainers raced around.
+This is a story of loyalty.
+57.40: his retainers raced around.
+This is a story of loyalty.
+57.47: his retainers raced around.
+This is a story of loyalty.
+57.53: his retainers raced around.
+This is a story of loyalty.
+57.60: his retainers raced around.
+This is a story of loyalty.
+57.67: his retainers raced around.
+This is a story of loyalty.
+57.73: his retainers raced around.
+This is a story of loyalty.
+57.80: his retainers raced around.
+This is a story of loyalty.
+57.87: his retainers raced around.
+This is a story of loyalty.
+57.93: his retainers raced around.
+This is a story of loyalty.
+58.00: his retainers raced around.
+This is a story of loyalty.
+58.07: his retainers raced around.
+This is a story of loyalty.
+58.13: his retainers raced around.
+This is a story of loyalty.
+58.20: his retainers raced around.
+This is a story of loyalty.
+58.27: his retainers raced around.
+This is a story of loyalty.
+58.33: his retainers raced around.
+This is a story of loyalty.
+58.40: his retainers raced around.
+This is a story of loyalty.
+58.47: his retainers raced around.
+This is a story of loyalty.
+58.53: his retainers raced around.
+This is a story of loyalty.
+58.60: his retainers raced around.
+This is a story of loyalty.
+58.67: his retainers raced around.
+This is a story of loyalty.
+58.73: his retainers raced around.
+This is a story of loyalty.
+62.00: Though I am not so eloquent
+63.00: Though I am not so eloquent
+64.00: Though I am not so eloquent
+65.00: Though I am not so eloquent
+66.00: --Yes!
+--Akazaya!
+67.00: --Yes!
+--Akazaya!
+68.00: I will try my best to tell the story
+69.00: I will try my best to tell the story
+70.00: I will try my best to tell the story
+71.00: I will try my best to tell the story
+72.00: I will try my best to tell the story
+73.00: I will try my best to tell the story
+74.00: I will try my best to tell the story
+77.00: ww
+78.00: www
+79.00: Now...
+82.00: At twilight
+on the day of the Fire Festival,
+83.00: At twilight
+on the day of the Fire Festival,
+84.00: At twilight
+on the day of the Fire Festival,
+86.00: before a stormy night with pouring rain,
+87.00: before a stormy night with pouring rain,
+88.00: before a stormy night with pouring rain,
+91.00: gathering at Habu Port...
+91.07: gathering at Habu Port...
+91.20: gathering at Habu Port...
+91.33: gathering at Habu Port...
+91.47: gathering at Habu Port...
+91.60: gathering at Habu Port...
+C
+91.73: gathering at Habu Port...
+91.87: gathering at Habu Port...
+92.00: gathering at Habu Port...
+Ch
+92.13: gathering at Habu Port...
+Cham
+92.27: gathering at Habu Port...
+Cham
+92.40: gathering at Habu Port...
+Cham
+92.53: gathering at Habu Port...
+Cham
+92.67: gathering at Habu Port...
+Cham
+92.80: gathering at Habu Port...
+Cham
+92.93: gathering at Habu Port...
+Cham
+93.07: Ch
+93.60: ...to raid Onigashima
+where the dragon king waited...
+93.73: ...to raid Onigashima
+where the dragon king waited...
+93.87: ...to raid Onigashima
+where the dragon king waited...
+94.00: ...to raid Onigashima
+where the dragon king waited...
+94.13: ...to raid Onigashima
+where the dragon king waited...
+94.27: ...to raid Onigashima
+where the dragon king waited...
+94.40: ...to raid Onigashima
+where the dragon king waited...
+94.53: ...to raid Onigashima
+where the dragon king waited...
+94.67: ...to raid Onigashima
+where the dragon king waited...
+94.80: ...to raid Onigashima
+where the dragon king waited...
+94.93: ...to raid Onigashima
+where the dragon king waited...
+95.07: ...to raid Onigashima
+where the dragon king waited...
+95.20: ...to raid Onigashima
+where the dragon king waited...
+95.27: ...to raid Onigashima
+where the dragon king waited...
+95.33: ...to raid Onigashima
+where the dragon king waited...
+95.40: ...to raid Onigashima
+where the dragon king waited...
+95.47: ...to raid Onigashima
+where the dragon king waited...
+95.53: ...to raid Onigashima
+where the dragon king waited...
+95.60: ...to raid Onigashima
+where the dragon king waited...
+95.67: ...to raid Onigashima
+where the dragon king waited...
+95.73: ...to raid Onigashima
+where the dragon king waited...
+95.80: ...to raid Onigashima
+where the dragon king waited...
+95.87: ...to raid Onigashima
+where the dragon king waited...
+95.93: ...to raid Onigashima
+where the dragon king waited...
+96.00: ...to raid Onigashima
+where the dragon king waited...
+96.07: ...to raid Onigashima
+where the dragon king waited...
+96.13: ...to raid Onigashima
+where the dragon king waited...
+96.20: ...to raid Onigashima
+where the dragon king waited...
+96.27: ...to raid Onigashima
+where the dragon king waited...
+96.33: ...to raid Onigashima
+where the dragon king waited...
+96.40: ...to raid Onigashima
+where the dragon king waited...
+96.47: ...to raid Onigashima
+where the dragon king waited...
+96.53: ...to raid Onigashima
+where the dragon king waited...
+96.60: ...to raid Onigashima
+where the dragon king waited...
+96.67: ...to raid Onigashima
+where the dragon king waited...
+96.73: ...to raid Onigashima
+where the dragon king waited...
+96.80: ...to raid Onigashima
+where the dragon king waited...
+96.87: ...to raid Onigashima
+where the dragon king waited...
+96.93: ...to raid Onigashima
+where the dragon king waited...
+97.00: ...to raid Onigashima
+where the dragon king waited...
+97.07: ...to raid Onigashima
+where the dragon king waited...
+97.13: ...to raid Onigashima
+where the dragon king waited...
+97.20: ...to raid Onigashima
+where the dragon king waited...
+97.27: ...to raid Onigashima
+where the dragon king waited...
+97.33: ...to raid Onigashima
+where the dragon king waited...
+97.40: ...to raid Onigashima
+where the dragon king waited...
+97.47: ...to raid Onigashima
+where the dragon king waited...
+97.53: ...to raid Onigashima
+where the dragon king waited...
+97.60: ...to raid Onigashima
+where the dragon king waited...
+97.67: ...to raid Onigashima
+where the dragon king waited...
+97.73: ...to raid Onigashima
+where the dragon king waited...
+97.80: ...to raid Onigashima
+where the dragon king waited...
+97.87: ...to raid Onigashima
+where the dragon king waited...
+97.93: ...to raid Onigashima
+where the dragon king waited...
+98.00: ...to raid Onigashima
+where the dragon king waited...
+98.07: ...to raid Onigashima
+where the dragon king waited...
+98.13: ...to raid Onigashima
+where the dragon king waited...
+98.20: ...to raid Onigashima
+where the dragon king waited...
+98.27: ...to raid Onigashima
+where the dragon king waited...
+98.33: ...to raid Onigashima
+where the dragon king waited...
+98.40: ...to raid Onigashima
+where the dragon king waited...
+98.47: ...to raid Onigashima
+where the dragon king waited...
+98.53: ...to raid Onigashima
+where the dragon king waited...
+98.60: ...to raid Onigashima
+where the dragon king waited...
+99.33: ...were warriors,
+all excellent and brilliant!
+99.40: ...were warriors,
+all excellent and brilliant!
+99.47: ...were warriors,
+all excellent and brilliant!
+99.50: ...were warriors,
+all excellent and brilliant!
+99.60: ...were warriors,
+all excellent and brilliant!
+99.70: ...were warriors,
+all excellent and brilliant!
+99.80: ...were warriors,
+all excellent and brilliant!
+99.90: ...were warriors,
+all excellent and brilliant!
+100.00: ...were warriors,
+all excellent and brilliant!
+100.10: ...were warriors,
+all excellent and brilliant!
+100.20: ...were warriors,
+all excellent and brilliant!
+100.30: ...were warriors,
+all excellent and brilliant!
+100.40: ...were warriors,
+all excellent and brilliant!
+100.50: ...were warriors,
+all excellent and brilliant!
+100.60: ...were warriors,
+all excellent and brilliant!
+100.70: ...were warriors,
+all excellent and brilliant!
+100.80: ...were warriors,
+all excellent and brilliant!
+100.90: ...were warriors,
+all excellent and brilliant!
+101.00: ...were warriors,
+all excellent and brilliant!
+101.10: ...were warriors,
+all excellent and brilliant!
+101.20: ...were warriors,
+all excellent and brilliant!
+101.30: ...were warriors,
+all excellent and brilliant!
+101.40: ...were warriors,
+all excellent and brilliant!
+101.50: ...were warriors,
+all excellent and brilliant!
+101.60: ...were warriors,
+all excellent and brilliant!
+101.70: ...were warriors,
+all excellent and brilliant!
+101.80: ...were warriors,
+all excellent and brilliant!
+101.90: ...were warriors,
+all excellent and brilliant!
+102.00: ...were warriors,
+all excellent and brilliant!
+102.10: ...were warriors,
+all excellent and brilliant!
+102.20: ...were warriors,
+all excellent and brilliant!
+102.30: ...were warriors,
+all excellent and brilliant!
+102.40: ...were warriors,
+all excellent and brilliant!
+102.50: ...were warriors,
+all excellent and brilliant!
+102.60: ...were warriors,
+all excellent and brilliant!
+102.67: ...were warriors,
+all excellent and brilliant!
+102.73: ...were warriors,
+all excellent and brilliant!
+102.80: ...were warriors,
+all excellent and brilliant!
+102.87: ...were warriors,
+all excellent and brilliant!
+102.93: ...were warriors,
+all excellent and brilliant!
+103.00: ...were warriors,
+all excellent and brilliant!
+103.07: ...were warriors,
+all excellent and brilliant!
+103.13: ...were warriors,
+all excellent and brilliant!
+103.20: ...were warriors,
+all excellent and brilliant!
+103.27: ...were warriors,
+all excellent and brilliant!
+103.33: ...were warriors,
+all excellent and brilliant!
+103.40: ...were warriors,
+all excellent and brilliant!
+103.47: ...were warriors,
+all excellent and brilliant!
+103.53: ...were warriors,
+all excellent and brilliant!
+103.60: ...were warriors,
+all excellent and brilliant!
+103.67: ...were warriors,
+all excellent and brilliant!
+103.73: ...were warriors,
+all excellent and brilliant!
+103.80: ...were warriors,
+all excellent and brilliant!
+103.87: were warriors,
+all excellent and brilliant!
+103.93: were warriors,
+all excellent and brilliant!
+104.00: ...were warriors,
+all excellent and brilliant!
+104.07: ...were warriors,
+all excellent and brilliant!
+104.13: ...were warriors,
+all excellent and brilliant!
+104.20: ...were warriors,
+all excellent and brilliant!
+104.27: ...were warriors,
+all excellent and brilliant!
+104.33: ...were warriors,
+all excellent and brilliant!
+104.40: ...were warriors,
+all excellent and brilliant!
+104.47: ...were warriors,
+all excellent and brilliant!
+104.53: ...were warriors,
+all excellent and brilliant!
+104.60: ...were warriors,
+all excellent and brilliant!
+104.67: ...were warriors,
+all excellent and brilliant!
+104.73: ...were warriors,
+all excellent and brilliant!
+104.80: ...were warriors,
+all excellent and brilliant!
+104.87: ...were warriors,
+all excellent and brilliant!
+104.93: ...were warriors,
+all excellent and brilliant!
+105.00: ...were warriors,
+all excellent and brilliant!
+105.07: ...were warriors,
+all excellent and brilliant!
+105.13: ...were warriors,
+all excellent and brilliant!
+105.20: ...were warriors,
+all excellent and brilliant!
+105.27: ...were warriors,
+all excellent and brilliant!
+105.33: ...were warriors,
+all excellent and brilliant!
+105.40: ...were warriors,
+all excellent and brilliant!
+105.47: ...were warriors,
+all excellent and brilliant!
+105.53: ...were warriors,
+all excellent and brilliant!
+105.60: ...were warriors,
+all excellent and brilliant!
+105.67: ...were warriors,
+all excellent and brilliant!
+105.73: ...were warriors,
+all excellent and brilliant!
+105.80: ...were warriors,
+all excellent and brilliant!
+105.87: ...were warriors,
+all excellent and brilliant!
+113.00: Leaving the boisterous Flower Capital,
+114.00: Leaving the boisterous Flower Capital,
+115.00: Momonosuke and the others are heading
+towards Tokage Port trying to catch up to Luffy.
+116.00: Momonosuke and the others are heading
+towards Tokage Port trying to catch up to Luffy.
+117.00: Momonosuke and the others are heading
+towards Tokage Port trying to catch up to Luffy.
+118.00: Momonosuke and the others are heading
+towards Tokage Port trying to catch up to Luffy.
+119.00: Momonosuke and the others are heading
+towards Tokage Port trying to catch up to Luffy.
+120.00: Momonosuke and the others are heading
+towards Tokage Port trying to catch up to Luffy.
+123.00: Momonosuke-kun!
+I'll stay in the Land of Wano!
+124.00: Momonosuke-kun!
+I'll stay in the Land of Wano!
+125.00: Momonosuke-kun!
+I'll stay in the Land of Wano!
+126.00: What?!
+Are you not going out to sea, Yamato?!
+127.00: What?!
+Are you not going out to sea, Yamato?!
+128.00: What?!
+Are you not going out to sea, Yamato?!
+129.00: Mm-hm! I'm not!
+I've already told Luffy and the others!
+130.00: Mm-hm! I'm not!
+I've already told Luffy and the others!
+131.00: Mm-hm! I'm not!
+I've already told Luffy and the others!
+132.00: Mm-hm! I'm not!
+I've already told Luffy and the others!
+133.00: So you are staying, Yamato
+134.00: So you are staying, Yamato,
+135.00: Should I not?
+136.00: No, it is reassuring to have you here...
+137.00: No, it is reassuring to have you here...
+138.00: No, it is reassuring to have you here...
+138.07: No, it is reassuring to have you here...
+138.13: No, it is reassuring to have you here...
+138.20: No, it is reassuring to have you here...
+138.27: No, it is reassuring to have you here...
+138.33: No, it is reassuring to have you here...
+138.40: No, it is reassuring to have you here...
+138.47: No, it is reassuring to have you here...
+138.53: No, it is reassuring to have you here...
+138.60: No, it is reassuring to have you here...
+138.67: No, it is reassuring to have you here...
+139.13: But did you not say
+you made up your mind earlier?
+139.20: But did you not say
+you made up your mind earlier?
+139.27: But did you not say
+you made up your mind earlier?
+139.33: But did you not say
+you made up your mind earlier?
+139.40: But did you not say
+you made up your mind earlier?
+139.47: But did you not say
+you made up your mind earlier?
+139.53: But did you not say
+you made up your mind earlier?
+139.60: But did you not say
+you made up your mind earlier?
+139.67: But did you not say
+you made up your mind earlier?
+139.73: But did you not say
+you made up your mind earlier?
+139.80: But did you not say
+you made up your mind earlier?
+139.87: But did you not say
+you made up your mind earlier?
+139.93: But did you not say
+you made up your mind earlier?
+140.00: But did you not say
+you made up your mind earlier?
+140.07: But did you not say
+you made up your mind earlier?
+140.13: But did you not say
+you made up your mind earlier?
+140.20: But did you not say
+you made up your mind earlier?
+140.27: But did you not say
+you made up your mind earlier?
+140.33: But did you not say
+you made up your mind earlier?
+140.40: But did you not say
+you made up your mind earlier?
+140.47: But did you not say
+you made up your mind earlier?
+140.53: But did you not say
+you made up your mind earlier?
+140.60: But did you not say
+you made up your mind earlier?
+140.67: But did you not say
+you made up your mind earlier?
+140.73: But did you not say
+you made up your mind earlier?
+140.80: But did you not say
+you made up your mind earlier?
+140.87: But did you not say
+you made up your mind earlier?
+140.93: But did you not say
+you made up your mind earlier?
+141.00: But did you not say
+you made up your mind earlier?
+141.07: But did you not say
+you made up your mind earlier?
+141.13: But did you not say
+you made up your mind earlier?
+141.20: But did you not say
+you made up your mind earlier?
+141.27: But did you not say
+you made up your mind earlier?
+141.33: But did you not say
+you made up your mind earlier?
+141.40: But did you not say
+you made up your mind earlier?
+141.47: But did you not say
+you made up your mind earlier?
+141.53: But did you not say
+you made up your mind earlier?
+141.60: But did you not say
+you made up your mind earlier?
+141.67: But did you not say
+you made up your mind earlier?
+141.73: But did you not say
+you made up your mind earlier?
+141.80: But did you not say
+you made up your mind earlier?
+141.87: But did you not say
+you made up your mind earlier?
+141.93: But did you not say
+you made up your mind earlier?
+142.00: But did you not say
+you made up your mind earlier?
+142.07: But did you not say
+you made up your mind earlier?
+142.13: But did you not say
+you made up your mind earlier?
+142.20: But did you not say
+you made up your mind earlier?
+142.27: But did you not say
+you made up your mind earlier?
+142.33: But did you not say
+you made up your mind earlier?
+142.40: But did you not say
+you made up your mind earlier?
+142.47: But did you not say
+you made up your mind earlier?
+142.53: But did you not say
+you made up your mind earlier?
+142.60: But did you not say
+you made up your mind earlier?
+142.67: But did you not say
+you made up your mind earlier?
+142.73: But did you not say
+you made up your mind earlier?
+142.80: But did you not say
+you made up your mind earlier?
+142.87: But did you not say
+you made up your mind earlier?
+142.93: But did you not say
+you made up your mind earlier?
+143.00: But did you not say
+you made up your mind earlier?
+143.07: I thought you decided to leave
+with Luffy-dono and the others.
+143.13: I thought you decided to leave
+with Luffy-dono and the others.
+143.20: I thought you decided to leave
+with Luffy-dono and the others.
+143.27: I thought you decided to leave
+with Luffy-dono and the others.
+143.33: I thought you decided to leave
+with Luffy-dono and the others.
+143.40: I thought you decided to leave
+with Luffy-dono and the others.
+143.47: I thought you decided to leave
+with Luffy-dono and the others.
+143.53: I thought you decided to leave
+with Luffy-dono and the others.
+143.60: I thought you decided to leave
+with Luffy-dono and the others.
+143.67: I thought you decided to leave
+with Luffy-dono and the others.
+143.73: I thought you decided to leave
+with Luffy-dono and the others.
+143.80: I thought you decided to leave
+with Luffy-dono and the others.
+143.87: I thought you decided to leave
+with Luffy-dono and the others.
+143.93: I thought you decided to leave
+with Luffy-dono and the others.
+144.00: 1 thought you decided to leave
+with Luffy-dono and the others.
+144.07: I thought you decided to leave
+with Luffy-dono and the others.
+144.13: I thought you decided to leave
+with Luffy-dono and the others.
+144.20: 1 thought you decided to leave
+with Luffy-dono and the others.
+144.27: I thought you decided to leave
+with Luffy-dono and the others.
+144.33: I thought you decided to leave
+with Luffy-dono and the others.
+144.40: I thought you decided to leave
+with Luffy-dono and the others.
+144.47: I thought you decided to leave
+with Luffy-dono and the others.
+144.53: I thought you decided to leave
+with Luffy-dono and the others.
+144.60: I thought you decided to leave
+with Luffy-dono and the others.
+144.67: I thought you decided to leave
+with Luffy-dono and the others.
+144.73: I thought you decided to leave
+with Luffy-dono and the others.
+144.80: I thought you decided to leave
+with Luffy-dono and the others.
+144.87: I thought you decided to leave
+with Luffy-dono and the others.
+144.93: 1 thought you decided to leave
+with Luffy-dono and the others.
+145.00: I thought you decided to leave
+with Luffy-dono and the others.
+145.07: I thought you decided to leave
+with Luffy-dono and the others.
+145.13: I thought you decided to leave
+with Luffy-dono and the others.
+145.20: I thought you decided to leave
+with Luffy-dono and the others.
+145.27: I thought you decided to leave
+with Luffy-dono and the others.
+145.33: I thought you decided to leave
+with Luffy-dono and the others.
+145.40: I thought you decided to leave
+with Luffy-dono and the others.
+145.47: I thought you decided to leave
+with Luffy-dono and the others.
+145.53: I thought you decided to leave
+with Luffy-dono and the others.
+145.60: I thought you decided to leave
+with Luffy-dono and the others.
+145.67: I thought you decided to leave
+with Luffy-dono and the others.
+145.73: I thought you decided to leave
+with Luffy-dono and the others.
+145.80: S
+I thought you decided to leave
+with Luffy-dono and the others.
+145.87: I thought you decided to leave
+with Luffy-dono and the others.
+145.93: I thought you decided to leave
+with Luffy-dono and the others.
+146.00: I thought you decided to leave
+with Luffy-dono and the others.
+146.07: I thought you decided to leave
+with Luffy-dono and the others.
+146.13: thought you decided to leave
+with Luffy-dono and the others.
+146.20: I thought you decided to leave
+with Luffy-dono and the others.
+146.27: I thought you decided to leave
+with Luffy-dono and the others.
+146.33: I thought you decided to leave
+with Luffy-dono and the others.
+146.40: I thought you decided to leave
+with Luffy-dono and the others.
+146.47: I thought you decided to leave
+with Luffy-dono and the others.
+146.53: I thought you decided to leave
+with Luffy-dono and the others.
+146.60: I thought you decided to leave
+with Luffy-dono and the others.
+146.67: I thought you decided to leave
+with Luffy-dono and the others.
+146.73: I thought you decided to leave
+with Luffy-dono and the others.
+146.80: Ithought you decided to leave
+with Luffy-dono and the others.
+146.87: Ithought you decided to leave
+with Luffy-dono and the others.
+146.93: Ithought you decided to leave
+with Luffy-dono and the others.
+147.00: I thought you decided to leave
+with Luffy-dono and the others.
+147.07: I thought you decided to leave
+with Luffy-dono and the others.
+147.13: I thought you decided to leave
+with Luffy-dono and the others.

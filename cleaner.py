@@ -8,6 +8,7 @@ from difflib import SequenceMatcher
 import tiktoken
 import hashlib
 from langdetect import detect
+import glob
 
 # Ensure NLTK's words corpus is downloaded
 nltk.download('words')
@@ -110,16 +111,6 @@ def is_similar(text1, text2, threshold=0.85):
     except Exception as e:
         logger.error(f"Error calculating similarity: {e}")
         return False
-
-# Function to check if a timestamp is validc
-def is_valid_timestamp(timestamp):
-    try:
-        float(timestamp)
-        return True
-    except ValueError:
-        logger.warning(f"Invalid timestamp: {timestamp}")
-        return False
-
 
 # Function for generating a unique hash
 def generate_hash(text, timestamp=None, similarity_check=False, existing_hashes=None, similarity_threshold=0.94):
@@ -353,20 +344,7 @@ def extract_subtitles_with_timestamps(raw_subtitles):
         subtitles_with_timestamps.append((current_timestamp, " ".join(current_subtitle)))
         logger.debug(f"Finalized subtitle: {current_timestamp}: {' '.join(current_subtitle)}")
 
-    # Validate timestamps after extracting all subtitles
-    logger.info("Filtering subtitles with invalid timestamps...")
-    valid_subtitles = [
-        (timestamp, subtitle) for timestamp, subtitle in subtitles_with_timestamps
-        if is_valid_timestamp(timestamp)
-    ]
-
-    # Log invalid timestamps for debugging
-    invalid_count = len(subtitles_with_timestamps) - len(valid_subtitles)
-    if invalid_count > 0:
-        logger.warning(f"Filtered out {invalid_count} subtitles with invalid timestamps.")
-
-    return valid_subtitles
-
+    return subtitles_with_timestamps
 
 # Use OpenAI API to clean a batch of subtitles
 def clean_subtitles_with_openai_batch(subtitles_with_timestamps, max_tokens=1500):
@@ -445,19 +423,49 @@ def clean_subtitles_with_openai_batch(subtitles_with_timestamps, max_tokens=1500
         logger.error(f"Error during batch cleaning: {e}")
         return []
 
-# Clean subtitles from an input file and save results
-def clean_subtitles_file(input_file, output_file, batch_size=10, iterations=2):
+# Function to determine the next chunk file name
+def get_next_chunk_file_name(base_file_name, output_dir):
+    """
+    Determines the next available chunk file name by scanning the output directory.
+
+    Args:
+        base_file_name (str): The base name of the file (e.g., 'chunk_cleaned.txt').
+        output_dir (str): The directory where files are saved.
+
+    Returns:
+        str: The next available chunk file name (e.g., 'chunk_2_cleaned.txt').
+    """
+    base_name, ext = os.path.splitext(base_file_name)  # Strip extension
+    pattern = os.path.join(output_dir, f"{base_name}_*_cleaned{ext}")
+    existing_files = glob.glob(pattern)
+
+    # Extract existing chunk numbers
+    chunk_numbers = []
+    for file in existing_files:
+        match = re.search(rf"{base_name}_(\d+)_cleaned", os.path.basename(file))
+        if match:
+            chunk_numbers.append(int(match.group(1)))
+
+    next_chunk_number = max(chunk_numbers, default=0) + 1
+    return os.path.join(output_dir, f"{base_name}_{next_chunk_number}_cleaned{ext}")
+
+# Updated clean_subtitles_file function
+def clean_subtitles_file(input_file, output_dir, base_file_name="chunk_cleaned.txt", batch_size=10, iterations=2):
     """
     Processes subtitles from the input file, iteratively consolidates duplicates using hashing,
     sends them in batches to OpenAI for cleaning, and saves the cleaned results.
 
     Args:
         input_file (str): Path to the input subtitles file.
-        output_file (str): Path to save the cleaned subtitles.
+        output_dir (str): Directory to save the cleaned subtitle files.
+        base_file_name (str): Base name for the output chunk files.
         batch_size (int): Number of subtitles to process in each OpenAI batch.
         iterations (int): Number of cleaning iterations to perform on the subtitles.
     """
     try:
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir)
+
         logger.info(f"Reading subtitles from file: {input_file}")
         with open(input_file, 'r', encoding='utf-8') as f:
             raw_subtitles = f.readlines()
@@ -476,77 +484,31 @@ def clean_subtitles_file(input_file, output_file, batch_size=10, iterations=2):
             subtitles_with_timestamps = hash_based_consolidate(subtitles_with_timestamps)
             logger.info(f"Iteration {iteration + 1}: Consolidated to {len(subtitles_with_timestamps)} subtitles.")
 
-            # Save intermediate file with raw subtitles for debugging or validation
-            intermediate_file = f"{os.path.splitext(output_file)[0]}_iteration_{iteration + 1}_pre_openai.txt"
-            logger.info(f"Saving intermediate subtitles to: {intermediate_file}")
-            with open(intermediate_file, 'w', encoding='utf-8') as f:
-                for timestamp, subtitle in subtitles_with_timestamps:
-                    f.write(f"{timestamp}: {subtitle}\n")
-            logger.info(f"Intermediate subtitles for iteration {iteration + 1} saved successfully.")
-
-            # Batch process with OpenAI
-            logger.info("Starting batch processing for OpenAI subtitle cleaning.")
-            cleaned_subtitles = []
-            seen_cleaned_subtitles = set()
-
+            # Save each batch to a new chunk file
             for i in range(0, len(subtitles_with_timestamps), batch_size):
                 batch = subtitles_with_timestamps[i:i + batch_size]
-                logger.info(f"Processing batch {i // batch_size + 1} with {len(batch)} subtitles.")
 
-                # Clean the batch using OpenAI
-                try:
-                    cleaned_batch = clean_subtitles_with_openai_batch(batch)
-                    if cleaned_batch:
-                        for cleaned in cleaned_batch:
-                            try:
-                                # New logic to validate OpenAI output lines
-                                if ":" not in cleaned:
-                                    logger.warning(f"Malformed line in OpenAI output: {cleaned}")
-                                    continue
+                # Generate the next chunk file name dynamically
+                chunk_file = get_next_chunk_file_name(base_file_name, output_dir)
+                logger.info(f"Saving batch to file: {chunk_file}")
 
-                                parts = cleaned.split(":", 1)
-                                if len(parts) != 2 or not is_valid_timestamp(parts[0]):
-                                    logger.warning(f"Invalid line in OpenAI output: {cleaned}")
-                                    continue
+                # Save the batch to the chunk file
+                with open(chunk_file, 'w', encoding='utf-8') as f:
+                    for timestamp, subtitle in batch:
+                        f.write(f"{timestamp}: {subtitle}\n")
 
-                                timestamp, subtitle = parts
-                                timestamp = timestamp.strip()
-                                subtitle = subtitle.strip()
+                logger.info(f"Batch successfully saved to: {chunk_file}")
 
-                                # Validate the timestamp further
-                                if not is_valid_timestamp(timestamp):
-                                    raise ValueError(f"Invalid timestamp: {timestamp}")
+            logger.info(f"Ending iteration {iteration + 1}/{iterations}")
 
-                                cleaned_text = subtitle.strip()
-                                if cleaned_text and cleaned_text not in seen_cleaned_subtitles:
-                                    cleaned_subtitles.append((timestamp, cleaned_text))
-                                    seen_cleaned_subtitles.add(cleaned_text)
-                                    logger.debug(f"Added cleaned subtitle: {cleaned_text}")
-                                else:
-                                    logger.info(f"Skipped duplicate or invalid cleaned subtitle: {cleaned_text}")
-                            except ValueError as ve:
-                                logger.warning(f"Malformed cleaned line: {cleaned}. Error: {ve}")
-                                continue
-                except Exception as e:
-                    logger.error(f"Error processing batch {i // batch_size + 1}: {e}")
-                    continue
-
-            # Sort cleaned subtitles by timestamp
-            cleaned_subtitles.sort(key=lambda x: float(x[0]))
-            subtitles_with_timestamps = cleaned_subtitles  # Update for the next iteration
-
-            logger.info(f"Iteration {iteration + 1} completed. Total subtitles: {len(cleaned_subtitles)}")
-
-        # Save final cleaned subtitles to file
-        logger.info(f"Writing final cleaned subtitles to file: {output_file}")
-        with open(output_file, 'w', encoding='utf-8') as f:
-            for timestamp, subtitle in subtitles_with_timestamps:
-                f.write(f"{timestamp}: {subtitle}\n")
-
-        logger.info(f"Final cleaned subtitles successfully saved to {output_file}")
+            # Break the loop when the required iterations are completed
+            if iteration + 1 == iterations:
+                logger.info("All iterations completed. Breaking loop.")
+                break
 
     except Exception as e:
         logger.error(f"Error cleaning subtitles file: {e}")
+
 
 
 # Function to batch subtitles based on token limit

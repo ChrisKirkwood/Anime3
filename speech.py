@@ -87,6 +87,7 @@ def synthesize_subtitles(input_file, output_dir, tts_client, start_index=1, batc
 
     for batch_idx, batch in enumerate(batch_subtitles(subtitles, max_batch_size=max_batch_size), start=1):
         logger.info(f"Processing batch {batch_idx} with {len(batch)} subtitles.")
+        logger.info(f"Starting batch {batch_idx} with current_time_in_ms: {current_time_in_ms}")
 
         numbered_audio_file = os.path.join(output_dir, f"final_synthesized_audio_{start_index}.mp3")
         while os.path.exists(numbered_audio_file):
@@ -98,11 +99,12 @@ def synthesize_subtitles(input_file, output_dir, tts_client, start_index=1, batc
         try:
             # Extract the first timestamp and normalize
             first_timestamp = float(batch[0].split(":")[0]) * 1000  # Convert to milliseconds
-            
-            # Calculate initial silence padding dynamically
             initial_silence_padding = max(0, int(first_timestamp - current_time_in_ms))
             combined_audio += AudioSegment.silent(duration=initial_silence_padding)
             current_time_in_ms += initial_silence_padding
+
+            logger.info(f"Batch {batch_idx}: first_timestamp={first_timestamp}, initial_silence_padding={initial_silence_padding}")
+
         except Exception as e:
             logger.error(f"Error extracting first timestamp in batch {batch_idx}: {e}")
             continue
@@ -117,6 +119,9 @@ def synthesize_subtitles(input_file, output_dir, tts_client, start_index=1, batc
                 # Calculate silence required before this subtitle
                 normalized_timestamp = max(0, int(float(timestamp) * 1000) - first_timestamp)
                 silence_duration = max(0, normalized_timestamp - current_time_in_ms)
+
+                logger.info(f"Subtitle {idx}: timestamp={timestamp}, normalized_timestamp={normalized_timestamp}, silence_duration={silence_duration}")
+
                 if silence_duration > 0:
                     combined_audio += AudioSegment.silent(duration=silence_duration)
                     current_time_in_ms += silence_duration
@@ -126,6 +131,8 @@ def synthesize_subtitles(input_file, output_dir, tts_client, start_index=1, batc
                 combined_audio += generated_audio
                 current_time_in_ms += len(generated_audio)
 
+                logger.info(f"Subtitle {idx}: generated_audio_duration={len(generated_audio)}, current_time_in_ms={current_time_in_ms}")
+
                 # Handle gaps between subtitles
                 if idx < len(batch) - 1:
                     next_timestamp = float(batch[idx + 1].split(":")[0]) * 1000
@@ -133,6 +140,8 @@ def synthesize_subtitles(input_file, output_dir, tts_client, start_index=1, batc
                     if gap_duration > 0:
                         combined_audio += AudioSegment.silent(duration=gap_duration)
                         current_time_in_ms += gap_duration
+
+                        logger.info(f"Subtitle {idx}: gap_duration_to_next_subtitle={gap_duration}, updated_current_time_in_ms={current_time_in_ms}")
 
             except Exception as e:
                 logger.error(f"Error processing subtitle line '{line.strip()}': {e}")
@@ -145,7 +154,10 @@ def synthesize_subtitles(input_file, output_dir, tts_client, start_index=1, batc
         start_index += 1
         time.sleep(batch_delay)
 
+    logger.info(f"Final current_time_in_ms after batch {batch_idx}: {current_time_in_ms}")
     return start_index, current_time_in_ms
+
+
 
 
 

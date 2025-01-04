@@ -1,0 +1,125 @@
+0.00: The sky is dark
+0.50: The sky is dark
+1.00: The sky is dark
+1.50: The sky is dark
+2.00: The sky is dark
+2.50: The sky is dark
+3.00: The sky is dark
+3.50: The sky is dark
+4.00: The sky is dark
+4.50: The sky is dark
+7.50: 1
+11.00: The storm rages on
+11.50: The storm rages on
+12.00: The storm rages on
+12.50: The storm rages on
+13.00: The storm rages on
+13.50: The storm rages on
+14.00: The storm rages on
+14.50: The storm rages on
+15.00: The storm rages on
+15.50: The storm rages on
+15.53: The storm rages on
+15.60: The storm rages on
+15.67: The storm rages on
+15.73: The storm rages on
+15.80: The storm rages on
+15.87: The storm rages on
+15.93: The storm rages on
+16.00: The storm rages on
+16.07: The storm rages on
+16.13: The storm rages on
+16.20: The storm rages on
+16.27: The storm rages on
+16.33: The storm rages on
+16.40: The storm rages on
+16.47: The storm rages on
+16.53: The storm rages on
+16.60: The storm rages on
+16.67: The storm rages on
+16.73: The storm rages on
+16.80: The storm rages on
+16.87: The storm rages on
+16.93: The storm rages on
+17.00: The storm rages on
+17.07: The storm rages on
+17.13: The storm rages on
+17.20: The storm rages on
+17.27: The storm rages on
+17.33: The storm rages on
+17.40: The storm rages on
+17.47: The storm rages on
+17.87: Thank you for your purchase!
+This one is so fresh!
+18.13: Thank you for your purchase!
+This one is so fresh!
+18.40: Thank you for your purchase!
+This one is so fresh!
+18.67: Thank you for your purchase!
+This one is so fresh!
+18.93: Thank you for your purchase!
+This one is so fresh!
+19.20: Thank you for your purchase!
+This one is so fresh!
+19.47: Thank you for your purchase!
+This one is so fresh!
+19.73: Thank you for your purchase!
+This one is so fresh!
+20.00: Thank you for your purchase!
+This one is so fresh!
+20.27: Thank you for your purchase!
+This one is so fresh!
+20.53: Thank you for your purchase!
+This one is so fresh!
+21.07: At Onigashima
+21.33: At Onigashima
+21.60: At Onigashima
+21.87: At Onigashima
+21.93: At Onigashima
+22.00: At Onigashima
+22.07: At Onigashima
+22.13: At Onigashima
+22.20: At Onigashima
+22.27: At Onigashima
+22.33: At Onigashima
+22.40: At Onigashima
+22.47: At Onigashima
+22.53: At Onigashima
+22.60: At Onigashima
+22.67: At Onigashima
+22.73: At Onigashima
+22.80: At Onigashima
+22.87: At Onigashima
+22.93: At Onigashima
+23.00: At Onigashima
+23.07: At Onigashima
+23.13: At Onigashima
+23.20: At Onigashima
+23.27: At Onigashima
+23.33: At Onigashima
+23.40: At Onigashima
+23.47: At Onigashima
+23.53: At Onigashima
+23.60: At Onigashima
+23.67: At Onigashima
+23.73: At Onigashima
+23.80: At Onigashima
+23.87: At Onigashima
+23.93: At Onigashima
+24.00: At Onigashima
+24.07: At Onigashima
+24.13: At Onigashima
+24.20: At Onigashima
+24.27: At Onigashima
+24.33: At Onigashima
+24.40: At Onigashima
+24.47: At Onigashima
+24.53: At Onigashima
+24.60: At Onigashima
+24.67: At Onigashima
+24.73: At Onigashima
+24.80: At Onigashima
+24.87: At Onigashima
+24.93: At Onigashima
+25.00: At Onigashima
+25.07: At Onigashima

@@ -23,7 +23,7 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-def split_video(input_video, chunk_dir, chunk_duration=300):
+def split_video(input_video, chunk_dir, chunk_duration=150):
     """
     Splits the input video into chunks using FFmpeg.
 
@@ -86,16 +86,17 @@ def get_last_audio_index(output_dir):
     return max_index
 
 
-def process_chunks(chunk_files, output_dir):
+def process_chunks(chunk_files, output_dir, current_time_in_ms=0):
     """
     Processes each video chunk through the pipeline.
 
     Args:
         chunk_files (list): List of video chunk paths.
         output_dir (str): Directory to save processed files.
+        current_time_in_ms (int): Current cumulative time in milliseconds.
 
     Returns:
-        tuple: Paths to all cleaned subtitle files and synthesized audio files.
+        tuple: Paths to all cleaned subtitle files, synthesized audio files, and updated current_time_in_ms.
     """
     cleaned_subtitle_files = []
     final_audio_files = []
@@ -104,15 +105,13 @@ def process_chunks(chunk_files, output_dir):
     vision_client = setup_vision_client()
     tts_client = setup_tts_client()
 
-    # Initialize the current time in milliseconds for audio continuity
-    current_time_in_ms = 0
-
     # Get the last audio index to ensure continuity
     start_index = get_last_audio_index(output_dir) + 1
 
     for idx, chunk in enumerate(chunk_files):
         try:
             logger.info(f"Processing chunk {idx + 1}/{len(chunk_files)}: {chunk}")
+            logger.info(f"Chunk {idx + 1}: Starting with current_time_in_ms = {current_time_in_ms}")
 
             # Paths for intermediate outputs
             subtitle_file = os.path.join(output_dir, f"chunk_{idx + 1}_subtitles.txt")
@@ -144,8 +143,14 @@ def process_chunks(chunk_files, output_dir):
                 current_time_in_ms=current_time_in_ms
             )
 
+            # Log the duration of audio generated for the chunk
+            audio_duration = updated_time_in_ms - current_time_in_ms
+            logger.info(f"Chunk {idx + 1}: Audio duration generated = {audio_duration} ms")
+
             # Update `current_time_in_ms` and `start_index`
             current_time_in_ms = updated_time_in_ms
+            logger.info(f"Chunk {idx + 1}: Updated current_time_in_ms = {current_time_in_ms}")
+
             audio_files = [
                 os.path.join(output_dir, f"final_synthesized_audio_{i}.mp3")
                 for i in range(start_index, new_start_index)
@@ -162,7 +167,9 @@ def process_chunks(chunk_files, output_dir):
     else:
         logger.info(f"Processed {len(cleaned_subtitle_files)} subtitle files and {len(final_audio_files)} audio files.")
 
-    return cleaned_subtitle_files, final_audio_files
+    return cleaned_subtitle_files, final_audio_files, current_time_in_ms
+
+
 
 
 

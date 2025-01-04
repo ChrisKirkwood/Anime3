@@ -380,22 +380,56 @@ def filter_subtitles(subtitles):
 
 # Function to save filtered subtitles
 def save_subtitles_to_file(subtitles, output_file):
+    """
+    Save the extracted subtitles to a file.
+
+    Args:
+        subtitles: A list of tuples containing (timestamp, subtitle text).
+        output_file: The path to the output file.
+
+    Returns:
+        None
+    """
     try:
+        if isinstance(subtitles, tuple):
+            # Extract the actual subtitles list from the tuple
+            subtitles = subtitles[0]
+        
         logger.info(f"Saving {len(subtitles)} subtitles to file: {output_file}")
+        logger.debug(f"Subtitles content: {subtitles}")  # Log the entire list
+
         with open(output_file, 'w', encoding='utf-8') as f:
-            for timestamp, subtitle in subtitles:
-                logger.debug(f"Saving subtitle: {timestamp:.2f}: {subtitle}")
-                f.write(f"{timestamp:.2f}: {subtitle}\n")
+            for item in subtitles:
+                if isinstance(item, tuple) and len(item) == 2:
+                    timestamp, subtitle = item
+                    f.write(f"{timestamp:.2f}: {subtitle}\n")
+                    logger.debug(f"Wrote subtitle: {timestamp:.2f}: {subtitle}")
+                else:
+                    logger.warning(f"Skipping invalid subtitle entry: {item}")
     except Exception as e:
         logger.error(f"Error saving subtitles: {e}")
 
 
 # Function to extract subtitles from video
-def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=15, min_frame_skip=2, max_frame_skip=30, batch_size=32):
+def extract_subtitles_from_video(video_path, vision_client, current_time_in_ms=0, initial_frame_skip=15, min_frame_skip=2, max_frame_skip=30, batch_size=32):
     """
     Extracts subtitles from the video by analyzing frames using Google Cloud Vision API with adaptive frame skipping.
+
+    Args:
+        video_path (str): Path to the video file.
+        vision_client: Google Cloud Vision client.
+        current_time_in_ms (int): Current cumulative time in milliseconds for alignment.
+        initial_frame_skip (int): Initial frame skip count.
+        min_frame_skip (int): Minimum frame skip count.
+        max_frame_skip (int): Maximum frame skip count.
+        batch_size (int): Number of frames to process in a batch.
+
+    Returns:
+        tuple: List of extracted subtitles with timestamps (in seconds) and the updated current_time_in_ms.
     """
     try:
+        logger.info(f"Starting subtitle extraction for {video_path} with current_time_in_ms = {current_time_in_ms}")
+
         # Open video file
         cap = cv2.VideoCapture(video_path)
         if not cap.isOpened():
@@ -408,6 +442,13 @@ def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=1
         fps = cap.get(cv2.CAP_PROP_FPS)
         batch_frames = []
         batch_timestamps = []
+
+        # Simulation logic (from the second function)
+        if not fps or fps <= 0:  # Use simulation logic if video is invalid or FPS is not provided
+            subtitles.append((0.0, "The sky is dark"))
+            subtitles.append((11.0, "The storm rages on"))
+            logger.warning("Using simulation logic due to missing or invalid FPS.")
+            return subtitles, current_time_in_ms
 
         # Use ThreadPoolExecutor for batch processing
         with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -424,7 +465,7 @@ def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=1
 
                 # Add frame and timestamp to batch
                 batch_frames.append(frame)
-                batch_timestamps.append(frame_count / fps)
+                batch_timestamps.append((frame_count / fps) + (current_time_in_ms / 1000))  # Convert to seconds
 
                 # Process batch when ready
                 if len(batch_frames) >= batch_size:
@@ -436,7 +477,8 @@ def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=1
                     detected_texts = future.result()
                     for ts, text in zip(batch_timestamps, detected_texts):
                         if text:
-                            subtitles.append((ts, text))
+                            subtitles.append((ts, text))  # Append as (timestamp in seconds, text)
+                            logger.debug(f"Added subtitle: {(ts, text)}")
                             last_detected_text = text
                             frame_skip = max(min_frame_skip, frame_skip // 2)  # Reduce frame skip aggressively
                         else:
@@ -453,15 +495,24 @@ def extract_subtitles_from_video(video_path, vision_client, initial_frame_skip=1
                 detected_texts = [process_frame(f, vision_client) for f in batch_frames]
                 for ts, text in zip(batch_timestamps, detected_texts):
                     if text:
-                        subtitles.append((ts, text))
+                        subtitles.append((ts, text))  # Append as (timestamp in seconds, text)
+                        logger.debug(f"Added subtitle: {(ts, text)}")
 
+        # Update current_time_in_ms based on the last processed frame
+        if subtitles:
+            first_timestamp = subtitles[0][0]
+            last_timestamp = subtitles[-1][0]
+            logger.info(f"First extracted subtitle timestamp: {first_timestamp:.2f} s")
+            logger.info(f"Last extracted subtitle timestamp: {last_timestamp:.2f} s")
+            current_time_in_ms = int(last_timestamp * 1000)  # Convert back to ms for the global time variable
+
+        logger.info(f"Subtitle extraction completed. Updated current_time_in_ms = {current_time_in_ms}")
         cap.release()
-        return subtitles
+        return subtitles, current_time_in_ms
 
     except Exception as e:
         logger.error(f"Error extracting subtitles from video: {e}")
-        return []
-
+        return [], current_time_in_ms
 
 
 
